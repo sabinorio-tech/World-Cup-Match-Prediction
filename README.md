@@ -1,77 +1,63 @@
-# Football Match Prediction Project (FIFA World Cup 2026)
+# FIFA World Cup 2026 Match Prediction
 
-[![Project Status](https://img.shields.io/badge/status-work%20in%20progress-yellow)](#)
+[![Project Status](https://img.shields.io/badge/status-data%20engineering%20complete-green)](#)
 [![Python](https://img.shields.io/badge/python-3.x-blue)](#)
 [![BeCode](https://img.shields.io/badge/BeCode-team%20project-black)](#)
-[![License](https://img.shields.io/badge/license-TBD-lightgrey)](#)
 
 ## Project Overview
 
-This project is a BeCode team project focused on building an end-to-end football match prediction system for the FIFA World Cup 2026.
+This project aims to predict FIFA World Cup 2026 match outcomes using historical international football results, Elo ratings, qualified-team information, and FIFA World Cup 2026 fixture data.
 
-The goal is to combine Data Engineering, Data Science, and Data Analytics workflows into one complete project. The system will collect and clean historical football data, engineer useful match and team-level features, train machine learning models, and present predictions and insights through a Streamlit dashboard.
+The project is structured as an end-to-end data product. The Data Engineering phase is complete: raw data has been discovered, cleaned, validated, standardized, and transformed into reusable processed datasets. The project is now ready to move into Feature Engineering and Modeling.
 
-This project is currently **Work in Progress**.
+## Project Objectives
 
-## Objectives
+- Build a clean and maintainable football match prediction dataset.
+- Separate completed historical matches from future fixtures.
+- Standardize team names across all input sources.
+- Validate FIFA World Cup 2026 team and fixture coverage.
+- Enrich World Cup 2026 fixtures with selected team metadata and Elo attributes.
+- Produce lean processed datasets that can be reused by feature engineering, modeling, and dashboard workflows.
+- Keep data engineering outputs separate from later machine learning features.
 
-- Collect historical football and FIFA World Cup data.
-- Clean, transform, and structure raw datasets.
-- Engineer features relevant to match outcome prediction.
-- Store processed data in a database.
-- Train and evaluate machine learning models.
-- Predict FIFA World Cup 2026 match outcomes.
-- Visualize team statistics and predictions in a Streamlit dashboard.
-- Build a maintainable team project structure suitable for portfolio presentation.
+## Data Sources
 
-## Architecture Overview
+The project uses four primary data source groups:
 
-```text
-Raw Data Sources
-      |
-      v
-Data Scraping / Collection
-      |
-      v
-Data Cleaning
-      |
-      v
-Feature Engineering
-      |
-      v
-Database Storage
-      |
-      v
-Model Training & Evaluation
-      |
-      v
-Prediction Pipeline
-      |
-      v
-Streamlit Dashboard
-```
+| Source | Purpose |
+| --- | --- |
+| Historical international results | Completed international match results used for training and historical analysis. |
+| FIFA World Cup 2026 teams | Qualified team reference data, including group, confederation, FIFA rank, coach, best World Cup result, and debut status. |
+| Elo ratings | Historical and latest Elo ratings for qualified teams. |
+| FIFA World Cup 2026 fixtures | Group-stage fixtures and knockout-stage placeholder fixtures for the 2026 tournament. |
 
-## Repository Structure
+Raw data is stored under `data/raw/`. Cleaned and reusable outputs are stored under `data/processed/`.
+
+## Project Structure
 
 ```text
 .
-├── airflow/
-│   └── .gitkeep
-├── dashboard/
-│   └── .gitkeep
 ├── data/
 │   ├── external/
-│   │   └── .gitkeep
 │   ├── processed/
-│   │   └── .gitkeep
+│   │   ├── elo_history.csv
+│   │   ├── elo_latest.csv
+│   │   ├── results_future.csv
+│   │   ├── results_historical.csv
+│   │   ├── wc_2026_fixtures_enriched.csv
+│   │   ├── wc_2026_fixtures_validated.csv
+│   │   └── wc_2026_teams_cleaned.csv
 │   └── raw/
-│       └── .gitkeep
 ├── database/
 │   └── schema.sql
-├── models/
-│   └── .gitkeep
+├── docs/
+│   ├── data_findings.md
+│   ├── fixture_enrichment_readiness_report.md
+│   └── processed_data_report.md
 ├── notebooks/
-│   └── .gitkeep
+│   ├── 00_shared_data_discovery.ipynb
+│   ├── 01_de_cleaning_exploration.ipynb
+│   └── 03_fixture_enrichment.ipynb
 ├── requirements/
 │   ├── base.txt
 │   ├── dashboard.txt
@@ -80,39 +66,128 @@ Streamlit Dashboard
 │   └── ds.txt
 ├── src/
 │   ├── extract/
-│   │   └── .gitkeep
 │   ├── features/
-│   │   └── .gitkeep
 │   ├── load/
-│   │   └── .gitkeep
 │   ├── transform/
-│   │   └── .gitkeep
+│   │   ├── clean_elo.py
+│   │   ├── clean_results.py
+│   │   └── enrich_fixtures.py
 │   └── utils/
-│       └── .gitkeep
 ├── .env.example
 ├── .gitignore
 ├── README.md
 └── requirements.txt
 ```
 
-## Installation
+## Data Engineering Pipeline
 
-Clone the repository:
+The current pipeline converts raw football data into validated processed datasets.
+
+```text
+Raw data
+  |
+  v
+Data discovery and validation
+  |
+  v
+Team-name standardization
+  |
+  v
+Historical/future result split
+  |
+  v
+Elo history cleaning and latest snapshot creation
+  |
+  v
+World Cup 2026 fixture validation
+  |
+  v
+Fixture enrichment with team metadata and latest Elo ratings
+  |
+  v
+Processed datasets for feature engineering and modeling
+```
+
+### Transform Scripts
+
+| Script | Purpose | Main outputs |
+| --- | --- | --- |
+| `src/transform/clean_results.py` | Cleans historical results, standardizes team names, separates completed and future matches, and adds match outcome labels. | `results_historical.csv`, `results_future.csv` |
+| `src/transform/clean_elo.py` | Cleans Elo ratings, standardizes country names, validates coverage, and creates the latest Elo snapshot. | `elo_history.csv`, `elo_latest.csv` |
+| `src/transform/enrich_fixtures.py` | Enriches all 104 World Cup 2026 fixtures with lean team and Elo metadata while preserving knockout placeholders. | `wc_2026_fixtures_enriched.csv` |
+
+## Processed Datasets
+
+| Dataset | Description |
+| --- | --- |
+| `results_historical.csv` | Completed historical international matches with scores and outcome labels. |
+| `results_future.csv` | Future result-style rows separated from the raw results source. Scores are intentionally missing. |
+| `elo_history.csv` | Historical Elo ratings for the 48 World Cup 2026 teams. Must be used with time-aware joins. |
+| `elo_latest.csv` | Latest Elo snapshot for the 48 qualified teams. Used for fixture enrichment. |
+| `wc_2026_teams_cleaned.csv` | Cleaned reference table for all 48 qualified World Cup 2026 teams. |
+| `wc_2026_fixtures_validated.csv` | Validated fixture table with group-stage teams and knockout placeholders. |
+| `wc_2026_fixtures_enriched.csv` | Lean enriched fixture dataset containing all 104 fixtures, selected team metadata, and selected Elo attributes. |
+
+The main enriched fixture output keeps all 104 fixtures:
+
+- 72 known group-stage fixtures include team and Elo metadata.
+- 32 knockout-stage placeholder fixtures remain present with null team/Elo metadata.
+- No engineered ML features are included in this file.
+
+More detailed dataset profiling is available in:
+
+- `docs/data_findings.md`
+- `docs/fixture_enrichment_readiness_report.md`
+- `docs/processed_data_report.md`
+
+## Current Project Status
+
+Data Engineering is complete.
+
+Completed work:
+
+- Raw data discovery and documentation.
+- Historical results cleaning.
+- Future fixture separation from historical results.
+- Team-name standardization across datasets.
+- Elo history cleaning and latest snapshot creation.
+- World Cup 2026 team reference validation.
+- World Cup 2026 fixture validation.
+- Lean fixture enrichment.
+- Processed dataset documentation.
+
+The project is ready to transition into Feature Engineering.
+
+## Next Steps
+
+The next phase should focus on creating modeling-ready features from the processed datasets.
+
+Recommended next steps:
+
+- Build feature engineering scripts under `src/features/`.
+- Create team-level and match-level features from historical results and Elo history.
+- Use time-aware joins to avoid data leakage.
+- Keep model features separate from raw enrichment outputs.
+- Define train/test validation strategy.
+- Prepare modeling datasets for Data Science workflows.
+- Add automated validation checks for feature outputs.
+- Document feature definitions and assumptions.
+
+Model selection and detailed model evaluation should happen after the feature engineering layer is defined.
+
+## How to Run the Project
+
+### 1. Clone the repository
 
 ```bash
 git clone <repository-url>
 cd World-Cup-Match-Prediction
 ```
 
-Create a virtual environment:
+### 2. Create and activate a virtual environment
 
 ```bash
 python -m venv .venv
-```
-
-Activate the virtual environment:
-
-```bash
 source .venv/bin/activate
 ```
 
@@ -122,113 +197,66 @@ On Windows:
 .venv\Scripts\activate
 ```
 
-Install the project requirements:
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Environment Setup
+### 4. Run the Data Engineering transforms
 
-Environment variables should be stored in a local `.env` file.
-
-Example:
+Clean historical results:
 
 ```bash
-cp .env.example .env
+python src/transform/clean_results.py
 ```
 
-This section is **Work in Progress**. Environment variables will be documented as the database, scraping, dashboard, and deployment configuration are finalized.
-
-## Running the Project
-
-This project is still **Work in Progress**. The final execution workflow may include data pipelines, model training scripts, scheduled jobs, and a Streamlit dashboard.
-
-Planned examples:
+Clean Elo ratings:
 
 ```bash
-python src/extract/<script_name>.py
-python src/transform/<script_name>.py
-python src/features/<script_name>.py
-streamlit run dashboard/<app_name>.py
+python src/transform/clean_elo.py
 ```
 
-Notebook-based exploration can be run from:
+Create the lean enriched fixture dataset:
+
+```bash
+python src/transform/enrich_fixtures.py
+```
+
+Expected enriched output:
+
+```text
+data/processed/wc_2026_fixtures_enriched.csv
+```
+
+### 5. Explore notebooks
+
+Notebook-based discovery and validation work is available in:
+
+```text
+notebooks/
+```
+
+Run notebooks with:
 
 ```bash
 jupyter notebook
 ```
-
-## Team Responsibilities
-
-### Data Engineering
-
-- Data scraping and collection.
-- Raw data validation.
-- Data cleaning and transformation.
-- Feature engineering pipeline.
-- Database schema and loading logic.
-- Scheduling and automation.
-
-### Data Science
-
-- Exploratory data analysis.
-- Model training.
-- Model evaluation.
-- Match outcome prediction.
-- Experiment tracking and comparison.
-
-### Data Analytics
-
-- Streamlit dashboard development.
-- Team statistics visualization.
-- Prediction visualization.
-- User-facing analytics views.
-
-This section is **Work in Progress** and will be updated with team member names and responsibilities.
-
-## Planned Features
-
-- Historical match data ingestion.
-- FIFA World Cup 2026 team and fixture integration.
-- Elo rating and team strength features.
-- Match outcome prediction model.
-- Model evaluation workflow.
-- Database-backed data pipeline.
-- Automated scheduling for repeatable updates.
-- Streamlit dashboard for team analysis and predictions.
-- Clear separation between raw, processed, and external data.
 
 ## Technologies Used
 
 - Python
 - Pandas
 - NumPy
-- SQLAlchemy
-- PostgreSQL / SQLite
-- Requests
-- BeautifulSoup
-- lxml
 - Jupyter Notebook
-- Streamlit
-- Machine Learning libraries: **Work in Progress**
-- Airflow / scheduling tools: **Work in Progress**
+- SQL / database schema planning
+- Git and GitHub
+- Streamlit planned for dashboarding
+- Airflow or scheduling tooling planned for later pipeline automation
 
-## Future Improvements
+## Notes
 
-- Add production-ready pipeline scripts.
-- Add automated tests.
-- Add data validation checks.
-- Add model versioning.
-- Add experiment tracking.
-- Add CI/CD workflow.
-- Add Docker support.
-- Add deployment instructions for the dashboard.
-- Add complete database documentation.
-- Add model performance reporting once models are trained and evaluated.
-
-## Contributors
-
-This is a BeCode team project.
-
-Contributors section is **Work in Progress**.
+- `wc_2026_fixtures_enriched.csv` is an enrichment output, not a feature-engineered modeling dataset.
+- Knockout-stage placeholders are expected and intentionally retained.
+- Historical Elo data must be joined with date cutoffs during future feature engineering to avoid leakage.
+- Processed datasets are versioned so team members can work from the same Data Engineering outputs.
