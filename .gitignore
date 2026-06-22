@@ -15,6 +15,7 @@
 venv/
 env/
 ENV/
+.worldcupfootball/
 
 # =========================
 
@@ -33,6 +34,8 @@ ENV/
 # =========================
 
 .ipynb_checkpoints/
+**/.ipynb_checkpoints/
+*.ipynb_checkpoints
 
 # =========================
 
@@ -115,6 +118,7 @@ airflow/webserver_config.py
 # =========================
 
 .DS_Store
+**/.DS_Store
 Thumbs.db
 *:Zone.Identifier
 
