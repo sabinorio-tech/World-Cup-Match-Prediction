@@ -40,7 +40,6 @@ ENV/
 
 # =========================
 
-data/raw/*
 data/external/*
 
 # Keep folder structure
