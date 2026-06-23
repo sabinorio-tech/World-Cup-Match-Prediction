@@ -43,8 +43,6 @@ ENV/
 
 # =========================
 
-data/raw/*
-data/processed/*
 data/external/*
 
 # Keep folder structure

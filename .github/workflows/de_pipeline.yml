@@ -1,0 +1,66 @@
+name: Data Engineering Pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions cron uses UTC. This runs at 15:00 Belgian summer time.
+    - cron: "0 13 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - "main.py"
+      - "src/**"
+      - "data/raw/**"
+      - "requirements.txt"
+      - "requirements/**"
+      - ".github/workflows/de_pipeline.yml"
+
+jobs:
+  run-de-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: |
+            requirements.txt
+            requirements/*.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Check raw data inputs
+        run: |
+          test -f data/raw/IF_1872_2026/results.csv
+          test -f data/raw/FIFA_WK_Elo_Ratings/elo_ratings_wc2026.csv
+          test -f data/raw/FIFA_WC_1930_2026/wc_2026_teams.csv
+          test -f data/raw/FIFA_WC_1930_2026/wc_2026_fixtures.csv
+
+      - name: Run Data Engineering pipeline
+        run: python main.py
+
+      - name: Check processed outputs
+        run: |
+          test -s data/processed/results_historical.csv
+          test -s data/processed/results_future.csv
+          test -s data/processed/elo_history.csv
+          test -s data/processed/elo_latest.csv
+          test -s data/processed/wc_2026_teams_cleaned.csv
+          test -s data/processed/wc_2026_fixtures_validated.csv
+          test -s data/processed/wc_2026_fixtures_enriched.csv
+          test -s data/processed/model_training_base.csv
+
+      - name: Upload processed datasets
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-data
+          path: data/processed/
