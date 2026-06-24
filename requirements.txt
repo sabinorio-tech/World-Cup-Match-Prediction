@@ -3,3 +3,4 @@
 -r requirements/ds.txt
 -r requirements/dashboard.txt
 -r requirements/dev.txt
+-r requirements/ai.txt
