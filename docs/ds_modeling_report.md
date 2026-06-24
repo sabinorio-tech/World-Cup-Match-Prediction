@@ -32,6 +32,32 @@ The ensemble wins on log loss across both sets — meaning the **probabilities a
 
 ---
 
+## Calibration
+
+Checked on combined val + test (92 matches). See `docs/assets/calibration_plot.png`.
+
+**Brier Score** (mean squared error of probabilities; lower = better, 0 = perfect):
+
+| Class | Ensemble | Naive baseline |
+|---|---|---|
+| home_win | 0.2236 | 0.2489 ✅ better |
+| away_win | 0.1779 | 0.1928 ✅ better |
+| draw | 0.1977 | 0.1979 ⚠️ = baseline |
+
+**Expected Calibration Error (ECE)** — average gap between predicted probability and actual frequency:
+
+| Class | ECE |
+|---|---|
+| home_win | 0.045 |
+| draw | 0.029 |
+| away_win | 0.053 |
+
+ECE values of 0.03–0.05 are **good**: when the model outputs P(home_win)=0.60, the home team actually wins ~60% of those matches. The model's probabilities can be trusted for home_win and away_win.
+
+Draw is the only weak spot: Brier score equals the naive baseline, meaning the model adds no calibration value for draws beyond predicting the average draw frequency (~22%) for every match. This is a structural limitation, not a tuning issue.
+
+---
+
 ## For the DA — How to Use in the Dashboard
 
 ### Option A — Dynamic prediction (any match, any teams)
