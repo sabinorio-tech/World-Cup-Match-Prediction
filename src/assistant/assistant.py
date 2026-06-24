@@ -14,6 +14,8 @@ from src.assistant.formatters import (
     format_prediction,
 )
 
+from src.assistant.router import choose_tool
+
 def ask_assistant(question: str):
 
     question = question.lower()
@@ -71,6 +73,67 @@ def ask_assistant(question: str):
 
     return "Sorry, I don't understand that question yet."
 
+
+
+def ask_ai_assistant(question: str):
+    tool = choose_tool(question)
+
+    print(f"Selected tool: {tool}")
+
+    # temporary simple team extraction
+    question_lower = question.lower()
+
+    known_teams = [
+        "belgium",
+        "egypt",
+        "iran",
+        "new zealand",
+        "argentina",
+        "france",
+        "brazil",
+        "spain",
+        "germany",
+        "england",
+        "portugal",
+        "japan",
+    ]
+
+    found_teams = [
+        team for team in known_teams
+        if team in question_lower
+    ]
+
+    if tool == "get_team_elo" and len(found_teams) >= 1:
+        return format_elo(
+            get_team_elo(found_teams[0])
+        )
+
+    if tool == "get_team_group" and len(found_teams) >= 1:
+        return format_group(
+            get_team_group(found_teams[0])
+        )
+
+    if tool == "get_team_fixtures" and len(found_teams) >= 1:
+        return format_fixtures(
+            get_team_fixtures(found_teams[0])
+        )
+
+    if tool == "compare_teams" and len(found_teams) >= 2:
+        return format_comparison(
+            compare_teams(found_teams[0], found_teams[1])
+        )
+
+    if tool == "get_match_prediction" and len(found_teams) >= 2:
+        return format_prediction(
+            get_match_prediction(
+                found_teams[0].title(),
+                found_teams[1].title()
+            )
+        )
+
+    return "I understood the tool, but I could not extract the needed team names yet."
+
+
 if __name__ == "__main__":
 
     print("⚽ World Cup Assistant")
@@ -84,6 +147,6 @@ if __name__ == "__main__":
             print("Assistant: Goodbye!")
             break
 
-        response = ask_assistant(question)
+        response = ask_ai_assistant(question)
 
         print(f"\nAssistant: {response}\n")

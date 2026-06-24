@@ -1,5 +1,11 @@
 # World Cup Assistant
 
+## Document Role
+
+This document is the feature reference for the World Cup Assistant. It explains what the assistant does, which tools it exposes, which data sources it uses, and how the current architecture is organized.
+
+For the build history, implementation milestones, local LLM experiments, and learning journal, see [`ai_assistant_progress_report.md`](ai_assistant_progress_report.md).
+
 ## Purpose
 
 The World Cup Assistant is a lightweight natural language interface for the FIFA World Cup 2026 Match Prediction project. Its goal is to let users ask simple football analytics questions without directly opening CSV files, writing pandas queries, or manually calling prediction functions.
@@ -26,13 +32,19 @@ The current assistant supports five core capabilities.
 
 ## Architecture
 
-The assistant follows a simple request-response flow. A user question is routed through keyword-based logic, mapped to the appropriate tool, resolved using processed datasets or model prediction logic, and formatted into a user-facing response.
+The assistant follows a tool-based request-response flow. A user question is routed to a football data or prediction tool, resolved using processed datasets or model prediction logic, and formatted into a user-facing response.
+
+The current codebase includes two routing approaches:
+
+- A deterministic rule-based route in `assistant.py`, useful for simple local testing.
+- An experimental local LLM router in `router.py`, using Ollama and `llama3.2:1b` to select the most appropriate tool.
 
 ```text
 User Question
     |
     v
 Assistant Router
+(Rule-Based or Local LLM)
     |
     v
 Tool Selection
@@ -49,7 +61,8 @@ Response
 
 At a high level, the assistant separates responsibilities into three layers:
 
-- `assistant.py` handles question routing.
+- `assistant.py` handles the rule-based terminal assistant flow.
+- `router.py` handles local LLM-based tool selection.
 - `tools.py` handles data access and prediction calls.
 - `formatters.py` converts tool outputs into readable responses.
 
@@ -60,6 +73,7 @@ The assistant-related source code is located in `src/assistant/`.
 ```text
 src/assistant/
 ├── assistant.py
+├── router.py
 ├── tools.py
 └── formatters.py
 ```
@@ -77,6 +91,18 @@ It currently routes questions based on terms such as:
 - `predict`
 
 The file also includes a basic terminal loop under `if __name__ == "__main__":`, allowing the assistant to be tested interactively from the command line.
+
+### `router.py`
+
+`router.py` contains the experimental local LLM router. It sends a constrained prompt to an Ollama model and asks the model to return exactly one tool name.
+
+This layer is responsible for intent detection only. It does not retrieve data or execute tools directly.
+
+Current model:
+
+```text
+llama3.2:1b
+```
 
 ### `tools.py`
 
@@ -274,42 +300,41 @@ The current assistant is intentionally simple and works as a first functional pr
 
 Known limitations:
 
-- Routing is rule-based and implemented with `if` / `elif` keyword logic.
-- Questions must follow predefined patterns.
+- The original terminal assistant still relies on `if` / `elif` keyword routing.
+- The local LLM router currently returns only the tool name.
+- Team extraction and tool argument parsing are still simple.
+- Questions work best when they follow expected football patterns.
 - There is no conversational memory between questions.
-- There is no LLM integration.
+- There is no full agentic multi-step workflow yet.
 - There is no Retrieval-Augmented Generation implementation.
+- There is no assistant web interface yet.
 - The assistant does not perform fuzzy matching for misspelled team names.
 - The assistant depends on local processed datasets and trained prediction model files being available.
+- Local LLM routing requires Ollama to be installed and running.
 
-## Future Roadmap
+## Product Roadmap
 
-### Version 0.2
+This roadmap summarizes the feature direction. For the detailed version-by-version implementation journal, see [`ai_assistant_progress_report.md`](ai_assistant_progress_report.md).
 
-- Interactive terminal chat
-- Improved response formatting
+### Near Term
+
+- Dynamic team extraction from project datasets
+- Structured LLM outputs with tool arguments
 - Better error messages for unknown teams or unsupported questions
 - More flexible parsing of team names
 
-### Version 0.3
+### Mid Term
 
+- Streamlit chat interface
 - Additional football analytics tools
 - Group-level summaries
 - Fixture difficulty analysis
 - Team form summaries
 - Basic tournament path analysis
 
-### Version 1.0
+### Long Term
 
-- Streamlit web interface
-- LLM integration with Ollama or OpenAI
-- Natural language intent detection
-- Tool calling
-- Agentic workflow
-- User-friendly assistant panel for dashboard use
-
-### Version 2.0
-
+- Conversation memory
 - RAG over project documentation
 - Power BI integration
 - Model explanation assistant
