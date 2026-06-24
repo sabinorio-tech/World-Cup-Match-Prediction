@@ -1,3 +1,2 @@
-# Work in Progress
-
-# DS dependencies will be added when modeling begins.
+scikit-learn>=1.9.0
+xgboost>=3.3.0

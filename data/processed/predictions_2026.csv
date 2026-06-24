@@ -1,0 +1,73 @@
+group,date,team1,team2,team1_win_prob,draw_prob,team2_win_prob,favorite
+A,2026-06-11,Mexico,South Africa,0.6,0.238,0.162,Mexico
+A,2026-06-11,South Korea,Czechia,0.53,0.242,0.228,South Korea
+A,2026-06-18,South Korea,Mexico,0.341,0.292,0.367,Mexico
+A,2026-06-18,Czechia,South Africa,0.504,0.244,0.252,Czechia
+A,2026-06-24,Czechia,Mexico,0.275,0.252,0.473,Mexico
+A,2026-06-24,South Africa,South Korea,0.252,0.248,0.501,South Korea
+B,2026-06-12,Canada,Bosnia and Herzegovina,0.621,0.215,0.164,Canada
+B,2026-06-13,Qatar,Switzerland,0.148,0.182,0.671,Switzerland
+B,2026-06-18,Switzerland,Bosnia and Herzegovina,0.593,0.218,0.189,Switzerland
+B,2026-06-19,Canada,Qatar,0.764,0.153,0.084,Canada
+B,2026-06-24,Switzerland,Canada,0.485,0.243,0.271,Switzerland
+B,2026-06-24,Bosnia and Herzegovina,Qatar,0.698,0.182,0.12,Bosnia and Herzegovina
+C,2026-06-13,Brazil,Morocco,0.475,0.281,0.243,Brazil
+C,2026-06-13,Haiti,Scotland,0.294,0.262,0.444,Scotland
+C,2026-06-19,Brazil,Scotland,0.526,0.255,0.219,Brazil
+C,2026-06-19,Morocco,Haiti,0.599,0.249,0.153,Morocco
+C,2026-06-24,Scotland,Brazil,0.338,0.273,0.39,Brazil
+C,2026-06-24,Morocco,Haiti,0.599,0.249,0.153,Morocco
+D,2026-06-12,USA,Paraguay,0.407,0.271,0.322,USA
+D,2026-06-13,Australia,Türkiye,0.423,0.242,0.334,Australia
+D,2026-06-19,USA,Australia,0.329,0.27,0.401,Australia
+D,2026-06-20,Türkiye,Paraguay,0.483,0.247,0.269,Türkiye
+D,2026-06-25,Türkiye,USA,0.493,0.224,0.283,Türkiye
+D,2026-06-25,Paraguay,Australia,0.387,0.261,0.352,Paraguay
+E,2026-06-14,Germany,Curaçao,0.649,0.194,0.157,Germany
+E,2026-06-14,Ivory Coast,Ecuador,0.404,0.287,0.31,Ivory Coast
+E,2026-06-20,Germany,Ivory Coast,0.547,0.209,0.243,Germany
+E,2026-06-20,Ecuador,Curaçao,0.561,0.256,0.182,Ecuador
+E,2026-06-25,Ecuador,Germany,0.396,0.258,0.347,Ecuador
+E,2026-06-25,Curaçao,Ivory Coast,0.234,0.219,0.547,Ivory Coast
+F,2026-06-14,Netherlands,Japan,0.449,0.262,0.289,Netherlands
+F,2026-06-14,Sweden,Tunisia,0.436,0.23,0.334,Sweden
+F,2026-06-20,Netherlands,Sweden,0.656,0.196,0.148,Netherlands
+F,2026-06-20,Tunisia,Japan,0.286,0.249,0.465,Japan
+F,2026-06-26,Japan,Sweden,0.66,0.196,0.144,Japan
+F,2026-06-26,Tunisia,Netherlands,0.294,0.244,0.462,Netherlands
+G,2026-06-15,Belgium,Egypt,0.561,0.247,0.192,Belgium
+G,2026-06-15,Iran,New Zealand,0.505,0.169,0.326,Iran
+G,2026-06-21,Belgium,Iran,0.534,0.222,0.245,Belgium
+G,2026-06-21,New Zealand,Egypt,0.385,0.282,0.333,New Zealand
+G,2026-06-26,Egypt,Iran,0.329,0.27,0.402,Iran
+G,2026-06-26,New Zealand,Belgium,0.366,0.239,0.395,Belgium
+H,2026-06-15,Spain,Cape Verde,0.604,0.208,0.188,Spain
+H,2026-06-15,Saudi Arabia,Uruguay,0.298,0.278,0.424,Uruguay
+H,2026-06-21,Spain,Saudi Arabia,0.657,0.183,0.16,Spain
+H,2026-06-21,Uruguay,Cape Verde,0.492,0.273,0.235,Uruguay
+H,2026-06-26,Cape Verde,Saudi Arabia,0.432,0.28,0.289,Cape Verde
+H,2026-06-26,Uruguay,Spain,0.282,0.238,0.48,Spain
+I,2026-06-16,France,Senegal,0.544,0.207,0.25,France
+I,2026-06-16,Iraq,Norway,0.219,0.165,0.616,Norway
+I,2026-06-22,France,Iraq,0.619,0.217,0.164,France
+I,2026-06-22,Norway,Senegal,0.429,0.191,0.38,Norway
+I,2026-06-26,Norway,France,0.341,0.199,0.46,France
+I,2026-06-26,Senegal,Iraq,0.625,0.23,0.145,Senegal
+J,2026-06-16,Argentina,Algeria,0.575,0.242,0.183,Argentina
+J,2026-06-17,Austria,Jordan,0.578,0.242,0.18,Austria
+J,2026-06-22,Argentina,Austria,0.541,0.234,0.226,Argentina
+J,2026-06-23,Jordan,Algeria,0.354,0.269,0.377,Algeria
+J,2026-06-27,Algeria,Austria,0.299,0.274,0.427,Austria
+J,2026-06-27,Jordan,Argentina,0.222,0.231,0.547,Argentina
+K,2026-06-17,Portugal,DR Congo,0.535,0.211,0.254,Portugal
+K,2026-06-17,Uzbekistan,Colombia,0.316,0.237,0.446,Colombia
+K,2026-06-23,Portugal,Uzbekistan,0.557,0.216,0.227,Portugal
+K,2026-06-23,Colombia,DR Congo,0.517,0.23,0.253,Colombia
+K,2026-06-27,Colombia,Portugal,0.393,0.224,0.383,Colombia
+K,2026-06-27,DR Congo,Uzbekistan,0.375,0.293,0.332,DR Congo
+L,2026-06-17,England,Croatia,0.549,0.205,0.245,England
+L,2026-06-17,Ghana,Panama,0.37,0.285,0.345,Ghana
+L,2026-06-23,England,Ghana,0.566,0.203,0.231,England
+L,2026-06-23,Croatia,Panama,0.589,0.216,0.195,Croatia
+L,2026-06-27,Panama,England,0.268,0.26,0.472,England
+L,2026-06-27,Croatia,Ghana,0.536,0.195,0.269,Croatia
