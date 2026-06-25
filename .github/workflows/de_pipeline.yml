@@ -1,4 +1,4 @@
-name: Data Engineering Pipeline
+name: Data and ML Pipeline
 
 on:
   workflow_dispatch:
@@ -21,7 +21,7 @@ permissions:
   contents: write
 
 jobs:
-  run-de-pipeline:
+  run-data-ml-pipeline:
     runs-on: ubuntu-latest
 
     steps:
@@ -51,14 +51,14 @@ jobs:
           test -f data/raw/FIFA_WC_1930_2026/wc_2026_teams.csv
           test -f data/raw/FIFA_WC_1930_2026/wc_2026_fixtures.csv
 
-      - name: Run Data Engineering pipeline
+      - name: Run Data and ML pipeline
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: |
           test -n "$FOOTBALL_DATA_API_KEY" || (echo "Missing FOOTBALL_DATA_API_KEY GitHub Secret" && exit 1)
           python main.py
 
-      - name: Check processed outputs
+      - name: Check generated outputs
         run: |
           test -s data/processed/results_historical.csv
           test -s data/processed/results_future.csv
@@ -70,19 +70,25 @@ jobs:
           test -s data/processed/model_training_base.csv
           test -s data/raw/live/football_data_wc_matches.json
           test -s data/processed/live_matches.csv
+          test -s data/processed/features.csv
+          test -s models/xgb_model.pkl
+          test -s models/poisson_model.pkl
+          test -s data/processed/predictions_2026.csv
 
-      - name: Upload processed datasets
+      - name: Upload generated datasets and models
         uses: actions/upload-artifact@v4
         with:
-          name: processed-data
+          name: generated-data-and-models
           path: |
             data/processed/
             data/raw/live/football_data_wc_matches.json
+            models/xgb_model.pkl
+            models/poisson_model.pkl
 
-      - name: Commit updated live data
+      - name: Commit updated generated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/raw/live/football_data_wc_matches.json data/processed/live_matches.csv
-          git commit -m "Update live match data" || echo "No changes to commit"
+          git add data/raw/live/football_data_wc_matches.json data/processed/live_matches.csv data/processed/features.csv data/processed/predictions_2026.csv
+          git commit -m "Update generated World Cup data" || echo "No changes to commit"
           git push origin HEAD:${{ github.ref_name }}

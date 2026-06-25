@@ -1,16 +1,16 @@
 group,date,team1,team2,team1_win_prob,draw_prob,team2_win_prob,favorite
 A,2026-06-11,Mexico,South Africa,0.654,0.22,0.125,Mexico
 A,2026-06-11,South Korea,Czechia,0.503,0.251,0.246,South Korea
-A,2026-06-18,South Korea,Mexico,0.289,0.297,0.415,Mexico
 A,2026-06-18,Czechia,South Africa,0.479,0.254,0.267,Czechia
+A,2026-06-18,South Korea,Mexico,0.289,0.297,0.415,Mexico
 A,2026-06-24,Czechia,Mexico,0.225,0.265,0.51,Mexico
 A,2026-06-24,South Africa,South Korea,0.225,0.237,0.538,South Korea
 B,2026-06-12,Canada,Bosnia and Herzegovina,0.612,0.221,0.167,Canada
 B,2026-06-13,Qatar,Switzerland,0.101,0.16,0.739,Switzerland
 B,2026-06-18,Switzerland,Bosnia and Herzegovina,0.6,0.232,0.168,Switzerland
 B,2026-06-19,Canada,Qatar,0.777,0.148,0.075,Canada
-B,2026-06-24,Switzerland,Canada,0.434,0.258,0.308,Switzerland
 B,2026-06-24,Bosnia and Herzegovina,Qatar,0.626,0.206,0.168,Bosnia and Herzegovina
+B,2026-06-24,Switzerland,Canada,0.434,0.258,0.308,Switzerland
 C,2026-06-13,Brazil,Morocco,0.419,0.293,0.287,Brazil
 C,2026-06-13,Haiti,Scotland,0.245,0.25,0.505,Scotland
 C,2026-06-19,Brazil,Scotland,0.49,0.255,0.255,Brazil
@@ -21,14 +21,14 @@ D,2026-06-12,USA,Paraguay,0.388,0.266,0.346,USA
 D,2026-06-13,Australia,Türkiye,0.392,0.255,0.353,Australia
 D,2026-06-19,USA,Australia,0.313,0.261,0.426,Australia
 D,2026-06-20,Türkiye,Paraguay,0.467,0.25,0.284,Türkiye
-D,2026-06-25,Türkiye,USA,0.496,0.23,0.273,Türkiye
 D,2026-06-25,Paraguay,Australia,0.339,0.267,0.394,Australia
+D,2026-06-25,Türkiye,USA,0.496,0.23,0.273,Türkiye
 E,2026-06-14,Germany,Curaçao,0.713,0.176,0.111,Germany
 E,2026-06-14,Ivory Coast,Ecuador,0.359,0.291,0.35,Ivory Coast
-E,2026-06-20,Germany,Ivory Coast,0.51,0.224,0.266,Germany
 E,2026-06-20,Ecuador,Curaçao,0.606,0.251,0.143,Ecuador
-E,2026-06-25,Ecuador,Germany,0.393,0.271,0.336,Ecuador
+E,2026-06-20,Germany,Ivory Coast,0.51,0.224,0.266,Germany
 E,2026-06-25,Curaçao,Ivory Coast,0.202,0.222,0.576,Ivory Coast
+E,2026-06-25,Ecuador,Germany,0.393,0.271,0.336,Ecuador
 F,2026-06-14,Netherlands,Japan,0.416,0.26,0.323,Netherlands
 F,2026-06-14,Sweden,Tunisia,0.386,0.236,0.377,Sweden
 F,2026-06-20,Netherlands,Sweden,0.658,0.193,0.149,Netherlands
@@ -41,14 +41,14 @@ G,2026-06-21,Belgium,Iran,0.517,0.237,0.246,Belgium
 G,2026-06-21,New Zealand,Egypt,0.443,0.246,0.311,New Zealand
 G,2026-06-26,Egypt,Iran,0.337,0.264,0.398,Iran
 G,2026-06-26,New Zealand,Belgium,0.347,0.222,0.431,Belgium
-H,2026-06-15,Spain,Cape Verde,0.672,0.189,0.139,Spain
 H,2026-06-15,Saudi Arabia,Uruguay,0.252,0.282,0.466,Uruguay
+H,2026-06-15,Spain,Cape Verde,0.672,0.189,0.139,Spain
 H,2026-06-21,Spain,Saudi Arabia,0.726,0.164,0.11,Spain
 H,2026-06-21,Uruguay,Cape Verde,0.509,0.275,0.216,Uruguay
 H,2026-06-26,Cape Verde,Saudi Arabia,0.424,0.283,0.293,Cape Verde
 H,2026-06-26,Uruguay,Spain,0.235,0.228,0.536,Spain
 I,2026-06-16,France,Senegal,0.526,0.215,0.259,France
-I,2026-06-16,Iraq,Norway,0.123,0.128,0.748,Norway
+I,2026-06-16,Iraq,Norway,0.123,0.128,0.749,Norway
 I,2026-06-22,France,Iraq,0.711,0.182,0.108,France
 I,2026-06-22,Norway,Senegal,0.496,0.189,0.315,Norway
 I,2026-06-26,Norway,France,0.395,0.205,0.4,France
@@ -61,13 +61,13 @@ J,2026-06-27,Algeria,Austria,0.287,0.262,0.451,Austria
 J,2026-06-27,Jordan,Argentina,0.163,0.209,0.629,Argentina
 K,2026-06-17,Portugal,DR Congo,0.521,0.242,0.237,Portugal
 K,2026-06-17,Uzbekistan,Colombia,0.283,0.232,0.485,Colombia
-K,2026-06-23,Portugal,Uzbekistan,0.559,0.225,0.216,Portugal
 K,2026-06-23,Colombia,DR Congo,0.484,0.26,0.257,Colombia
+K,2026-06-23,Portugal,Uzbekistan,0.559,0.225,0.216,Portugal
 K,2026-06-27,Colombia,Portugal,0.353,0.226,0.421,Portugal
 K,2026-06-27,DR Congo,Uzbekistan,0.39,0.291,0.319,DR Congo
 L,2026-06-17,England,Croatia,0.561,0.207,0.232,England
 L,2026-06-17,Ghana,Panama,0.342,0.276,0.382,Panama
-L,2026-06-23,England,Ghana,0.664,0.18,0.155,England
 L,2026-06-23,Croatia,Panama,0.563,0.228,0.209,Croatia
-L,2026-06-27,Panama,England,0.185,0.205,0.611,England
+L,2026-06-23,England,Ghana,0.664,0.18,0.155,England
 L,2026-06-27,Croatia,Ghana,0.569,0.195,0.236,Croatia
+L,2026-06-27,Panama,England,0.185,0.205,0.611,England
