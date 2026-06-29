@@ -1,5 +1,7 @@
 # Data Engineering Automation Plan
 
+> **Historical planning document:** this records the original five-stage automation milestone. The production pipeline now contains 13 Data Engineering and Machine Learning stages, including live data, knockout resolution, player enrichment, model training, predictions, and evaluation. See `README.md` and `main.py` for the current authoritative flow.
+
 ## Objective
 
 This document explains the lightweight Python pipeline added for the FIFA World Cup 2026 Match Prediction project.

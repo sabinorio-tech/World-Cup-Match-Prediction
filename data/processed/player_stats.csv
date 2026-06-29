@@ -1,55 +1,56 @@
 player_name,team,position,appearances,starts,substitute_appearances,goals,assists,minutes_played,passes,pass_accuracy,key_passes,shots,shots_on_target,tackles,interceptions,dribbles,duels_won,fouls_won,yellow_cards,red_cards
-Achref Abada,Algeria,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Adil Boulbina,Algeria,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Aissa Mandi,Algeria,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Amine Gouiri,Algeria,Forward,2,2,0,1,0,,,,,,,,,,,,0,0
-Anis Hadj Moussa,Algeria,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
-Fares Chaibi,Algeria,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Fares GhedJemis,Algeria,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Hicham Boudaoui,Algeria,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Houssem Aouar,Algeria,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Ibrahim Maza,Algeria,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Jaouen Hadjam,Algeria,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Luca Zidane,Algeria,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Melvin Mastil,Algeria,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Mohamed Amine Tougai,Algeria,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
+Achref Abada,Algeria,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Adil Boulbina,Algeria,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Aissa Mandi,Algeria,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Amine Gouiri,Algeria,Forward,3,3,0,1,0,,,,,,,,,,,,0,0
+Anis Hadj Moussa,Algeria,Forward,2,1,2,0,0,,,,,,,,,,,,0,0
+Fares Chaibi,Algeria,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Fares GhedJemis,Algeria,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Hicham Boudaoui,Algeria,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Houssem Aouar,Algeria,Midfielder,2,1,2,0,2,,,,,,,,,,,,0,0
+Ibrahim Maza,Algeria,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Jaouen Hadjam,Algeria,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Luca Zidane,Algeria,Goalkeeper,2,2,1,0,0,,,,,,,,,,,,0,0
+Melvin Mastil,Algeria,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Mohamed Amine Tougai,Algeria,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
 Mohamed El Amine Amoura,Algeria,Forward,1,0,1,0,0,,,,,,,,,,,,0,0
-Nabil Bentaleb,Algeria,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Nadhir Benbouali,Algeria,Forward,1,0,2,1,0,,,,,,,,,,,,0,0
-Oussama Benbot,Algeria,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Rafik Belghali,Algeria,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Ramiz Zerrouki,Algeria,Midfielder,2,1,1,0,0,,,,,,,,,,,,1,0
-Ramy Bensebaini,Algeria,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Rayan Ait-Nouri,Algeria,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Riyad Mahrez,Algeria,Forward,2,1,1,0,1,,,,,,,,,,,,0,0
-Samir Chergui,Algeria,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Yacine Titraoui,Algeria,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Zineddine Belaid,Algeria,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Alexis Mac Allister,Argentina,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Cristian Romero,Argentina,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Emiliano Martinez,Argentina,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Enzo Fernandez,Argentina,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Exequiel Palacios,Argentina,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Facundo Medina,Argentina,Defender,2,2,0,0,1,,,,,,,,,,,,1,0
-Geronimo Rulli,Argentina,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Giovani Lo Celso,Argentina,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Giuliano Simeone,Argentina,Forward,0,0,1,0,0,,,,,,,,,,,,0,0
-Gonzalo Montiel,Argentina,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Juan Musso,Argentina,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Julian Alvarez,Argentina,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Lautaro Martinez,Argentina,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Leandro Paredes,Argentina,Midfielder,1,0,2,0,0,,,,,,,,,,,,1,0
-Lionel Messi,Argentina,Forward,2,2,0,5,0,,,,,,,,,,,,0,0
-Lisandro Martinez,Argentina,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Marcos Senesi,Argentina,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Nahuel Molina,Argentina,Defender,2,1,1,0,0,,,,,,,,,,,,0,0
-Nico Paz,Argentina,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Nicolas Gonzalez,Argentina,Forward,2,0,2,0,1,,,,,,,,,,,,0,0
-Nicolas Otamendi,Argentina,Defender,2,0,2,0,0,,,,,,,,,,,,0,0
-Nicolas Tagliafico,Argentina,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Rodrigo de Paul,Argentina,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-Thiago Almada,Argentina,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Valentin Barco,Argentina,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
+Nabil Bentaleb,Algeria,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
+Nadhir Benbouali,Algeria,Forward,1,0,3,1,0,,,,,,,,,,,,0,0
+Oussama Benbot,Algeria,Goalkeeper,1,1,2,0,0,,,,,,,,,,,,0,0
+Rafik Belghali,Algeria,Defender,3,3,0,1,0,,,,,,,,,,,,0,0
+Ramiz Zerrouki,Algeria,Midfielder,2,1,2,0,0,,,,,,,,,,,,1,0
+Ramy Bensebaini,Algeria,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Rayan Ait-Nouri,Algeria,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Riyad Mahrez,Algeria,Forward,3,2,1,2,1,,,,,,,,,,,,0,0
+Samir Chergui,Algeria,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Yacine Titraoui,Algeria,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Zineddine Belaid,Algeria,Defender,2,0,3,0,0,,,,,,,,,,,,0,0
+Alexis Mac Allister,Argentina,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
+Cristian Romero,Argentina,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Emiliano Martinez,Argentina,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Enzo Fernandez,Argentina,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Exequiel Palacios,Argentina,Midfielder,1,1,2,0,0,,,,,,,,,,,,0,0
+Facundo Medina,Argentina,Defender,2,2,1,0,1,,,,,,,,,,,,1,0
+Geronimo Rulli,Argentina,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Giovani Lo Celso,Argentina,Midfielder,1,1,2,1,0,,,,,,,,,,,,0,0
+Giuliano Simeone,Argentina,Forward,1,1,1,0,0,,,,,,,,,,,,0,0
+Gonzalo Montiel,Argentina,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Jose Manuel Lopez,Argentina,Forward,1,0,1,0,0,,,,,,,,,,,,0,0
+Juan Musso,Argentina,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Julian Alvarez,Argentina,Forward,3,1,2,0,0,,,,,,,,,,,,0,0
+Lautaro Martinez,Argentina,Forward,3,3,0,1,0,,,,,,,,,,,,0,0
+Leandro Paredes,Argentina,Midfielder,2,1,2,0,0,,,,,,,,,,,,1,0
+Lionel Messi,Argentina,Forward,3,2,1,6,0,,,,,,,,,,,,0,0
+Lisandro Martinez,Argentina,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Marcos Senesi,Argentina,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Nahuel Molina,Argentina,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Nico Paz,Argentina,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Nicolas Gonzalez,Argentina,Forward,2,0,3,0,1,,,,,,,,,,,,0,0
+Nicolas Otamendi,Argentina,Defender,3,1,2,0,0,,,,,,,,,,,,0,0
+Nicolas Tagliafico,Argentina,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Rodrigo de Paul,Argentina,Midfielder,2,2,1,0,1,,,,,,,,,,,,0,0
+Thiago Almada,Argentina,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
+Valentin Barco,Argentina,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
 Aiden O'Neill,Australia,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
 Ajdin Hrustic,Australia,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
 Alessandro Circati,Australia,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
@@ -76,57 +77,57 @@ Patrick Beach,Australia,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
 Paul Izzo,Australia,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
 Paul Okom-Engstler,Australia,Midfielder,3,2,1,0,1,,,,,,,,,,,,0,0
 Tete Yengi,Australia,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
-Alessandro Schopf,Austria,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Alexander Prass,Austria,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Alexander Schlager,Austria,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Carney Chukwuemeka,Austria,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-David Affengruber,Austria,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-David Alaba,Austria,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Dejan Ljubicic,Austria,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Florian Grillitsch,Austria,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Florian Wiegele,Austria,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Kevin Danso,Austria,Defender,2,1,1,0,0,,,,,,,,,,,,0,0
-Konrad Laimer,Austria,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Marcel Sabitzer,Austria,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Marco Friedl,Austria,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Marko Arnautovic,Austria,Midfielder,2,0,2,1,0,,,,,,,,,,,,0,0
-Michael Gregoritsch,Austria,Forward,1,1,1,0,0,,,,,,,,,,,,0,0
-Michael Svoboda,Austria,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Nicolas Seiwald,Austria,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Patrick Pentz,Austria,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Patrick Wimmer,Austria,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Paul Wanner,Austria,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Philipp Lienhart,Austria,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Phillipp Mwene,Austria,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Romano Schmid,Austria,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Sasa Kalajdzic,Austria,Forward,1,1,1,0,0,,,,,,,,,,,,0,0
-Stefan Posch,Austria,Defender,2,2,0,0,0,,,,,,,,,,,,1,0
-Xaver Schlager,Austria,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-Alexis Saelemaekers,Belgium,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Amadou Onana,Belgium,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Arthur Theate,Belgium,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Axel Witsel,Belgium,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Brandon Mechele,Belgium,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Charles de Ketelaere,Belgium,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Diego Moreira,Belgium,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Dodi Lukebakio,Belgium,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Hans Vanaken,Belgium,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Jeremy Doku,Belgium,Forward,1,1,0,0,0,,,,,,,,,,,,0,0
-Joaquin Seys,Belgium,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Kevin De Bruyne,Belgium,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Koni De Winter,Belgium,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Leandro Trossard,Belgium,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Matias Fernandez Pardo,Belgium,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Maxim de Cuyper,Belgium,Defender,2,1,1,0,0,,,,,,,,,,,,1,0
-Mike Penders,Belgium,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
+Alessandro Schopf,Austria,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Alexander Prass,Austria,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Alexander Schlager,Austria,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Carney Chukwuemeka,Austria,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+David Affengruber,Austria,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+David Alaba,Austria,Midfielder,3,3,0,0,1,,,,,,,,,,,,0,0
+Dejan Ljubicic,Austria,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Florian Grillitsch,Austria,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Florian Wiegele,Austria,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Kevin Danso,Austria,Defender,3,1,2,0,0,,,,,,,,,,,,0,0
+Konrad Laimer,Austria,Midfielder,3,3,0,0,1,,,,,,,,,,,,1,0
+Marcel Sabitzer,Austria,Midfielder,3,3,0,1,0,,,,,,,,,,,,1,0
+Marco Friedl,Austria,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Marko Arnautovic,Austria,Midfielder,3,1,2,2,0,,,,,,,,,,,,1,0
+Michael Gregoritsch,Austria,Forward,2,1,2,0,1,,,,,,,,,,,,0,0
+Michael Svoboda,Austria,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Nicolas Seiwald,Austria,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Patrick Pentz,Austria,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Patrick Wimmer,Austria,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+Paul Wanner,Austria,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Philipp Lienhart,Austria,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Phillipp Mwene,Austria,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Romano Schmid,Austria,Midfielder,3,3,0,1,0,,,,,,,,,,,,0,0
+Sasa Kalajdzic,Austria,Forward,2,1,2,1,0,,,,,,,,,,,,0,0
+Stefan Posch,Austria,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Xaver Schlager,Austria,Midfielder,3,3,0,0,1,,,,,,,,,,,,0,0
+Alexis Saelemaekers,Belgium,Midfielder,2,1,2,1,0,,,,,,,,,,,,0,0
+Amadou Onana,Belgium,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Arthur Theate,Belgium,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Axel Witsel,Belgium,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Brandon Mechele,Belgium,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Charles de Ketelaere,Belgium,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Diego Moreira,Belgium,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Dodi Lukebakio,Belgium,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Hans Vanaken,Belgium,Midfielder,3,1,2,0,1,,,,,,,,,,,,0,0
+Jeremy Doku,Belgium,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
+Joaquin Seys,Belgium,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Kevin De Bruyne,Belgium,Midfielder,3,3,0,1,0,,,,,,,,,,,,0,0
+Koni De Winter,Belgium,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Leandro Trossard,Belgium,Forward,3,3,0,2,0,,,,,,,,,,,,0,0
+Matias Fernandez Pardo,Belgium,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
+Maxim de Cuyper,Belgium,Defender,3,2,1,0,0,,,,,,,,,,,,1,0
+Mike Penders,Belgium,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
 Nathan Ngoy,Belgium,Defender,2,2,0,0,0,,,,,,,,,,,,0,1
-Nicolas Raskin,Belgium,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Romelu Lukaku,Belgium,Forward,2,1,1,0,0,,,,,,,,,,,,1,0
-Senne Lammens,Belgium,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Thibaut Courtois,Belgium,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Thomas Meunier,Belgium,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Timothy Castagne,Belgium,Defender,2,1,1,0,0,,,,,,,,,,,,1,0
-Youri Tielemans,Belgium,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
+Nicolas Raskin,Belgium,Midfielder,3,1,2,0,1,,,,,,,,,,,,0,0
+Romelu Lukaku,Belgium,Forward,3,1,2,1,1,,,,,,,,,,,,1,0
+Senne Lammens,Belgium,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Thibaut Courtois,Belgium,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Thomas Meunier,Belgium,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Timothy Castagne,Belgium,Defender,3,2,1,0,0,,,,,,,,,,,,1,0
+Youri Tielemans,Belgium,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
 Amar Dedic,Bosnia and Herzegovina,Defender,2,2,1,0,0,,,,,,,,,,,,1,0
 Amar Memic,Bosnia and Herzegovina,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
 Amir Hadziahmetovic,Bosnia and Herzegovina,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
@@ -179,110 +180,110 @@ Rayan Rocha,Brazil,Forward,2,1,2,0,1,,,,,,,,,,,,0,0
 Roger Ibanez,Brazil,Defender,1,1,2,0,0,,,,,,,,,,,,1,0
 Vinicius Junior,Brazil,Forward,3,3,0,4,1,,,,,,,,,,,,0,0
 Weverton,Brazil,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
-Alfie Jones,Canada,Defender,0,0,1,0,0,,,,,,,,,,,,0,0
-Ali Ahmed,Canada,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
-Alistair Johnston,Canada,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
-Alphonso Davies,Canada,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
-Cyle Larin,Canada,Forward,3,2,1,2,0,,,,,,,,,,,,1,0
-Dayne St Clair,Canada,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
-Derek Cornelius,Canada,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Alfie Jones,Canada,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
+Ali Ahmed,Canada,Defender,3,2,2,0,0,,,,,,,,,,,,0,0
+Alistair Johnston,Canada,Defender,4,4,0,0,0,,,,,,,,,,,,1,0
+Alphonso Davies,Canada,Midfielder,1,0,4,0,0,,,,,,,,,,,,0,0
+Cyle Larin,Canada,Forward,3,2,2,2,0,,,,,,,,,,,,1,0
+Dayne St Clair,Canada,Goalkeeper,0,0,4,0,0,,,,,,,,,,,,0,0
+Derek Cornelius,Canada,Defender,4,4,0,0,0,,,,,,,,,,,,1,0
 Ismael Kone,Canada,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Jacob Shaffelburg,Canada,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
-Jayden Nelson,Canada,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
-Joel Waterman,Canada,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
-Jonathan David,Canada,Forward,3,3,0,3,0,,,,,,,,,,,,0,0
-Jonathan Osorio,Canada,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
-Liam Millar,Canada,Forward,2,1,2,0,0,,,,,,,,,,,,0,0
-Luc de Fourgerolles,Canada,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
-Mathieu Choinere,Canada,Midfielder,1,1,2,0,0,,,,,,,,,,,,0,0
-Maxime Crepeau,Canada,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
-Moise Bombito,Canada,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
-Nathan Saliba,Canada,Midfielder,2,1,2,1,2,,,,,,,,,,,,0,0
-Niko Sigur,Canada,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
-Owen Goodman,Canada,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
-Promise David Akinpelu,Canada,Forward,2,0,3,1,1,,,,,,,,,,,,0,0
-Richie Laryea,Canada,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
-Stephen Eustaquio,Canada,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
-Tajon Buchanan,Canada,Forward,3,3,0,0,0,,,,,,,,,,,,0,0
-Tani Oluwaseyi,Canada,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
-Benchimol,Cape Verde,Forward,1,1,1,0,0,,,,,,,,,,,,0,0
-CJ dos Santos,Cape Verde,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Dailon Livramento,Cape Verde,Forward,1,1,1,0,0,,,,,,,,,,,,0,0
-Deroy Duarte,Cape Verde,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Diney,Cape Verde,Defender,2,2,0,0,0,,,,,,,,,,,,1,0
-Garry Rodrigues,Cape Verde,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Helio Varela,Cape Verde,Midfielder,1,0,2,1,0,,,,,,,,,,,,0,0
-Jamiro Monteiro,Cape Verde,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Joao Paulo,Cape Verde,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Josimar Vozinha,Cape Verde,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Jovane Cabral,Cape Verde,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Kelvin Pires,Cape Verde,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Kevin Pina,Cape Verde,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Laros Duarte,Cape Verde,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Logan Costa,Cape Verde,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Marcio Rosa,Cape Verde,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Nuno Da Costa,Cape Verde,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Pico,Cape Verde,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Ryan Mendes,Cape Verde,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
+Jacob Shaffelburg,Canada,Forward,3,0,4,0,0,,,,,,,,,,,,0,0
+Jayden Nelson,Canada,Forward,0,0,4,0,0,,,,,,,,,,,,0,0
+Joel Waterman,Canada,Midfielder,0,0,4,0,0,,,,,,,,,,,,0,0
+Jonathan David,Canada,Forward,4,4,0,3,0,,,,,,,,,,,,0,0
+Jonathan Osorio,Canada,Midfielder,1,0,4,0,0,,,,,,,,,,,,0,0
+Liam Millar,Canada,Forward,3,2,2,0,0,,,,,,,,,,,,0,0
+Luc de Fourgerolles,Canada,Defender,4,3,1,0,0,,,,,,,,,,,,1,0
+Mathieu Choinere,Canada,Midfielder,1,1,3,0,0,,,,,,,,,,,,0,0
+Maxime Crepeau,Canada,Goalkeeper,4,4,0,0,0,,,,,,,,,,,,0,0
+Moise Bombito,Canada,Defender,2,1,3,0,0,,,,,,,,,,,,0,0
+Nathan Saliba,Canada,Midfielder,3,2,2,1,2,,,,,,,,,,,,1,0
+Niko Sigur,Canada,Defender,2,0,4,0,0,,,,,,,,,,,,1,0
+Owen Goodman,Canada,Goalkeeper,0,0,4,0,0,,,,,,,,,,,,0,0
+Promise David Akinpelu,Canada,Forward,3,0,4,1,1,,,,,,,,,,,,0,0
+Richie Laryea,Canada,Midfielder,4,4,0,0,0,,,,,,,,,,,,0,0
+Stephen Eustaquio,Canada,Midfielder,4,3,1,1,0,,,,,,,,,,,,0,0
+Tajon Buchanan,Canada,Forward,4,4,0,0,0,,,,,,,,,,,,0,0
+Tani Oluwaseyi,Canada,Midfielder,4,2,2,0,0,,,,,,,,,,,,0,0
+Benchimol,Cape Verde,Forward,1,1,2,0,0,,,,,,,,,,,,0,0
+CJ dos Santos,Cape Verde,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Dailon Livramento,Cape Verde,Forward,2,2,1,0,0,,,,,,,,,,,,0,0
+Deroy Duarte,Cape Verde,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Diney,Cape Verde,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Garry Rodrigues,Cape Verde,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Helio Varela,Cape Verde,Midfielder,2,0,3,1,0,,,,,,,,,,,,0,0
+Jamiro Monteiro,Cape Verde,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Joao Paulo,Cape Verde,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Josimar Vozinha,Cape Verde,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Jovane Cabral,Cape Verde,Midfielder,1,1,2,0,0,,,,,,,,,,,,0,0
+Kelvin Pires,Cape Verde,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Kevin Pina,Cape Verde,Midfielder,3,3,0,1,0,,,,,,,,,,,,0,0
+Laros Duarte,Cape Verde,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Logan Costa,Cape Verde,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Marcio Rosa,Cape Verde,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Nuno Da Costa,Cape Verde,Forward,3,0,3,0,0,,,,,,,,,,,,0,0
+Pico,Cape Verde,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Ryan Mendes,Cape Verde,Forward,3,3,0,0,0,,,,,,,,,,,,0,0
 Sidney Cabral,Cape Verde,Defender,2,2,0,0,0,,,,,,,,,,,,2,0
-Steven Moreira,Cape Verde,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Stopira,Cape Verde,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
+Steven Moreira,Cape Verde,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Stopira,Cape Verde,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
 Telmo Arcanjo,Cape Verde,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Wagner Pina,Cape Verde,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Willy Semedo,Cape Verde,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Yannick Semedo,Cape Verde,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Alvaro Montero,Colombia,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Andres Gomez,Colombia,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Camilo Vargas,Colombia,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Cucho Hernandez,Colombia,Forward,1,0,2,0,1,,,,,,,,,,,,0,0
-Daniel Munoz,Colombia,Defender,2,2,0,2,0,,,,,,,,,,,,0,0
-David Ospina,Colombia,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Davinson Sanchez,Colombia,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Deiver Machado,Colombia,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Gustavo Puerta,Colombia,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-James Rodriguez,Colombia,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Jaminton Leandro Campaz,Colombia,Midfielder,1,0,2,1,0,,,,,,,,,,,,0,0
-Jefferson Lerma,Colombia,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Jhon Arias,Colombia,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Jhon Cordoba,Colombia,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Jhon Lucumi,Colombia,Defender,2,2,0,0,0,,,,,,,,,,,,1,0
-Johan Mojica,Colombia,Defender,2,2,0,0,0,,,,,,,,,,,,1,0
-Jorge Carrascal,Colombia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Juan Portilla,Colombia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Juan Quintero,Colombia,Midfielder,1,0,2,0,1,,,,,,,,,,,,0,0
-Kevin Castano,Colombia,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Luis Diaz,Colombia,Forward,2,2,0,1,1,,,,,,,,,,,,0,0
-Luis Suarez,Colombia,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Richard Rios,Colombia,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Santiago Arias,Colombia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Willer Ditta,Colombia,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Yerry Mina,Colombia,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Andrej Kramaric,Croatia,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Ante Budimir,Croatia,Forward,1,0,2,1,0,,,,,,,,,,,,0,0
-Dominik Kotarski,Croatia,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Dominik Livakovic,Croatia,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Duje Caleta-Car,Croatia,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Igor Matanovic,Croatia,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Ivan Perisic,Croatia,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-Ivor Pandur,Croatia,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Joako Gvardiol,Croatia,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Josip Stanisic,Croatia,Defender,2,2,0,0,1,,,,,,,,,,,,0,0
-Josip Sutalo,Croatia,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Kristijan Jakic,Croatia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Luka Modric,Croatia,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Luka Sucic,Croatia,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Luka Vuskovic,Croatia,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Marco Pasalic,Croatia,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Marin Pongracic,Croatia,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Mario Pasalic,Croatia,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Martin Baturina,Croatia,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Martin Erlic,Croatia,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Mateo Kovacic,Croatia,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Nikola Moro,Croatia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Nikola Vlasic,Croatia,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Petar Musa,Croatia,Forward,2,2,0,1,0,,,,,,,,,,,,0,0
-Petar Sucic,Croatia,Midfielder,2,1,1,0,1,,,,,,,,,,,,1,0
-Toni Fruk,Croatia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
+Wagner Pina,Cape Verde,Defender,1,1,2,0,0,,,,,,,,,,,,1,0
+Willy Semedo,Cape Verde,Forward,2,1,2,0,0,,,,,,,,,,,,0,0
+Yannick Semedo,Cape Verde,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Alvaro Montero,Colombia,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Andres Gomez,Colombia,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Camilo Vargas,Colombia,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Cucho Hernandez,Colombia,Forward,1,0,3,0,1,,,,,,,,,,,,0,0
+Daniel Munoz,Colombia,Defender,3,2,1,2,0,,,,,,,,,,,,0,0
+David Ospina,Colombia,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Davinson Sanchez,Colombia,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Deiver Machado,Colombia,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Gustavo Puerta,Colombia,Midfielder,3,3,0,0,1,,,,,,,,,,,,1,0
+James Rodriguez,Colombia,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Jaminton Leandro Campaz,Colombia,Midfielder,1,0,3,1,0,,,,,,,,,,,,0,0
+Jefferson Lerma,Colombia,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Jhon Arias,Colombia,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Jhon Cordoba,Colombia,Forward,2,1,2,0,0,,,,,,,,,,,,0,0
+Jhon Lucumi,Colombia,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Johan Mojica,Colombia,Defender,2,2,1,0,0,,,,,,,,,,,,1,0
+Jorge Carrascal,Colombia,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Juan Portilla,Colombia,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Juan Quintero,Colombia,Midfielder,2,0,3,0,1,,,,,,,,,,,,0,0
+Kevin Castano,Colombia,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+Luis Diaz,Colombia,Forward,3,3,0,1,1,,,,,,,,,,,,0,0
+Luis Suarez,Colombia,Forward,3,2,1,0,0,,,,,,,,,,,,0,0
+Richard Rios,Colombia,Midfielder,3,0,3,0,0,,,,,,,,,,,,0,0
+Santiago Arias,Colombia,Midfielder,1,1,2,0,0,,,,,,,,,,,,0,0
+Willer Ditta,Colombia,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Yerry Mina,Colombia,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Andrej Kramaric,Croatia,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
+Ante Budimir,Croatia,Forward,2,1,2,1,0,,,,,,,,,,,,0,0
+Dominik Kotarski,Croatia,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Dominik Livakovic,Croatia,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Duje Caleta-Car,Croatia,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Igor Matanovic,Croatia,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+Ivan Perisic,Croatia,Midfielder,3,3,0,0,1,,,,,,,,,,,,1,0
+Ivor Pandur,Croatia,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Joako Gvardiol,Croatia,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Josip Stanisic,Croatia,Defender,3,3,0,0,1,,,,,,,,,,,,0,0
+Josip Sutalo,Croatia,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Kristijan Jakic,Croatia,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Luka Modric,Croatia,Midfielder,3,3,0,0,1,,,,,,,,,,,,0,0
+Luka Sucic,Croatia,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Luka Vuskovic,Croatia,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Marco Pasalic,Croatia,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Marin Pongracic,Croatia,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Mario Pasalic,Croatia,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Martin Baturina,Croatia,Midfielder,3,3,0,1,0,,,,,,,,,,,,0,0
+Martin Erlic,Croatia,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Mateo Kovacic,Croatia,Midfielder,3,2,1,0,1,,,,,,,,,,,,0,0
+Nikola Moro,Croatia,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Nikola Vlasic,Croatia,Midfielder,2,1,2,1,0,,,,,,,,,,,,0,0
+Petar Musa,Croatia,Forward,2,2,1,1,0,,,,,,,,,,,,0,0
+Petar Sucic,Croatia,Midfielder,3,2,1,1,1,,,,,,,,,,,,1,0
+Toni Fruk,Croatia,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
 Ar'Jany Martha,Curaçao,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
 Armando Obispo,Curaçao,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
 Brandley Kuwas,Curaçao,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
@@ -335,32 +336,32 @@ Tomas Holes,Czechia,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
 Tomas Soucek,Czechia,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
 Vladimir Coufal,Czechia,Defender,3,3,0,0,1,,,,,,,,,,,,0,0
 Vladimir Darida,Czechia,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Aaron Tshibola,DR Congo,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Aaron Wan-Bissaka,DR Congo,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Arthur Masuaku,DR Congo,Defender,2,2,0,0,1,,,,,,,,,,,,0,0
-Axel Tuanzebe,DR Congo,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Brian Cipenga,DR Congo,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Cedric Bakambu,DR Congo,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Chancel Mbemba,DR Congo,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Charles Pickel,DR Congo,Midfielder,2,0,2,0,0,,,,,,,,,,,,1,0
-Dylan Batubinsika,DR Congo,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Edo Kayembe,DR Congo,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Fiston Mayele,DR Congo,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Gael Kakuta,DR Congo,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Gedeon Kalulu,DR Congo,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Joris Kayembe,DR Congo,Defender,2,0,2,0,0,,,,,,,,,,,,0,0
-Lionel Mpasi,DR Congo,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Matthieu Epolo,DR Congo,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Meschak Elia,DR Congo,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Nathanael Mbuku,DR Congo,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Ngal'ayel Mukau,DR Congo,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Noah Sadiki,DR Congo,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Samuel Moutoussamy,DR Congo,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Simon Banza,DR Congo,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Steve Kapuadi,DR Congo,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Theo Bongonda,DR Congo,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Timothy Fayulu,DR Congo,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Yoane Wissa,DR Congo,Forward,2,2,0,1,0,,,,,,,,,,,,0,0
+Aaron Tshibola,DR Congo,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Aaron Wan-Bissaka,DR Congo,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Arthur Masuaku,DR Congo,Defender,3,3,0,0,1,,,,,,,,,,,,0,0
+Axel Tuanzebe,DR Congo,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Brian Cipenga,DR Congo,Midfielder,1,1,2,0,0,,,,,,,,,,,,0,0
+Cedric Bakambu,DR Congo,Forward,3,3,0,0,0,,,,,,,,,,,,0,0
+Chancel Mbemba,DR Congo,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Charles Pickel,DR Congo,Midfielder,2,0,3,0,0,,,,,,,,,,,,1,0
+Dylan Batubinsika,DR Congo,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Edo Kayembe,DR Congo,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Fiston Mayele,DR Congo,Forward,1,0,3,1,0,,,,,,,,,,,,0,0
+Gael Kakuta,DR Congo,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Gedeon Kalulu,DR Congo,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Joris Kayembe,DR Congo,Defender,3,0,3,0,0,,,,,,,,,,,,0,0
+Lionel Mpasi,DR Congo,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Matthieu Epolo,DR Congo,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Meschak Elia,DR Congo,Forward,1,0,3,0,1,,,,,,,,,,,,0,0
+Nathanael Mbuku,DR Congo,Midfielder,2,1,2,0,0,,,,,,,,,,,,1,0
+Ngal'ayel Mukau,DR Congo,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
+Noah Sadiki,DR Congo,Midfielder,3,1,2,0,0,,,,,,,,,,,,1,0
+Samuel Moutoussamy,DR Congo,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Simon Banza,DR Congo,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
+Steve Kapuadi,DR Congo,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Theo Bongonda,DR Congo,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Timothy Fayulu,DR Congo,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Yoane Wissa,DR Congo,Forward,3,3,0,3,0,,,,,,,,,,,,0,0
 Alan Franco,Ecuador,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
 Alan Minda,Ecuador,Forward,1,1,2,0,0,,,,,,,,,,,,0,0
 Angelo Preciado,Ecuador,Defender,3,0,3,0,0,,,,,,,,,,,,0,0
@@ -387,85 +388,85 @@ Pervis Estupinan,Ecuador,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
 Piero Hincapie,Ecuador,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
 William Pacho,Ecuador,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
 Yaimar Medina,Ecuador,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
-Ahmed Fatouh,Egypt,Defender,2,2,0,0,0,,,,,,,,,,,,1,0
-Ahmed Sayed Zizo,Egypt,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-El Mahdy Soliman,Egypt,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Eman Ashour,Egypt,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Haissem Hassan,Egypt,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
+Ahmed Fatouh,Egypt,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Ahmed Sayed Zizo,Egypt,Midfielder,3,0,3,0,0,,,,,,,,,,,,0,0
+El Mahdy Soliman,Egypt,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Eman Ashour,Egypt,Midfielder,3,3,0,1,0,,,,,,,,,,,,0,0
+Haissem Hassan,Egypt,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
 Hamdi Fathi,Egypt,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Hamza Abdelkarim,Egypt,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
+Hamza Abdelkarim,Egypt,Forward,3,0,3,0,0,,,,,,,,,,,,0,0
 Hossam Abdelmaguid,Egypt,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Ibrahim Adel,Egypt,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Karim Hafez,Egypt,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
+Ibrahim Adel,Egypt,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Karim Hafez,Egypt,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
 Mahmoud Alaa,Egypt,Defender,0,0,1,0,0,,,,,,,,,,,,0,0
-Mahmoud Saber,Egypt,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Marwan Attia,Egypt,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Mohamed Abdelmonem,Egypt,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Mohamed Alaa,Egypt,Goalkeeper,0,0,1,0,0,,,,,,,,,,,,0,0
-Mohamed El-Shenawy,Egypt,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Mohamed Hany,Egypt,Defender,2,2,0,0,1,,,,,,,,,,,,0,0
-Mohamed Salah,Egypt,Forward,2,2,0,1,2,,,,,,,,,,,,0,0
-Mohanad Lasheen,Egypt,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Mostafa Shobeir,Egypt,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Mostafa Ziko,Egypt,Midfielder,2,2,0,1,1,,,,,,,,,,,,0,0
-Nabil Emad,Egypt,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Omar Marmoush,Egypt,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Ramy Rabia,Egypt,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Tarek Alaa,Egypt,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Trezeguet,Egypt,Midfielder,1,0,2,1,0,,,,,,,,,,,,0,0
-Yasser Ibrahim,Egypt,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Anthony Gordon,England,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Bukayo Saka,England,Midfielder,2,0,2,0,1,,,,,,,,,,,,0,0
-Dan Burn,England,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Dean Henderson,England,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Declan Rice,England,Midfielder,2,2,0,0,1,,,,,,,,,,,,1,0
-Djed Spence,England,Defender,2,1,1,0,0,,,,,,,,,,,,0,0
-Eberechi Eze,England,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Elliot Anderson,England,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-Ezri Konsa,England,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Harry Kane,England,Forward,2,2,0,2,0,,,,,,,,,,,,0,0
-Ivan Toney,England,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-James Trafford,England,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Jarell Quansah,England,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-John Stones,England,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Jordan Henderson,England,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Jordan Pickford,England,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Jude Bellingham,England,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Kobbie Mainoo,England,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Marc Guehi,England,Defender,2,1,1,0,0,,,,,,,,,,,,0,0
-Marcus Rashford,England,Forward,2,0,2,1,0,,,,,,,,,,,,0,0
-Morgan Rogers,England,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Nico O'Reilly,England,Defender,2,1,1,0,0,,,,,,,,,,,,0,0
-Noni Madueke,England,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Ollie Watkins,England,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
+Mahmoud Saber,Egypt,Midfielder,1,1,2,1,0,,,,,,,,,,,,1,0
+Marwan Attia,Egypt,Midfielder,3,2,1,0,0,,,,,,,,,,,,1,0
+Mohamed Abdelmonem,Egypt,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Mohamed Alaa,Egypt,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
+Mohamed El-Shenawy,Egypt,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Mohamed Hany,Egypt,Defender,3,3,0,0,1,,,,,,,,,,,,0,0
+Mohamed Salah,Egypt,Forward,3,3,0,1,2,,,,,,,,,,,,0,0
+Mohanad Lasheen,Egypt,Midfielder,3,3,0,0,0,,,,,,,,,,,,2,0
+Mostafa Shobeir,Egypt,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Mostafa Ziko,Egypt,Midfielder,3,3,0,1,1,,,,,,,,,,,,0,0
+Nabil Emad,Egypt,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Omar Marmoush,Egypt,Forward,3,2,1,0,0,,,,,,,,,,,,0,0
+Ramy Rabia,Egypt,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Tarek Alaa,Egypt,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Trezeguet,Egypt,Midfielder,2,1,2,1,1,,,,,,,,,,,,0,0
+Yasser Ibrahim,Egypt,Defender,3,2,1,0,0,,,,,,,,,,,,1,0
+Anthony Gordon,England,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Bukayo Saka,England,Midfielder,3,1,2,0,2,,,,,,,,,,,,0,0
+Dan Burn,England,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Dean Henderson,England,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Declan Rice,England,Midfielder,2,2,1,0,1,,,,,,,,,,,,1,0
+Djed Spence,England,Defender,3,1,2,0,0,,,,,,,,,,,,0,0
+Eberechi Eze,England,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+Elliot Anderson,England,Midfielder,3,3,0,0,1,,,,,,,,,,,,0,0
+Ezri Konsa,England,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Harry Kane,England,Forward,3,3,0,3,0,,,,,,,,,,,,0,0
+Ivan Toney,England,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+James Trafford,England,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Jarell Quansah,England,Defender,1,1,2,0,0,,,,,,,,,,,,1,0
+John Stones,England,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Jordan Henderson,England,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Jordan Pickford,England,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Jude Bellingham,England,Midfielder,3,3,0,2,1,,,,,,,,,,,,0,0
+Kobbie Mainoo,England,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Marc Guehi,England,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Marcus Rashford,England,Forward,3,1,2,1,0,,,,,,,,,,,,0,0
+Morgan Rogers,England,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Nico O'Reilly,England,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Noni Madueke,England,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
+Ollie Watkins,England,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
 Reece James,England,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Trevoh Chalobah,England,Defender,0,0,1,0,0,,,,,,,,,,,,0,0
-Adrien Rabiot,France,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-Aurelien Tchouameni,France,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Bradley Barcola,France,Forward,2,1,1,1,0,,,,,,,,,,,,0,0
-Brice Samba,France,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Dayot Upamecano,France,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Desire Doue,France,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
-Ibrahima Konate,France,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Jean Philippe Mateta,France,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Jules Kounde,France,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Kouadio Kone,France,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Kylian Mbappe,France,Forward,2,2,0,4,0,,,,,,,,,,,,0,0
-Lucas Digne,France,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Lucas Hernandez,France,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Maghnes Akilouche,France,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Malo Gusto,France,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Marcus Thuram,France,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Mathis Rayan Cherki,France,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Maxence Lacroix,France,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Michael Olise,France,Midfielder,2,2,0,0,3,,,,,,,,,,,,0,0
-Mike Maignan,France,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-N'Golo Kante,France,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Ousmane Dembele,France,Midfielder,2,2,0,1,1,,,,,,,,,,,,0,0
-Robin Risser,France,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Theo Hernandez,France,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Warren Zaire-Emery,France,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-William Saliba,France,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
+Trevoh Chalobah,England,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
+Adrien Rabiot,France,Midfielder,2,2,1,0,1,,,,,,,,,,,,0,0
+Aurelien Tchouameni,France,Midfielder,2,2,1,0,1,,,,,,,,,,,,1,0
+Bradley Barcola,France,Forward,3,1,2,1,1,,,,,,,,,,,,0,0
+Brice Samba,France,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Dayot Upamecano,France,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Desire Doue,France,Forward,3,2,1,1,0,,,,,,,,,,,,0,0
+Ibrahima Konate,France,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Jean Philippe Mateta,France,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Jules Kounde,France,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Kouadio Kone,France,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Kylian Mbappe,France,Forward,3,3,0,4,2,,,,,,,,,,,,0,0
+Lucas Digne,France,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Lucas Hernandez,France,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Maghnes Akilouche,France,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Malo Gusto,France,Defender,2,0,3,0,0,,,,,,,,,,,,0,0
+Marcus Thuram,France,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Mathis Rayan Cherki,France,Midfielder,3,0,3,0,0,,,,,,,,,,,,0,0
+Maxence Lacroix,France,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Michael Olise,France,Midfielder,3,3,0,0,3,,,,,,,,,,,,0,0
+Mike Maignan,France,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+N'Golo Kante,France,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Ousmane Dembele,France,Midfielder,3,3,0,4,1,,,,,,,,,,,,0,0
+Robin Risser,France,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Theo Hernandez,France,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Warren Zaire-Emery,France,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+William Saliba,France,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
 Aleksandar Pavlovic,Germany,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
 Alexander Nubel,Germany,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
 Angelo Stiller,Germany,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
@@ -492,32 +493,32 @@ Nico Schlotterbeck,Germany,Defender,2,2,0,1,0,,,,,,,,,,,,0,0
 Oliver Baumann,Germany,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
 Pascal Gross,Germany,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
 Waldemar Anton,Germany,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
-Abdul Fatawu,Ghana,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Abdul Mumin,Ghana,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Abdul-Rahman Baba,Ghana,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Alidu Seidu,Ghana,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Antoine Semenyo,Ghana,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Augustine Boakye,Ghana,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Benjamin Asare,Ghana,Goalkeeper,2,1,1,0,0,,,,,,,,,,,,0,0
-Brandon Thomas-Asante,Ghana,Forward,1,0,2,0,1,,,,,,,,,,,,0,0
-Caleb Yirenkyi,Ghana,Midfielder,2,2,0,1,0,,,,,,,,,,,,1,0
-Christophe Bonsu Baah,Ghana,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Derrick Luckassen,Ghana,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Elisha Owusu,Ghana,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Ernest Nuamah,Ghana,Forward,1,1,1,0,0,,,,,,,,,,,,0,0
-Gideon Mensah,Ghana,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Inaki Williams,Ghana,Forward,1,1,1,0,0,,,,,,,,,,,,1,0
-Jerome Opoku,Ghana,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Jonas Adjei Adjetey,Ghana,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Jordan Ayew,Ghana,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Joseph Anang,Ghana,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Kamaldeen Sulemana,Ghana,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Kojo Peprah Oppong,Ghana,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Kwasi Sibo,Ghana,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Lawrence Ati-Zigi,Ghana,Goalkeeper,1,1,1,0,0,,,,,,,,,,,,0,0
-Marvin Senaya,Ghana,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Prince Kwabena Adu,Ghana,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Thomas Partey,Ghana,Midfielder,1,1,0,0,0,,,,,,,,,,,,0,0
+Abdul Fatawu,Ghana,Midfielder,3,0,3,0,0,,,,,,,,,,,,0,0
+Abdul Mumin,Ghana,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Abdul-Rahman Baba,Ghana,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Alidu Seidu,Ghana,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Antoine Semenyo,Ghana,Forward,3,3,0,0,0,,,,,,,,,,,,0,0
+Augustine Boakye,Ghana,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Benjamin Asare,Ghana,Goalkeeper,3,2,1,0,0,,,,,,,,,,,,0,0
+Brandon Thomas-Asante,Ghana,Forward,2,0,3,0,1,,,,,,,,,,,,0,0
+Caleb Yirenkyi,Ghana,Midfielder,3,2,1,1,0,,,,,,,,,,,,1,0
+Christophe Bonsu Baah,Ghana,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+Derrick Luckassen,Ghana,Defender,1,1,2,1,0,,,,,,,,,,,,0,0
+Elisha Owusu,Ghana,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Ernest Nuamah,Ghana,Forward,2,1,2,0,1,,,,,,,,,,,,0,0
+Gideon Mensah,Ghana,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Inaki Williams,Ghana,Forward,1,1,2,0,0,,,,,,,,,,,,1,0
+Jerome Opoku,Ghana,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Jonas Adjei Adjetey,Ghana,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Jordan Ayew,Ghana,Forward,3,3,0,0,0,,,,,,,,,,,,0,0
+Joseph Anang,Ghana,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Kamaldeen Sulemana,Ghana,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Kojo Peprah Oppong,Ghana,Defender,2,0,3,0,0,,,,,,,,,,,,1,0
+Kwasi Sibo,Ghana,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
+Lawrence Ati-Zigi,Ghana,Goalkeeper,1,1,2,0,0,,,,,,,,,,,,0,0
+Marvin Senaya,Ghana,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Prince Kwabena Adu,Ghana,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
+Thomas Partey,Ghana,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
 Alexandre Pierre,Haiti,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
 Carl Sainte,Haiti,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
 Carlens Arcus,Haiti,Defender,3,2,1,0,0,,,,,,,,,,,,1,0
@@ -544,59 +545,59 @@ Wilguens Paugain,Haiti,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
 Wilson Isidor,Haiti,Forward,3,2,1,1,0,,,,,,,,,,,,0,0
 Woodensky Pierre,Haiti,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
 Yassin Fortune,Haiti,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
-Ali Alipour,Iran,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Ali Nemati,Iran,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Alireza Beiranvand,Iran,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Alireza Jahanbakhsh,Iran,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Amirhossein Hosseinzadeh,Iran,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Amirmohammad Razzaghinia,Iran,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Aria Yousefi,Iran,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Danial Eirl,Iran,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Dennis Eckert,Iran,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Ehsan Hajsafi,Iran,Midfielder,2,1,1,0,0,,,,,,,,,,,,1,0
-Hossein Hosseini,Iran,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Hossein Kanaani,Iran,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Mehdi Ghayedi,Iran,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Mehdi Taremi,Iran,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Mehdi Torabi,Iran,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Milad Mohammadi,Iran,Defender,2,1,1,0,0,,,,,,,,,,,,0,0
-Mohammad Ghorbani,Iran,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Mohammad Mohebi,Iran,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Payam Niazmand,Iran,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Ramin Rezaeian,Iran,Defender,2,2,0,1,1,,,,,,,,,,,,0,0
-Rouzbeh Cheshmi,Iran,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Saeid Ezatolahi,Iran,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Saleh Hardani,Iran,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Saman Ghoddos,Iran,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Shahriyar Moghanlou,Iran,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
-Shoja Khalilzadeh,Iran,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Ahmed Basil,Iraq,Goalkeeper,1,1,1,0,0,,,,,,,,,,,,0,0
-Ahmed Maknzi,Iraq,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Ahmed Qasem,Iraq,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Aimar Sher,Iraq,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Akam Hashim,Iraq,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Ali Al-Hamadi,Iraq,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
-Ali Jasim,Iraq,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Ali Yousif,Iraq,Forward,0,0,1,0,0,,,,,,,,,,,,0,0
-Amir Al-Ammari,Iraq,Midfielder,2,2,0,0,1,,,,,,,,,,,,1,0
-Aymen Hussein,Iraq,Forward,2,2,0,1,0,,,,,,,,,,,,0,0
-Fahad Talib,Iraq,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Frans Putros,Iraq,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Hussein Ali,Iraq,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Ibrahim Bayesh,Iraq,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Jalal Hassan,Iraq,Goalkeeper,1,1,1,0,0,,,,,,,,,,,,0,0
+Ali Alipour,Iran,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Ali Nemati,Iran,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Alireza Beiranvand,Iran,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Alireza Jahanbakhsh,Iran,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+Amirhossein Hosseinzadeh,Iran,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
+Amirmohammad Razzaghinia,Iran,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Aria Yousefi,Iran,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Danial Eirl,Iran,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Dennis Eckert,Iran,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+Ehsan Hajsafi,Iran,Midfielder,2,1,2,0,0,,,,,,,,,,,,1,0
+Hossein Hosseini,Iran,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Hossein Kanaani,Iran,Defender,2,2,1,0,0,,,,,,,,,,,,1,0
+Mehdi Ghayedi,Iran,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Mehdi Taremi,Iran,Forward,3,3,0,0,0,,,,,,,,,,,,0,0
+Mehdi Torabi,Iran,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Milad Mohammadi,Iran,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Mohammad Ghorbani,Iran,Midfielder,1,1,2,0,0,,,,,,,,,,,,0,0
+Mohammad Mohebi,Iran,Midfielder,3,3,0,1,0,,,,,,,,,,,,0,0
+Payam Niazmand,Iran,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Ramin Rezaeian,Iran,Defender,3,3,0,2,1,,,,,,,,,,,,0,0
+Rouzbeh Cheshmi,Iran,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Saeid Ezatolahi,Iran,Midfielder,3,3,0,0,0,,,,,,,,,,,,2,0
+Saleh Hardani,Iran,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Saman Ghoddos,Iran,Forward,3,3,0,0,0,,,,,,,,,,,,0,0
+Shahriyar Moghanlou,Iran,Forward,3,1,2,0,0,,,,,,,,,,,,0,0
+Shoja Khalilzadeh,Iran,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Ahmed Basil,Iraq,Goalkeeper,2,2,1,0,0,,,,,,,,,,,,0,0
+Ahmed Maknzi,Iraq,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Ahmed Qasem,Iraq,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
+Aimar Sher,Iraq,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Akam Hashim,Iraq,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Ali Al-Hamadi,Iraq,Forward,3,2,1,0,0,,,,,,,,,,,,0,0
+Ali Jasim,Iraq,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Ali Yousif,Iraq,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
+Amir Al-Ammari,Iraq,Midfielder,3,3,0,0,1,,,,,,,,,,,,2,0
+Aymen Hussein,Iraq,Forward,2,2,1,1,0,,,,,,,,,,,,0,0
+Fahad Talib,Iraq,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Frans Putros,Iraq,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Hussein Ali,Iraq,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Ibrahim Bayesh,Iraq,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Jalal Hassan,Iraq,Goalkeeper,2,1,2,0,0,,,,,,,,,,,,0,0
 Karrar Jasim,Iraq,Midfielder,0,0,1,0,0,,,,,,,,,,,,0,0
-Kevin Yakob,Iraq,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Manaf Younis,Iraq,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Marko Farji,Iraq,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Merchas Doski,Iraq,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Mohanad Ali,Iraq,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Mustafa Saadoon,Iraq,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Rebin Sulaka,Iraq,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Youssef Amyn,Iraq,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Zaid Ismail,Iraq,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Zaid Tahseen,Iraq,Defender,2,2,0,0,0,,,,,,,,,,,,1,0
-Zidane Iqbal,Iraq,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
+Kevin Yakob,Iraq,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Manaf Younis,Iraq,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Marko Farji,Iraq,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+Merchas Doski,Iraq,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Mohanad Ali,Iraq,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Mustafa Saadoon,Iraq,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Rebin Sulaka,Iraq,Defender,2,1,2,0,0,,,,,,,,,,,,0,1
+Youssef Amyn,Iraq,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Zaid Ismail,Iraq,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Zaid Tahseen,Iraq,Defender,2,2,1,0,0,,,,,,,,,,,,1,0
+Zidane Iqbal,Iraq,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
 Alban Lafont,Ivory Coast,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
 Amad Diallo,Ivory Coast,Forward,3,2,1,1,0,,,,,,,,,,,,0,0
 Ange Yohan Bonny,Ivory Coast,Forward,3,2,1,0,0,,,,,,,,,,,,0,0
@@ -649,33 +650,33 @@ Yuito Suzuki,Japan,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
 Yukinari Sugawara,Japan,Defender,3,1,2,0,0,,,,,,,,,,,,0,0
 Yuto Nagatomo,Japan,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
 Zion Suzuki,Japan,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
-Abdallah Al-Fakhouri,Jordan,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Abdullah Nasib,Jordan,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Ali Azaizeh,Jordan,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Ali Olwan,Jordan,Forward,2,2,0,1,0,,,,,,,,,,,,0,0
-Amer Jamous,Jordan,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Anas Badawi,Jordan,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Husam Abu Dahab,Jordan,Defender,1,1,1,0,0,,,,,,,,,,,,1,0
-Ibrahim Sa'deh,Jordan,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Ihsan Haddad,Jordan,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Mahmoud Al-Mardi,Jordan,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
-Mohammad Abu Hashish,Jordan,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Mohammad Abu Zrayq,Jordan,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Mohammad Abualnadi,Jordan,Defender,1,1,0,0,0,,,,,,,,,,,,0,0
-Mohammad Al-Dawoud,Jordan,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Mohammad Taha,Jordan,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Mohannad Abu Taha,Jordan,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Musa Al-Taamari,Jordan,Forward,2,2,0,0,1,,,,,,,,,,,,0,0
-Nizar Al-Rashdan,Jordan,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Noor Al-Rawabdeh,Jordan,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-Nour Bani Attiah,Jordan,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Odeh Al-Fakhouri,Jordan,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
-Rajaei Ayed,Jordan,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Saed Al-Rosan,Jordan,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Salim Obaid,Jordan,Defender,2,0,2,0,0,,,,,,,,,,,,0,0
+Abdallah Al-Fakhouri,Jordan,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Abdullah Nasib,Jordan,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Ali Azaizeh,Jordan,Forward,3,1,2,0,0,,,,,,,,,,,,0,0
+Ali Olwan,Jordan,Forward,3,3,0,1,0,,,,,,,,,,,,0,0
+Amer Jamous,Jordan,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Anas Badawi,Jordan,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Husam Abu Dahab,Jordan,Defender,2,2,1,0,0,,,,,,,,,,,,1,0
+Ibrahim Sa'deh,Jordan,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Ihsan Haddad,Jordan,Defender,3,3,0,0,1,,,,,,,,,,,,0,0
+Mahmoud Al-Mardi,Jordan,Forward,3,1,2,0,0,,,,,,,,,,,,0,0
+Mohammad Abu Hashish,Jordan,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Mohammad Abu Zrayq,Jordan,Forward,2,0,3,0,0,,,,,,,,,,,,1,0
+Mohammad Abualnadi,Jordan,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
+Mohammad Al-Dawoud,Jordan,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Mohammad Taha,Jordan,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Mohannad Abu Taha,Jordan,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Musa Al-Taamari,Jordan,Forward,3,2,1,1,1,,,,,,,,,,,,0,0
+Nizar Al-Rashdan,Jordan,Midfielder,3,3,0,1,0,,,,,,,,,,,,0,0
+Noor Al-Rawabdeh,Jordan,Midfielder,3,3,0,0,1,,,,,,,,,,,,0,0
+Nour Bani Attiah,Jordan,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Odeh Al-Fakhouri,Jordan,Forward,3,2,1,0,0,,,,,,,,,,,,0,0
+Rajaei Ayed,Jordan,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Saed Al-Rosan,Jordan,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Salim Obaid,Jordan,Defender,3,0,3,0,0,,,,,,,,,,,,0,0
 Shareef Adnan,Jordan,Defender,0,0,1,0,0,,,,,,,,,,,,0,0
-Yazan Al-Arab,Jordan,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Yazeed Abulaila,Jordan,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
+Yazan Al-Arab,Jordan,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Yazeed Abulaila,Jordan,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
 Alexis Vega,Mexico,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
 Alvaro Fidalgo,Mexico,Midfielder,2,1,2,1,0,,,,,,,,,,,,0,0
 Armando Gonzalez,Mexico,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
@@ -755,84 +756,85 @@ Teun Koopmeiners,Netherlands,Midfielder,3,0,3,0,0,,,,,,,,,,,,0,0
 Tijjani Reijnders,Netherlands,Midfielder,3,3,0,0,1,,,,,,,,,,,,0,0
 Virgil van Dijk,Netherlands,Defender,3,3,0,1,1,,,,,,,,,,,,0,0
 Wout Weghorst,Netherlands,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
-Alex Paulsen,New Zealand,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Alex Rufer,New Zealand,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Ben Old,New Zealand,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Ben Waine,New Zealand,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Callan Elliot,New Zealand,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Callum McCowatt,New Zealand,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Chris Wood,New Zealand,Forward,2,2,0,0,2,,,,,,,,,,,,0,0
-Elijah Just,New Zealand,Forward,2,2,0,2,0,,,,,,,,,,,,0,0
-Finn Surman,New Zealand,Defender,2,2,0,1,0,,,,,,,,,,,,0,0
-Francis de Vries,New Zealand,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Jesse Randall,New Zealand,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Joe Bell,New Zealand,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Kosta Barbarouses,New Zealand,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Lachlan Bayliss,New Zealand,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Liberato Cacace,New Zealand,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Logan Rogerson,New Zealand,Forward,0,0,1,0,0,,,,,,,,,,,,0,0
-Marko Stamenic,New Zealand,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Max Crocombe,New Zealand,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Michael Boxall,New Zealand,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Michael Woud,New Zealand,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Nando Pijnaker,New Zealand,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Ryan Thomas,New Zealand,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Sarpreet Singh,New Zealand,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Tim Payne,New Zealand,Defender,2,2,0,0,1,,,,,,,,,,,,0,0
-Tommy Smith,New Zealand,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Tyler Bindon,New Zealand,Defender,2,0,2,0,0,,,,,,,,,,,,0,0
-Alexander Sorloth,Norway,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Andreas Schjelderup,Norway,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Antonio Nusa,Norway,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-David Wolfe,Norway,Defender,2,2,0,0,1,,,,,,,,,,,,0,0
-Egil Selvik,Norway,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Erling Haaland,Norway,Forward,2,2,0,4,0,,,,,,,,,,,,0,0
-Fredrik Andre Bjorkan,Norway,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Fredrik Aursnes,Norway,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Henrik Falchener,Norway,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Jens Petter Hauge,Norway,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Jorgen Strand Larsen,Norway,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Julian Ryersen,Norway,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Kristian Thorstvedt,Norway,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Kristoffer Ajer,Norway,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Leo Ostigard,Norway,Defender,2,0,2,1,0,,,,,,,,,,,,0,0
-Marcus Pedersen,Norway,Defender,1,0,2,1,0,,,,,,,,,,,,0,0
-Martin Odegaard,Norway,Midfielder,2,2,0,0,2,,,,,,,,,,,,0,0
-Morten Thorsby,Norway,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Orjan Nyland,Norway,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Oscar Bobb,Norway,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Patrick Berg,Norway,Midfielder,2,0,2,0,1,,,,,,,,,,,,0,0
-Sander Berge,Norway,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Sander Tangvik,Norway,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Sondre Langas,Norway,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Thelo Aasgaard,Norway,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Torbjorn Heggem,Norway,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Adalberto Carrasquilla,Panama,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Alberto Quintero,Panama,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Andres Andrade,Panama,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Anibal Godoy,Panama,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Azarias Londono,Panama,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Carlos Harvey,Panama,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Cecilio Waterman,Panama,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
+Alex Paulsen,New Zealand,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Alex Rufer,New Zealand,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+Ben Old,New Zealand,Midfielder,3,0,3,0,0,,,,,,,,,,,,0,0
+Ben Waine,New Zealand,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+Callan Elliot,New Zealand,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Callum McCowatt,New Zealand,Midfielder,3,2,1,0,0,,,,,,,,,,,,1,0
+Chris Wood,New Zealand,Forward,3,3,0,0,2,,,,,,,,,,,,0,0
+Elijah Just,New Zealand,Forward,3,3,0,3,0,,,,,,,,,,,,1,0
+Finn Surman,New Zealand,Defender,3,3,0,1,0,,,,,,,,,,,,0,0
+Francis de Vries,New Zealand,Defender,2,0,3,0,0,,,,,,,,,,,,0,0
+Jesse Randall,New Zealand,Forward,3,0,3,0,0,,,,,,,,,,,,0,0
+Joe Bell,New Zealand,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Kosta Barbarouses,New Zealand,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+Lachlan Bayliss,New Zealand,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Liberato Cacace,New Zealand,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Logan Rogerson,New Zealand,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
+Marko Stamenic,New Zealand,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Max Crocombe,New Zealand,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Michael Boxall,New Zealand,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Michael Woud,New Zealand,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Nando Pijnaker,New Zealand,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Ryan Thomas,New Zealand,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Sarpreet Singh,New Zealand,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Tim Payne,New Zealand,Defender,3,3,0,0,1,,,,,,,,,,,,0,0
+Tommy Smith,New Zealand,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Tyler Bindon,New Zealand,Defender,3,1,2,0,0,,,,,,,,,,,,0,0
+Alexander Sorloth,Norway,Forward,2,2,1,0,0,,,,,,,,,,,,0,0
+Andreas Schjelderup,Norway,Midfielder,3,1,2,0,1,,,,,,,,,,,,0,0
+Antonio Nusa,Norway,Forward,3,2,1,0,0,,,,,,,,,,,,0,0
+David Wolfe,Norway,Defender,2,2,1,0,1,,,,,,,,,,,,0,0
+Egil Selvik,Norway,Goalkeeper,1,1,2,0,0,,,,,,,,,,,,0,0
+Erling Haaland,Norway,Forward,2,2,1,4,0,,,,,,,,,,,,0,0
+Fredrik Andre Bjorkan,Norway,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Fredrik Aursnes,Norway,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Henrik Falchener,Norway,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Jens Petter Hauge,Norway,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Jorgen Strand Larsen,Norway,Forward,1,1,2,0,0,,,,,,,,,,,,0,0
+Julian Ryersen,Norway,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Kristian Thorstvedt,Norway,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Kristoffer Ajer,Norway,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Leo Ostigard,Norway,Defender,3,1,2,1,0,,,,,,,,,,,,0,0
+Marcus Pedersen,Norway,Defender,2,0,3,1,0,,,,,,,,,,,,0,0
+Martin Odegaard,Norway,Midfielder,2,2,1,0,2,,,,,,,,,,,,0,0
+Morten Thorsby,Norway,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Orjan Nyland,Norway,Goalkeeper,2,2,1,0,0,,,,,,,,,,,,0,0
+Oscar Bobb,Norway,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Patrick Berg,Norway,Midfielder,3,1,2,0,1,,,,,,,,,,,,1,0
+Sander Berge,Norway,Midfielder,2,2,1,0,0,,,,,,,,,,,,0,0
+Sander Tangvik,Norway,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Sondre Langas,Norway,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Thelo Aasgaard,Norway,Midfielder,1,1,2,1,0,,,,,,,,,,,,0,0
+Torbjorn Heggem,Norway,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Adalberto Carrasquilla,Panama,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Alberto Quintero,Panama,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Andres Andrade,Panama,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Anibal Godoy,Panama,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Azarias Londono,Panama,Forward,3,0,3,0,0,,,,,,,,,,,,0,0
+Carlos Harvey,Panama,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Cecilio Waterman,Panama,Forward,2,1,2,0,0,,,,,,,,,,,,0,0
 Cesar Blackman,Panama,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Cesar Samudio,Panama,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Cesar Yanis,Panama,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Christian Martinez P,Panama,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Edgar Barcenas,Panama,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Edgardo Farina,Panama,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Erick Davis,Panama,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Fidel Escobar,Panama,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Ismael Diaz,Panama,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Jiovany Ramos,Panama,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Jorge Gutierrez,Panama,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Jose Cordoba,Panama,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Jose Fajardo,Panama,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
-Jose Luis Rodriguez,Panama,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Luis Mejia,Panama,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Michael Amir Murillo,Panama,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Orlando Mosquera,Panama,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Roderick Miller,Panama,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Tomas Rodriguez,Panama,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
+Cesar Samudio,Panama,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Cesar Yanis,Panama,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Christian Martinez P,Panama,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Edgar Barcenas,Panama,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Edgardo Farina,Panama,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Erick Davis,Panama,Defender,2,0,3,0,0,,,,,,,,,,,,0,0
+Fidel Escobar,Panama,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Ismael Diaz,Panama,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
+Jiovany Ramos,Panama,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Jorge Gutierrez,Panama,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Jose Cordoba,Panama,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Jose Fajardo,Panama,Forward,3,1,2,0,0,,,,,,,,,,,,1,0
+Jose Luis Rodriguez,Panama,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Luis Mejia,Panama,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Michael Amir Murillo,Panama,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Orlando Mosquera,Panama,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Roderick Miller,Panama,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Rolando Blackburn,Panama,Forward,0,0,1,0,0,,,,,,,,,,,,0,0
+Tomas Rodriguez,Panama,Forward,2,1,2,0,0,,,,,,,,,,,,0,0
 Adrian Cubas,Paraguay,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
 Alejandro Romero,Paraguay,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
 Alex Arce,Paraguay,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
@@ -859,32 +861,32 @@ Omar Alderete,Paraguay,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
 Orlando Gill,Paraguay,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
 Ramon Sosa,Paraguay,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
 Roberto Junior Fernandez,Paraguay,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
-Bernardo Silva,Portugal,Midfielder,2,1,1,0,0,,,,,,,,,,,,1,0
-Bruno Fernandes,Portugal,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-Cristiano Ronaldo,Portugal,Forward,2,2,0,2,0,,,,,,,,,,,,0,0
-Diogo Costa,Portugal,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Diogo Dalot,Portugal,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Francisco Conceicao,Portugal,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Francisco Trincao,Portugal,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Goncalo Guedes,Portugal,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Goncalo Inacio,Portugal,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Goncalo Ramos,Portugal,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Joao Cancelo,Portugal,Defender,2,2,0,0,1,,,,,,,,,,,,0,0
-Joao Felix,Portugal,Forward,1,1,1,0,0,,,,,,,,,,,,0,0
-Joao Neves,Portugal,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Jose Sa,Portugal,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Matheus Nunes,Portugal,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Nelson Semedo,Portugal,Defender,2,0,2,0,0,,,,,,,,,,,,1,0
-Nuno Mendes,Portugal,Defender,2,2,0,1,0,,,,,,,,,,,,0,0
-Pedro Neto,Portugal,Forward,2,2,0,0,1,,,,,,,,,,,,0,0
-Rafael Leao,Portugal,Forward,2,0,2,1,0,,,,,,,,,,,,0,0
-Renato Veiga,Portugal,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Ruben Dias,Portugal,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Ruben Neves,Portugal,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Rui Silva,Portugal,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Samu Costa,Portugal,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Tomas Lemos Araujo,Portugal,Defender,1,1,1,0,0,,,,,,,,,,,,1,0
-Vitinha,Portugal,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
+Bernardo Silva,Portugal,Midfielder,2,1,2,0,0,,,,,,,,,,,,1,0
+Bruno Fernandes,Portugal,Midfielder,3,3,0,0,1,,,,,,,,,,,,0,0
+Cristiano Ronaldo,Portugal,Forward,3,3,0,2,0,,,,,,,,,,,,0,0
+Diogo Costa,Portugal,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Diogo Dalot,Portugal,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Francisco Conceicao,Portugal,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+Francisco Trincao,Portugal,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Goncalo Guedes,Portugal,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+Goncalo Inacio,Portugal,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Goncalo Ramos,Portugal,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Joao Cancelo,Portugal,Defender,3,3,0,0,1,,,,,,,,,,,,0,0
+Joao Felix,Portugal,Forward,2,2,1,0,0,,,,,,,,,,,,0,0
+Joao Neves,Portugal,Midfielder,3,2,1,1,0,,,,,,,,,,,,0,0
+Jose Sa,Portugal,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Matheus Nunes,Portugal,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Nelson Semedo,Portugal,Defender,2,0,3,0,0,,,,,,,,,,,,1,0
+Nuno Mendes,Portugal,Defender,3,3,0,1,0,,,,,,,,,,,,0,0
+Pedro Neto,Portugal,Forward,3,3,0,0,1,,,,,,,,,,,,0,0
+Rafael Leao,Portugal,Forward,3,0,3,1,0,,,,,,,,,,,,0,0
+Renato Veiga,Portugal,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Ruben Dias,Portugal,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Ruben Neves,Portugal,Midfielder,1,1,2,0,0,,,,,,,,,,,,0,0
+Rui Silva,Portugal,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Samu Costa,Portugal,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Tomas Lemos Araujo,Portugal,Defender,1,1,2,0,0,,,,,,,,,,,,1,0
+Vitinha,Portugal,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
 Abdulaziz Hatem,Qatar,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
 Ahmed Al-Ganehi,Qatar,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
 Ahmed Alaaeldin,Qatar,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
@@ -911,32 +913,32 @@ Salah Zakaria,Qatar,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
 Sultan Al-Brake,Qatar,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
 Tahsin Jamshid,Qatar,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
 Yusuf Abdurisag,Qatar,Forward,2,2,1,0,0,,,,,,,,,,,,0,0
-Abdulelah Al-Amri,Saudi Arabia,Defender,2,2,0,1,0,,,,,,,,,,,,1,0
-Abdullah Al-Hamdan,Saudi Arabia,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Abdullah Al-Khaibari,Saudi Arabia,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Ahmed Al-Kassar,Saudi Arabia,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Alaa Al-Hejji,Saudi Arabia,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Ali Lajami,Saudi Arabia,Defender,2,1,1,0,0,,,,,,,,,,,,0,0
-Ali Majrashi,Saudi Arabia,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Ayman Yahya,Saudi Arabia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Firas Al-Buraikan,Saudi Arabia,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Hassan Al-Tambakti,Saudi Arabia,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Hassan Kadesh,Saudi Arabia,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Jehad Thakri,Saudi Arabia,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Khalid Al-Ghannam,Saudi Arabia,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Mohamed Kanno,Saudi Arabia,Midfielder,2,1,1,0,0,,,,,,,,,,,,1,0
-Mohammed Abu Al-Shamat,Saudi Arabia,Defender,2,1,1,0,0,,,,,,,,,,,,0,0
-Mohammed Al-Owais,Saudi Arabia,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Moteb Al-Harbi,Saudi Arabia,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Musab Al-Juwayr,Saudi Arabia,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Nasser Al-Dawsari,Saudi Arabia,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Nawaf Al-Aqidi,Saudi Arabia,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Nawaf Boushal,Saudi Arabia,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Saleh Al-Shehri,Saudi Arabia,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Salem Al-Dawsari,Saudi Arabia,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Saud Abdulhamid,Saudi Arabia,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Sultan Mandash,Saudi Arabia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Ziyad Al-Johani,Saudi Arabia,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
+Abdulelah Al-Amri,Saudi Arabia,Defender,3,3,0,1,0,,,,,,,,,,,,1,0
+Abdullah Al-Hamdan,Saudi Arabia,Forward,3,0,3,0,0,,,,,,,,,,,,0,0
+Abdullah Al-Khaibari,Saudi Arabia,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Ahmed Al-Kassar,Saudi Arabia,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Alaa Al-Hejji,Saudi Arabia,Midfielder,2,0,3,0,0,,,,,,,,,,,,0,0
+Ali Lajami,Saudi Arabia,Defender,3,1,2,0,0,,,,,,,,,,,,0,0
+Ali Majrashi,Saudi Arabia,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Ayman Yahya,Saudi Arabia,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Firas Al-Buraikan,Saudi Arabia,Forward,3,3,0,0,0,,,,,,,,,,,,1,0
+Hassan Al-Tambakti,Saudi Arabia,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Hassan Kadesh,Saudi Arabia,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Jehad Thakri,Saudi Arabia,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Khalid Al-Ghannam,Saudi Arabia,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Mohamed Kanno,Saudi Arabia,Midfielder,3,2,1,0,0,,,,,,,,,,,,1,0
+Mohammed Abu Al-Shamat,Saudi Arabia,Defender,3,1,2,0,0,,,,,,,,,,,,0,0
+Mohammed Al-Owais,Saudi Arabia,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Moteb Al-Harbi,Saudi Arabia,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Musab Al-Juwayr,Saudi Arabia,Defender,3,2,1,0,0,,,,,,,,,,,,0,0
+Nasser Al-Dawsari,Saudi Arabia,Midfielder,3,2,1,0,0,,,,,,,,,,,,1,0
+Nawaf Al-Aqidi,Saudi Arabia,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Nawaf Boushal,Saudi Arabia,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Saleh Al-Shehri,Saudi Arabia,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+Salem Al-Dawsari,Saudi Arabia,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Saud Abdulhamid,Saudi Arabia,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Sultan Mandash,Saudi Arabia,Midfielder,1,1,2,0,0,,,,,,,,,,,,0,0
+Ziyad Al-Johani,Saudi Arabia,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
 Aaron Hickey,Scotland,Defender,1,1,2,0,0,,,,,,,,,,,,1,0
 Andrew Robertson,Scotland,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
 Angus Gunn,Scotland,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
@@ -963,59 +965,61 @@ Scott McKenna,Scotland,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
 Scott McTominay,Scotland,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
 Tony Ralston,Scotland,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
 Tyler Fletcher,Scotland,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
-Abdoulaye Seck,Senegal,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Antoine Mendy,Senegal,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Assane Diao,Senegal,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Bamba Dieng,Senegal,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Bara Sapoko Ndiaye,Senegal,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
+Abdoulaye Seck,Senegal,Defender,1,1,2,0,1,,,,,,,,,,,,1,0
+Antoine Mendy,Senegal,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Assane Diao,Senegal,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Bamba Dieng,Senegal,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Bara Sapoko Ndiaye,Senegal,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
 Cheick N'Diaye,Senegal,Goalkeeper,0,0,1,0,0,,,,,,,,,,,,0,0
-Cherif Ndiaye,Senegal,Forward,0,0,1,0,0,,,,,,,,,,,,0,0
+Cherif Ndiaye,Senegal,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
 Edouard Mendy,Senegal,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-El Hadji Malick Diouf,Senegal,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
+El Hadji Malick Diouf,Senegal,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Habib Diallo,Senegal,Forward,1,1,0,1,0,,,,,,,,,,,,0,0
 Habib Diarra,Senegal,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
+Ibrahim Mbaye,Senegal,Forward,1,1,0,0,0,,,,,,,,,,,,0,0
 Ibrahima M'Baye,Senegal,Defender,2,0,2,1,0,,,,,,,,,,,,0,0
-Idrissa Gueye,Senegal,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Iliman Ndiaye,Senegal,Forward,1,0,2,0,1,,,,,,,,,,,,0,0
-Ismail Jakobs,Senegal,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Ismaila Sarr,Senegal,Midfielder,2,2,0,2,0,,,,,,,,,,,,0,0
-Kalidou Koulibaly,Senegal,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Krepin Diatta,Senegal,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Lamine Camara,Senegal,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Mamadou Sarr,Senegal,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Mory Diaw,Senegal,Goalkeeper,1,0,2,0,0,,,,,,,,,,,,0,0
-Moussa Niakhate,Senegal,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Nicolas Jackson,Senegal,Midfielder,2,2,0,0,1,,,,,,,,,,,,0,0
-Pape Gueye,Senegal,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Pape Matar Sarr,Senegal,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Pathe Ciss,Senegal,Defender,2,0,2,0,0,,,,,,,,,,,,0,0
-Sadio Mane,Senegal,Forward,2,2,0,0,1,,,,,,,,,,,,0,0
-Yehvann Diouf,Senegal,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Aubrey Modiba,South Africa,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
-Bradley Cross,South Africa,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
-Evidence Makgopa,South Africa,Forward,3,1,2,0,0,,,,,,,,,,,,0,0
-Ime Okon,South Africa,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
-Iqraam Rayners,South Africa,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
-Jayden Adams,South Africa,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
-Kamogelo Sebelebele,South Africa,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
-Khuliso Mudau,South Africa,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
-Khulumani Ndamane,South Africa,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
-Lyle Foster,South Africa,Forward,1,1,2,0,0,,,,,,,,,,,,0,0
-Mbekezeli Mbokazi,South Africa,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
-Nkosinathi Sibisi,South Africa,Defender,1,1,2,0,0,,,,,,,,,,,,1,0
-Olwethu Makhanya,South Africa,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
-Oswin Appollis,South Africa,Midfielder,3,2,1,0,0,,,,,,,,,,,,0,0
-Relebohile Mokokeng,South Africa,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
-Ricardo Goss,South Africa,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
-Ronwen Williams,South Africa,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
-Samuele Kabini,South Africa,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
-Sipho Chaine,South Africa,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
-Teboho Mokoena,South Africa,Midfielder,2,2,0,1,0,,,,,,,,,,,,2,0
-Thabang Matuludi,South Africa,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
-Thalente Mbatha,South Africa,Midfielder,3,2,1,0,0,,,,,,,,,,,,1,0
-Thapelo Maseko,South Africa,Midfielder,2,2,1,1,0,,,,,,,,,,,,0,0
+Idrissa Gueye,Senegal,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Iliman Ndiaye,Senegal,Forward,3,0,3,1,2,,,,,,,,,,,,0,0
+Ismail Jakobs,Senegal,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Ismaila Sarr,Senegal,Midfielder,3,3,0,3,1,,,,,,,,,,,,0,0
+Kalidou Koulibaly,Senegal,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Krepin Diatta,Senegal,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Lamine Camara,Senegal,Midfielder,3,3,0,0,1,,,,,,,,,,,,0,0
+Mamadou Sarr,Senegal,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Mory Diaw,Senegal,Goalkeeper,2,1,2,0,0,,,,,,,,,,,,0,0
+Moussa Niakhate,Senegal,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Nicolas Jackson,Senegal,Midfielder,3,2,1,0,1,,,,,,,,,,,,0,0
+Pape Gueye,Senegal,Midfielder,3,2,1,2,1,,,,,,,,,,,,1,0
+Pape Matar Sarr,Senegal,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Pathe Ciss,Senegal,Defender,3,0,3,0,0,,,,,,,,,,,,0,0
+Sadio Mane,Senegal,Forward,3,3,0,0,1,,,,,,,,,,,,0,0
+Yehvann Diouf,Senegal,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Aubrey Modiba,South Africa,Defender,4,4,0,0,0,,,,,,,,,,,,1,0
+Bradley Cross,South Africa,Defender,0,0,4,0,0,,,,,,,,,,,,0,0
+Evidence Makgopa,South Africa,Forward,4,2,2,0,0,,,,,,,,,,,,0,0
+Ime Okon,South Africa,Defender,4,4,0,0,0,,,,,,,,,,,,0,0
+Iqraam Rayners,South Africa,Midfielder,4,2,2,0,0,,,,,,,,,,,,0,0
+Jayden Adams,South Africa,Midfielder,3,2,2,0,0,,,,,,,,,,,,0,0
+Kamogelo Sebelebele,South Africa,Midfielder,1,0,4,0,0,,,,,,,,,,,,0,0
+Khuliso Mudau,South Africa,Defender,4,4,0,0,0,,,,,,,,,,,,0,0
+Khulumani Ndamane,South Africa,Defender,0,0,4,0,0,,,,,,,,,,,,0,0
+Lyle Foster,South Africa,Forward,1,1,3,0,0,,,,,,,,,,,,0,0
+Mbekezeli Mbokazi,South Africa,Defender,4,4,0,0,0,,,,,,,,,,,,0,0
+Nkosinathi Sibisi,South Africa,Defender,1,1,3,0,0,,,,,,,,,,,,1,0
+Olwethu Makhanya,South Africa,Defender,0,0,4,0,0,,,,,,,,,,,,0,0
+Oswin Appollis,South Africa,Midfielder,4,3,1,0,0,,,,,,,,,,,,0,0
+Relebohile Mokokeng,South Africa,Midfielder,3,2,2,0,0,,,,,,,,,,,,0,0
+Ricardo Goss,South Africa,Goalkeeper,0,0,4,0,0,,,,,,,,,,,,0,0
+Ronwen Williams,South Africa,Goalkeeper,4,4,0,0,0,,,,,,,,,,,,0,0
+Samuele Kabini,South Africa,Defender,0,0,4,0,0,,,,,,,,,,,,0,0
+Sipho Chaine,South Africa,Goalkeeper,0,0,4,0,0,,,,,,,,,,,,0,0
+Teboho Mokoena,South Africa,Midfielder,3,3,0,1,0,,,,,,,,,,,,2,0
+Thabang Matuludi,South Africa,Defender,0,0,4,0,0,,,,,,,,,,,,0,0
+Thalente Mbatha,South Africa,Midfielder,4,2,2,0,0,,,,,,,,,,,,1,0
+Thapelo Maseko,South Africa,Midfielder,3,3,1,1,0,,,,,,,,,,,,0,0
 Themba Zwane,South Africa,Midfielder,1,0,1,0,0,,,,,,,,,,,,0,1
-Tshepamg Moremi,South Africa,Midfielder,1,0,2,0,1,,,,,,,,,,,,0,0
-Yaya Sithole,South Africa,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,1
+Tshepamg Moremi,South Africa,Midfielder,2,0,3,0,1,,,,,,,,,,,,0,0
+Yaya Sithole,South Africa,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,1
 Bum-Keun Song,South Korea,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
 Cho Wi-je,South Korea,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
 Dong-gyeong Lee,South Korea,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
@@ -1043,32 +1047,32 @@ Seol Young-Woo,South Korea,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
 Seung-Gyu Kim,South Korea,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
 Seung-Ho Paik,South Korea,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
 Tae-Hwan Kim,South Korea,Midfielder,0,0,1,0,0,,,,,,,,,,,,0,0
-Alex Baena,Spain,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Alex Grimaldo,Spain,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Aymeric Laporte,Spain,Defender,2,2,0,0,1,,,,,,,,,,,,0,0
-Borja Iglesias,Spain,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Dani Olmo,Spain,Forward,2,1,1,0,1,,,,,,,,,,,,0,0
-David Raya,Spain,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Eric Garcia,Spain,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Fabian,Spain,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Ferran Torres,Spain,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
+Alex Baena,Spain,Midfielder,2,2,1,1,0,,,,,,,,,,,,1,0
+Alex Grimaldo,Spain,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Aymeric Laporte,Spain,Defender,3,3,0,0,1,,,,,,,,,,,,0,0
+Borja Iglesias,Spain,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Dani Olmo,Spain,Forward,3,1,2,0,1,,,,,,,,,,,,0,0
+David Raya,Spain,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Eric Garcia,Spain,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Fabian,Spain,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Ferran Torres,Spain,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
 Gavi,Spain,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Joan Garcia,Spain,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Lamine Yamal,Spain,Forward,2,1,1,1,0,,,,,,,,,,,,0,0
-Marc Cucurella,Spain,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Marc Pubill,Spain,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Marcos Llorente,Spain,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Martin Zubimendi,Spain,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Mikel Merino,Spain,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Mikel Oyarzabal,Spain,Midfielder,2,2,0,2,1,,,,,,,,,,,,0,0
-Nico Williams,Spain,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Pau Cubarsi,Spain,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Pedri,Spain,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Pedro Porro,Spain,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Rodri Hernandez,Spain,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Unai Simon,Spain,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Victor Munoz,Spain,Forward,0,0,2,0,0,,,,,,,,,,,,0,0
-Yeremi Pino,Spain,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
+Joan Garcia,Spain,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Lamine Yamal,Spain,Forward,3,2,1,1,0,,,,,,,,,,,,0,0
+Marc Cucurella,Spain,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Marc Pubill,Spain,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Marcos Llorente,Spain,Midfielder,2,2,1,0,1,,,,,,,,,,,,0,0
+Martin Zubimendi,Spain,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Mikel Merino,Spain,Midfielder,3,1,2,0,0,,,,,,,,,,,,0,0
+Mikel Oyarzabal,Spain,Midfielder,3,3,0,2,1,,,,,,,,,,,,0,0
+Nico Williams,Spain,Forward,3,0,3,0,0,,,,,,,,,,,,0,0
+Pau Cubarsi,Spain,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Pedri,Spain,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Pedro Porro,Spain,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Rodri Hernandez,Spain,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Unai Simon,Spain,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Victor Munoz,Spain,Forward,0,0,3,0,0,,,,,,,,,,,,0,0
+Yeremi Pino,Spain,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
 Albin Ekdal,Sweden,Midfielder,0,0,1,0,0,,,,,,,,,,,,0,0
 Alexander Bernhardsson,Sweden,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
 Alexander Isak,Sweden,Forward,3,3,0,1,3,,,,,,,,,,,,0,0
@@ -1202,53 +1206,55 @@ Tim Ream,USA,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
 Timothy Weah,USA,Forward,2,1,2,0,0,,,,,,,,,,,,0,0
 Tyler Adams,USA,Midfielder,2,2,1,0,0,,,,,,,,,,,,1,0
 Weston McKennie,USA,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
-Agustin Canobbio,Uruguay,Midfielder,2,1,1,1,0,,,,,,,,,,,,0,0
-Brian Rodriguez,Uruguay,Forward,2,0,2,0,0,,,,,,,,,,,,0,0
-Darwin Nunez,Uruguay,Forward,2,1,1,0,0,,,,,,,,,,,,0,0
-Emiliano Martinez,Uruguay,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Facundo Pellistri,Uruguay,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Federico Valverde,Uruguay,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Federico Vinas,Uruguay,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Fernando Muslera,Uruguay,Goalkeeper,2,2,0,0,0,,,,,,,,,,,,0,0
-Guillermo Varela,Uruguay,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Joaquin Piquerez,Uruguay,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Jose Maria Gimenez,Uruguay,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Juan Manuel Sanabria,Uruguay,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Manuel Ugarte,Uruguay,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Mathias Olivera,Uruguay,Defender,2,2,0,0,0,,,,,,,,,,,,1,0
-Matias Vina,Uruguay,Defender,1,1,1,0,0,,,,,,,,,,,,0,0
-Maximiliano Araujo,Uruguay,Forward,2,2,0,2,1,,,,,,,,,,,,0,0
-Nicolas de la Cruz,Uruguay,Midfielder,2,0,2,0,0,,,,,,,,,,,,0,0
-Rodrigo Aguirre,Uruguay,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Rodrigo Bentancur,Uruguay,Midfielder,2,2,0,0,0,,,,,,,,,,,,1,0
-Rodrigo Zalazar,Uruguay,Midfielder,0,0,2,0,0,,,,,,,,,,,,0,0
-Santiago Bueno,Uruguay,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Santiago Mele,Uruguay,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Sebastian Caceras,Uruguay,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Sergio Rochet,Uruguay,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Abbosbek Fayzullaev,Uzbekistan,Midfielder,2,2,0,1,0,,,,,,,,,,,,0,0
-Abdulla Abdullaev,Uzbekistan,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Abduqodir Khusanov,Uzbekistan,Defender,2,2,0,0,0,,,,,,,,,,,,1,0
-Abduvohid Nematov,Uzbekistan,Goalkeeper,1,1,1,0,0,,,,,,,,,,,,0,0
-Akmal Mozgovoy,Uzbekistan,Midfielder,2,1,1,0,0,,,,,,,,,,,,0,0
-Avazbek Ulmasaliev,Uzbekistan,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Azizbek Amonov,Uzbekistan,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Azizjon Ganiev,Uzbekistan,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Bekhruz Karimov,Uzbekistan,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Botirali Eregashev,Uzbekistan,Goalkeeper,0,0,2,0,0,,,,,,,,,,,,0,0
-Dostonbek Khamdamov,Uzbekistan,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Eldor Shomurodov,Uzbekistan,Forward,2,2,0,0,0,,,,,,,,,,,,0,0
-Farrukh Sayfiev,Uzbekistan,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Igor Sergeev,Uzbekistan,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Jakhongir Urozov,Uzbekistan,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Jamshid Iskanderov,Uzbekistan,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Khoriakbar Alijonov,Uzbekistan,Defender,1,0,2,0,0,,,,,,,,,,,,0,0
-Odiljon Hamrobekov,Uzbekistan,Midfielder,1,1,1,0,0,,,,,,,,,,,,1,0
-Oston Uronov,Uzbekistan,Midfielder,1,1,1,0,0,,,,,,,,,,,,0,0
-Otabek Shukurov,Uzbekistan,Midfielder,2,2,0,0,0,,,,,,,,,,,,0,0
-Rushtam Ashurmatov,Uzbekistan,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Ruslanbek Jiyanov,Uzbekistan,Forward,1,0,2,0,0,,,,,,,,,,,,0,0
-Sherzod Esanov,Uzbekistan,Midfielder,1,0,2,0,0,,,,,,,,,,,,0,0
-Sherzod Nasrullaev,Uzbekistan,Defender,2,2,0,0,0,,,,,,,,,,,,0,0
-Umar Eshmurodov,Uzbekistan,Defender,0,0,2,0,0,,,,,,,,,,,,0,0
-Utkir Yusupov,Uzbekistan,Goalkeeper,1,1,1,0,0,,,,,,,,,,,,0,0
+Agustin Canobbio,Uruguay,Midfielder,3,2,1,1,0,,,,,,,,,,,,0,1
+Brian Rodriguez,Uruguay,Forward,3,0,3,0,0,,,,,,,,,,,,0,0
+Darwin Nunez,Uruguay,Forward,3,2,1,0,0,,,,,,,,,,,,0,0
+Emiliano Martinez,Uruguay,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Facundo Pellistri,Uruguay,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Federico Valverde,Uruguay,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Federico Vinas,Uruguay,Forward,3,2,1,0,0,,,,,,,,,,,,0,0
+Fernando Muslera,Uruguay,Goalkeeper,3,3,0,0,0,,,,,,,,,,,,0,0
+Giorgian De Arrascaeta,Uruguay,Midfielder,0,0,1,0,0,,,,,,,,,,,,0,0
+Guillermo Varela,Uruguay,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Joaquin Piquerez,Uruguay,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Jose Maria Gimenez,Uruguay,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Juan Manuel Sanabria,Uruguay,Midfielder,3,2,1,0,0,,,,,,,,,,,,1,0
+Manuel Ugarte,Uruguay,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Mathias Olivera,Uruguay,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Matias Vina,Uruguay,Defender,1,1,2,0,0,,,,,,,,,,,,0,0
+Maximiliano Araujo,Uruguay,Forward,3,3,0,2,1,,,,,,,,,,,,0,0
+Nicolas de la Cruz,Uruguay,Midfielder,3,0,3,0,0,,,,,,,,,,,,1,0
+Rodrigo Aguirre,Uruguay,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Rodrigo Bentancur,Uruguay,Midfielder,3,3,0,0,0,,,,,,,,,,,,1,0
+Rodrigo Zalazar,Uruguay,Midfielder,0,0,3,0,0,,,,,,,,,,,,0,0
+Ronald Araujo,Uruguay,Defender,0,0,1,0,0,,,,,,,,,,,,0,0
+Santiago Bueno,Uruguay,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Santiago Mele,Uruguay,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Sebastian Caceras,Uruguay,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Sergio Rochet,Uruguay,Goalkeeper,1,0,3,0,0,,,,,,,,,,,,0,0
+Abbosbek Fayzullaev,Uzbekistan,Midfielder,3,3,0,1,0,,,,,,,,,,,,0,0
+Abdulla Abdullaev,Uzbekistan,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Abduqodir Khusanov,Uzbekistan,Defender,3,3,0,0,0,,,,,,,,,,,,2,0
+Abduvohid Nematov,Uzbekistan,Goalkeeper,2,2,1,0,0,,,,,,,,,,,,0,0
+Akmal Mozgovoy,Uzbekistan,Midfielder,3,2,1,0,1,,,,,,,,,,,,0,0
+Avazbek Ulmasaliev,Uzbekistan,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Azizbek Amonov,Uzbekistan,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Azizjon Ganiev,Uzbekistan,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Bekhruz Karimov,Uzbekistan,Defender,2,2,1,0,0,,,,,,,,,,,,0,0
+Botirali Eregashev,Uzbekistan,Goalkeeper,0,0,3,0,0,,,,,,,,,,,,0,0
+Dostonbek Khamdamov,Uzbekistan,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Eldor Shomurodov,Uzbekistan,Forward,3,3,0,1,0,,,,,,,,,,,,0,0
+Farrukh Sayfiev,Uzbekistan,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Igor Sergeev,Uzbekistan,Forward,2,0,3,0,0,,,,,,,,,,,,0,0
+Jakhongir Urozov,Uzbekistan,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Jamshid Iskanderov,Uzbekistan,Defender,1,0,3,0,0,,,,,,,,,,,,0,0
+Khoriakbar Alijonov,Uzbekistan,Defender,2,1,2,0,0,,,,,,,,,,,,0,0
+Odiljon Hamrobekov,Uzbekistan,Midfielder,2,1,2,0,0,,,,,,,,,,,,1,0
+Oston Uronov,Uzbekistan,Midfielder,2,1,2,0,0,,,,,,,,,,,,0,0
+Otabek Shukurov,Uzbekistan,Midfielder,3,3,0,0,0,,,,,,,,,,,,0,0
+Rushtam Ashurmatov,Uzbekistan,Defender,3,3,0,0,0,,,,,,,,,,,,0,0
+Ruslanbek Jiyanov,Uzbekistan,Forward,1,0,3,0,0,,,,,,,,,,,,0,0
+Sherzod Esanov,Uzbekistan,Midfielder,1,0,3,0,0,,,,,,,,,,,,0,0
+Sherzod Nasrullaev,Uzbekistan,Defender,3,3,0,0,0,,,,,,,,,,,,1,0
+Umar Eshmurodov,Uzbekistan,Defender,0,0,3,0,0,,,,,,,,,,,,0,0
+Utkir Yusupov,Uzbekistan,Goalkeeper,1,1,2,0,0,,,,,,,,,,,,0,0

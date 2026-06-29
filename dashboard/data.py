@@ -13,15 +13,49 @@ app.py barely had to change.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from functools import lru_cache
 from pathlib import Path
 
 import pandas as pd
 
 import realdata as rd
 import simulate as sim
+from cache_utils import ttl_cache
+from src.utils.match_results import get_match_source_of_truth
 
 PROCESSED_DIR = Path(__file__).resolve().parent.parent / "data" / "processed"
+PLAYER_RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "raw" / "player_data"
+
+
+def _freshness_label(timestamp) -> str:
+    if timestamp is None or pd.isna(timestamp):
+        return "Unavailable"
+    value = pd.Timestamp(timestamp)
+    if value.tzinfo is None:
+        value = value.tz_localize("UTC")
+    else:
+        value = value.tz_convert("UTC")
+    return value.strftime("%d %B %Y, %H:%M UTC")
+
+
+def get_data_freshness() -> dict[str, str]:
+    live_path = PROCESSED_DIR / "live_matches.csv"
+    live_timestamp = None
+    if live_path.exists():
+        try:
+            updates = pd.read_csv(live_path, usecols=["last_updated"])["last_updated"]
+            live_timestamp = pd.to_datetime(updates, errors="coerce", utc=True).max()
+        except (ValueError, KeyError):
+            live_timestamp = pd.Timestamp(live_path.stat().st_mtime, unit="s", tz="UTC")
+
+    player_files = list(PLAYER_RAW_DIR.glob("*.html"))
+    player_timestamp = (
+        pd.Timestamp(max(path.stat().st_mtime for path in player_files), unit="s", tz="UTC")
+        if player_files else None
+    )
+    return {
+        "live": _freshness_label(live_timestamp),
+        "players": _freshness_label(player_timestamp),
+    }
 
 
 @dataclass(frozen=True)
@@ -46,7 +80,7 @@ class Team:
     campaign_results: list
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def get_teams() -> list:
     df = rd.load_teams()
     form = rd.load_recent_form()
@@ -71,7 +105,7 @@ def get_team(name: str):
     return next((t for t in get_teams() if t.name == name), None)
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def get_matches() -> pd.DataFrame:
     """Group-stage fixtures, renamed to the home/away schema the UI expects.
     `played=True` rows carry real scores; `played=False` rows carry the
@@ -88,7 +122,7 @@ def get_matches() -> pd.DataFrame:
     return df
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def get_group_standings() -> pd.DataFrame:
     """Actual current standings (from real results) + simulated qualification odds."""
     campaign = rd.load_campaign_stats()
@@ -109,7 +143,7 @@ def get_group_standings() -> pd.DataFrame:
     return df.reset_index(drop=True)
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def get_round_reach() -> pd.DataFrame:
     """Monte Carlo round-reach + tournament-win probabilities, with flags attached."""
     df = sim.run_simulation().copy()
@@ -117,10 +151,40 @@ def get_round_reach() -> pd.DataFrame:
     groups = rd.load_teams().set_index("team")["group"].to_dict()
     df["flag"] = df["team"].map(flags)
     df["group"] = df["team"].map(groups)
+    knockout = rd.load_knockout_matches()
+    if not knockout.empty:
+        r32 = knockout[knockout["stage"].eq("Round of 32")]
+        confirmed_r32 = set(r32["home_team"].dropna()) | set(r32["away_team"].dropna())
+        if len(confirmed_r32) == 32:
+            df["round_of_32"] = df["team"].isin(confirmed_r32).astype(float)
+
+        next_round_columns = {
+            "Round of 32": "round_of_16",
+            "Round of 16": "quarterfinal",
+            "Quarter-final": "semifinal",
+            "Semi-final": "final",
+            "Final": "tournament_win_probability",
+        }
+        ordered_columns = [
+            "round_of_16", "quarterfinal", "semifinal", "final", "tournament_win_probability"
+        ]
+        for _, match in knockout.iterrows():
+            truth = get_match_source_of_truth(match, is_knockout=True)
+            if truth["result_source"] != "actual" or not truth["winner"]:
+                continue
+            next_column = next_round_columns.get(str(match.get("stage")))
+            if not next_column:
+                continue
+            participants = {match.get("home_team"), match.get("away_team")}
+            loser = next((team for team in participants if pd.notna(team) and team != truth["winner"]), None)
+            start = ordered_columns.index(next_column)
+            df.loc[df["team"].eq(truth["winner"]), next_column] = 1.0
+            if loser:
+                df.loc[df["team"].eq(loser), ordered_columns[start:]] = 0.0
     return df.sort_values("tournament_win_probability", ascending=False).reset_index(drop=True)
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def get_knockout_matches() -> pd.DataFrame:
     return rd.load_knockout_matches()
 
@@ -129,7 +193,7 @@ def get_tournament_winner_probs(top_n: int = 10) -> pd.DataFrame:
     return get_round_reach().head(top_n)
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def get_player_profiles() -> pd.DataFrame:
     path = PROCESSED_DIR / "player_profiles.csv"
     if not path.exists():
@@ -137,7 +201,7 @@ def get_player_profiles() -> pd.DataFrame:
     return pd.read_csv(path)
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def get_player_stats() -> pd.DataFrame:
     path = PROCESSED_DIR / "player_stats.csv"
     if not path.exists():

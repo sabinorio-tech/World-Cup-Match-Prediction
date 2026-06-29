@@ -70,4 +70,4 @@ This run makes up to `10` API requests:
 
 ## Recommendation
 
-Partial continue. Use this POC output to verify actual World Cup 2026 coverage with your API key before replacing any existing source.
+**No Go as the project's free production source.** The free plan does not expose the required 2026 season. The implementation is retained as a documented POC, while football-data.org provides live fixtures/results and StatBunker provides the current free player enrichment.

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This proof of concept adds a free player-data enrichment layer for the future Teams Dashboard. It does not replace the existing World Cup pipeline, live-match source, prediction outputs, Elo ratings, or Streamlit dashboard.
+This enrichment step supplies free tournament player data to the Teams Dashboard. It complements the existing live-match, prediction, Elo, and Streamlit layers.
 
 ## Source Research
 
@@ -109,6 +109,12 @@ This would allow image URLs, authors, licenses, and attribution metadata to be t
 python -m src.enrichment.fetch_player_data
 ```
 
+It also runs as stage 8 of the full pipeline:
+
+```bash
+python main.py
+```
+
 ## Pipeline Flow
 
 ```text
@@ -131,7 +137,7 @@ Write processed CSV files
 - Page layout changes can break parsing.
 - Some advanced stats required by the final Teams Dashboard are not available.
 - Player images are not included.
-- This proof of concept is not yet integrated into `main.py` or GitHub Actions.
+- The production pipeline uses cached raw HTML when StatBunker temporarily blocks or rejects a refresh.
 
 ## Recommendation
 

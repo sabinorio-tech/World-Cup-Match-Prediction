@@ -2,17 +2,24 @@ from __future__ import annotations
 
 from pathlib import Path
 import re
+import sys
 
 import pandas as pd
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.utils.match_results import get_match_source_of_truth
+
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 LIVE_MATCHES_PATH = PROCESSED_DIR / "live_matches.csv"
 FIXTURES_PATH = PROCESSED_DIR / "wc_2026_fixtures_enriched.csv"
 OUTPUT_PATH = PROCESSED_DIR / "knockout_matches.csv"
 
 OUTPUT_COLUMNS = [
+    "match_number",
     "match_id",
     "stage",
     "date",
@@ -26,8 +33,12 @@ OUTPUT_COLUMNS = [
     "away_team",
     "home_goals",
     "away_goals",
+    "home_score_penalties",
+    "away_score_penalties",
     "status",
     "score_display",
+    "winner",
+    "result_source",
     "is_resolved",
     "resolution_source",
 ]
@@ -77,6 +88,14 @@ OFFICIAL_KNOCKOUT_SLOT_MAP = [
 ]
 
 _SIMPLE_SLOT_RE = re.compile(r"^([12])([A-L])$")
+
+TEAM_NAME_ALIASES = {
+    "United States": "USA",
+    "Bosnia-Herzegovina": "Bosnia and Herzegovina",
+    "Cape Verde Islands": "Cape Verde",
+    "Congo DR": "DR Congo",
+    "Turkey": "Türkiye",
+}
 
 
 def _load_csv(path: Path) -> pd.DataFrame:
@@ -205,6 +224,31 @@ def build_slot_lookup(standings: pd.DataFrame) -> dict[str, str]:
     return slots
 
 
+def build_team_slot_lookup(standings: pd.DataFrame) -> dict[str, str]:
+    """Map confirmed group finishers back to concrete 1A/2A/3A slots."""
+    slots: dict[str, str] = {}
+    if standings.empty:
+        return slots
+
+    for group, rows in standings.groupby("group"):
+        ranked = rows.sort_values(
+            ["points", "goal_difference", "goals_for", "team"],
+            ascending=[False, False, False, True],
+        ).reset_index(drop=True)
+        if len(ranked) != 4 or ranked["played"].min() < 3:
+            continue
+        for position in range(min(3, len(ranked))):
+            slots[str(ranked.iloc[position]["team"])] = f"{position + 1}{group}"
+    return slots
+
+
+def _project_team_name(value: object) -> str | None:
+    if pd.isna(value):
+        return None
+    team = str(value).strip()
+    return TEAM_NAME_ALIASES.get(team, team) if team else None
+
+
 def _resolve_slot(slot: str, slot_lookup: dict[str, str]) -> tuple[str | None, str]:
     slot = str(slot)
     if _SIMPLE_SLOT_RE.match(slot):
@@ -215,6 +259,52 @@ def _resolve_slot(slot: str, slot_lookup: dict[str, str]) -> tuple[str | None, s
     if slot.startswith("3"):
         return None, "unresolved_third_place_rule"
     return None, "unresolved_future_round"
+
+
+def _slot_accepts(expected: str, actual: str | None) -> bool:
+    if not actual:
+        return False
+    if expected == actual:
+        return True
+    if expected.startswith("3") and actual.startswith("3"):
+        return actual[1:] in expected[1:].split("/")
+    return False
+
+
+def _select_live_row(
+    candidates: list[dict[str, object]],
+    used_ids: set[object],
+    home_slot: str,
+    away_slot: str,
+    team_slot_lookup: dict[str, str],
+    expected_home: str | None = None,
+    expected_away: str | None = None,
+) -> dict[str, object]:
+    available = [row for row in candidates if row.get("match_id") not in used_ids]
+    for row in available:
+        live_home = str(row.get("home_team") or "")
+        live_away = str(row.get("away_team") or "")
+        if expected_home and expected_away:
+            if _project_team_name(live_home) == expected_home and _project_team_name(live_away) == expected_away:
+                return row
+        elif _slot_accepts(home_slot, team_slot_lookup.get(live_home)) and _slot_accepts(
+            away_slot, team_slot_lookup.get(live_away)
+        ):
+            return row
+    return available[0] if available else {}
+
+
+def _progression_team(
+    slot: str,
+    slot_lookup: dict[str, str],
+    winners: dict[int, str],
+    losers: dict[int, str],
+) -> str | None:
+    if slot.startswith("W") and slot[1:].isdigit():
+        return winners.get(int(slot[1:]))
+    if slot.startswith("L") and slot[1:].isdigit():
+        return losers.get(int(slot[1:]))
+    return slot_lookup.get(slot)
 
 
 def _ordered_live_knockout_rows(live_matches: pd.DataFrame) -> list[dict[str, object]]:
@@ -242,25 +332,72 @@ def resolve_knockout_matches(
     fixtures = _load_csv(fixtures_path)
     standings = compute_group_standings(live_matches)
     slot_lookup = build_slot_lookup(standings)
+    team_slot_lookup = build_team_slot_lookup(standings)
     live_rows = _ordered_live_knockout_rows(live_matches)
+    live_by_stage = {
+        stage: [row for row in live_rows if row.get("stage") == stage]
+        for stage in STAGE_LABELS
+    }
     fixture_rows = _ordered_fixture_metadata(fixtures)
 
     rows = []
+    used_live_ids: set[object] = set()
+    actual_winners: dict[int, str] = {}
+    actual_losers: dict[int, str] = {}
     for index, (match_number, stage_api, home_slot, away_slot) in enumerate(OFFICIAL_KNOCKOUT_SLOT_MAP):
-        live = live_rows[index] if index < len(live_rows) else {}
+        expected_home = _progression_team(home_slot, slot_lookup, actual_winners, actual_losers)
+        expected_away = _progression_team(away_slot, slot_lookup, actual_winners, actual_losers)
+        live = _select_live_row(
+            live_by_stage.get(stage_api, []),
+            used_live_ids,
+            home_slot,
+            away_slot,
+            team_slot_lookup,
+            expected_home=_project_team_name(expected_home),
+            expected_away=_project_team_name(expected_away),
+        )
+        if live.get("match_id") is not None:
+            used_live_ids.add(live["match_id"])
         fixture = fixture_rows[index] if index < len(fixture_rows) else {}
 
-        home_team, home_source = _resolve_slot(home_slot, slot_lookup)
-        away_team, away_source = _resolve_slot(away_slot, slot_lookup)
-        is_resolved = home_team is not None and away_team is not None
+        live_home_team = live.get("home_team")
+        live_away_team = live.get("away_team")
+        has_confirmed_live_teams = (
+            pd.notna(live_home_team)
+            and pd.notna(live_away_team)
+        )
 
-        sources = sorted({home_source, away_source})
-        if is_resolved:
-            resolution_source = "official_slot_map+computed_group_standings"
+        if has_confirmed_live_teams:
+            home_slot = team_slot_lookup.get(str(live_home_team), home_slot)
+            away_slot = team_slot_lookup.get(str(live_away_team), away_slot)
+            home_team = _project_team_name(live_home_team)
+            away_team = _project_team_name(live_away_team)
+            is_resolved = True
+            resolution_source = "football_data_api_confirmed"
         else:
-            resolution_source = "+".join(sources)
+            home_team, home_source = _resolve_slot(home_slot, slot_lookup)
+            away_team, away_source = _resolve_slot(away_slot, slot_lookup)
+            home_team = _project_team_name(home_team)
+            away_team = _project_team_name(away_team)
+            is_resolved = home_team is not None and away_team is not None
+
+            sources = sorted({home_source, away_source})
+            if is_resolved:
+                resolution_source = "official_slot_map+computed_group_standings"
+            else:
+                resolution_source = "+".join(sources)
+
+        truth = get_match_source_of_truth(live, is_knockout=True)
+        actual_winner = _project_team_name(truth["winner"])
+        if truth["result_source"] == "actual" and actual_winner:
+            actual_winners[match_number] = actual_winner
+            participants = {home_team, away_team}
+            loser = next((team for team in participants if team and team != actual_winner), None)
+            if loser:
+                actual_losers[match_number] = loser
 
         rows.append({
+            "match_number": match_number,
             "match_id": live.get("match_id", match_number),
             "stage": STAGE_LABELS.get(stage_api, stage_api),
             "date": live.get("match_date") or fixture.get("date"),
@@ -274,8 +411,12 @@ def resolve_knockout_matches(
             "away_team": away_team,
             "home_goals": live.get("home_score"),
             "away_goals": live.get("away_score"),
+            "home_score_penalties": live.get("home_score_penalties"),
+            "away_score_penalties": live.get("away_score_penalties"),
             "status": live.get("status", "SCHEDULED"),
             "score_display": live.get("score_display", "TBD"),
+            "winner": actual_winner,
+            "result_source": truth["result_source"],
             "is_resolved": is_resolved,
             "resolution_source": resolution_source,
         })

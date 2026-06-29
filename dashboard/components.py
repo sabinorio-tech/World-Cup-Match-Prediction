@@ -4,9 +4,13 @@ Keeps app.py focused on page composition rather than markup.
 """
 
 from html import escape
+from urllib.parse import quote
 
 import pandas as pd
 import streamlit as st
+
+from src.utils.match_results import get_match_source_of_truth
+from time_utils import belgian_kickoff
 
 _FLAG_IMAGE_CODES = {
     "England": "gb-eng",
@@ -281,6 +285,11 @@ h1, h2, h3 {
     font-size: .82rem;
     background: rgba(11, 35, 30, .68);
 }
+.wc-data-freshness {
+    color: rgba(222, 233, 245, .62);
+    font-size: .68rem;
+    margin-top: 9px;
+}
 .wc-live-dot {
     width: 10px;
     height: 10px;
@@ -491,6 +500,12 @@ h1, h2, h3 {
 .wc-view-all {
     color: #7fe34f;
     font-size: .68rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+.wc-view-all:hover {
+    color: #ffffff;
+    text-decoration: none;
 }
 .wc-overview-team-row {
     display: grid;
@@ -600,22 +615,10 @@ h1, h2, h3 {
 }
 .wc-scorer-card {
     display: grid;
-    grid-template-columns: 72px 1fr 78px;
+    grid-template-columns: minmax(0, 1fr) 78px;
     gap: 14px;
     align-items: center;
     min-height: 116px;
-}
-.wc-scorer-avatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: #ffffff;
-    background: linear-gradient(145deg, rgba(40,96,148,.8), rgba(9,30,48,.94));
-    border: 1px solid rgba(255,255,255,.14);
-    font-size: 1.35rem;
-    font-weight: 900;
 }
 .wc-scorer-name {
     color: #ffffff;
@@ -980,14 +983,11 @@ h1, h2, h3 {
 }
 
 .wc-bracket-shell {
-    background:
-        linear-gradient(120deg, rgba(16, 92, 61, .18), transparent 36%),
-        linear-gradient(245deg, rgba(215, 168, 63, .18), transparent 30%),
-        linear-gradient(145deg, rgba(5, 18, 31, 0.98), rgba(2, 11, 20, 0.98));
-    border: 1px solid rgba(215, 168, 63, 0.24);
-    border-radius: 8px;
-    padding: 18px;
-    box-shadow: 0 22px 58px rgba(0,0,0,0.32);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
 }
 .wc-bracket-tabs {
     display: grid;
@@ -1071,6 +1071,121 @@ h1, h2, h3 {
 .wc-bracket-single {
     grid-template-columns: 28px minmax(90px, 1fr) 48px;
     min-height: 36px;
+}
+.wc-bracket-source {
+    padding: 4px 8px;
+    color: rgba(222, 233, 245, .68);
+    font-size: .58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wc-bracket-source-actual {
+    color: #9be36c;
+    background: rgba(63, 139, 65, .12);
+}
+.wc-bracket-scroll {
+    width: 100%;
+    overflow-x: auto;
+    padding: 6px 2px 14px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(215,168,63,.52) rgba(255,255,255,.05);
+}
+.wc-bracket-mirror {
+    min-width: 2200px;
+    min-height: 1280px;
+    display: grid;
+    grid-template-columns: 245px 225px 216px 208px 260px 208px 216px 225px 245px;
+    gap: 22px;
+    align-items: stretch;
+}
+.wc-bracket-mirror .wc-bracket-team {
+    grid-template-columns: 32px 30px minmax(76px, 1fr) 46px;
+    gap: 7px;
+    min-height: 38px;
+    padding: 7px 9px;
+    font-size: .84rem;
+}
+.wc-bracket-mirror .wc-bracket-single {
+    grid-template-columns: 30px minmax(82px, 1fr) 48px;
+}
+.wc-bracket-mirror .wc-group-flag-img {
+    width: 30px;
+    height: 20px;
+}
+.wc-bracket-mirror .wc-bracket-source {
+    font-size: .64rem;
+    padding: 6px 9px;
+}
+.wc-mirror-stage {
+    min-height: 1280px;
+    display: flex;
+    flex-direction: column;
+}
+.wc-mirror-stage-title {
+    min-height: 32px;
+    display: grid;
+    place-items: center;
+    color: rgba(235,243,252,.72);
+    font-size: .78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.wc-mirror-stage-cards {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 8px;
+}
+.wc-mirror-match {
+    position: relative;
+}
+.wc-mirror-match-number {
+    color: rgba(222,233,245,.52);
+    font-size: .66rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0 0 3px 4px;
+}
+.wc-mirror-left .wc-mirror-match::after,
+.wc-mirror-right .wc-mirror-match::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 22px;
+    height: 1px;
+    background: rgba(196, 210, 224, .32);
+}
+.wc-mirror-left .wc-mirror-match::after { right: -22px; }
+.wc-mirror-right .wc-mirror-match::before { left: -22px; }
+.wc-mirror-center {
+    min-height: 1280px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 16px;
+}
+.wc-bracket-trophy-image {
+    width: 132px;
+    height: 190px;
+    object-fit: contain;
+    margin: 6px auto;
+    filter: drop-shadow(0 18px 26px rgba(215,168,63,.28));
+}
+.wc-mirror-center .wc-bracket-winner {
+    margin-top: 2px;
+}
+.wc-third-place-title {
+    color: rgba(235,243,252,.64);
+    font-size: .62rem;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 8px;
 }
 .wc-bracket-winner {
     background: linear-gradient(145deg, rgba(60, 44, 8, .96), rgba(22, 22, 12, .96));
@@ -1392,6 +1507,35 @@ h1, h2, h3 {
     gap: 16px;
     align-items: start;
 }
+.wc-ta-shell-no-side {
+    grid-template-columns: minmax(0, 1.42fr) minmax(330px, .92fr);
+}
+.wc-native-team-title {
+    color: rgba(234, 244, 252, .82);
+    font-size: .76rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 2px 0 9px;
+}
+.wc-native-team-flag {
+    display: block;
+    width: 28px;
+    height: 18px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.16);
+    margin: 0 auto;
+}
+.st-key-team_selector div[data-testid="stButton"] button {
+    min-height: 36px;
+    padding: 5px 8px;
+    border-radius: 6px;
+}
+.st-key-team_selector div[data-testid="stButton"] button p {
+    text-align: left;
+    font-size: .76rem;
+    white-space: normal;
+}
 .wc-ta-panel {
     background:
         linear-gradient(145deg, rgba(9, 35, 35, .94), rgba(5, 17, 30, .96)),
@@ -1429,6 +1573,24 @@ h1, h2, h3 {
     display: grid;
     gap: 3px;
     margin-top: 10px;
+    max-height: calc(100vh - 230px);
+    min-height: 360px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(117, 223, 72, .52) rgba(255,255,255,.05);
+}
+.wc-ta-list::-webkit-scrollbar {
+    width: 7px;
+}
+.wc-ta-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,.04);
+    border-radius: 8px;
+}
+.wc-ta-list::-webkit-scrollbar-thumb {
+    background: rgba(117, 223, 72, .48);
+    border-radius: 8px;
 }
 .wc-ta-list-row {
     display: flex;
@@ -1441,6 +1603,13 @@ h1, h2, h3 {
     color: #eaf2fb;
     font-size: .84rem;
     font-weight: 700;
+    text-decoration: none;
+    transition: background .16s ease, color .16s ease;
+}
+.wc-ta-list-row:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background: rgba(255,255,255,.08);
 }
 .wc-ta-list-row-active {
     background: color-mix(in srgb, var(--team-primary, #54b150) 25%, transparent);
@@ -1509,9 +1678,10 @@ h1, h2, h3 {
 .wc-ta-hero-flag {
     width: 112px;
     height: 112px;
-    object-fit: cover;
-    border-radius: 24px;
-    box-shadow: 0 18px 38px rgba(0,0,0,.34), 0 0 0 1px rgba(255,255,255,.20);
+    object-fit: contain;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 .wc-ta-country {
     color: #ffffff;
@@ -1548,7 +1718,7 @@ h1, h2, h3 {
 }
 .wc-ta-performer-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
     gap: 10px;
 }
 .wc-ta-performer {
@@ -1560,61 +1730,15 @@ h1, h2, h3 {
     position: relative;
     overflow: hidden;
 }
-.wc-ta-performer::after {
-    content: "";
-    position: absolute;
-    right: -26px;
-    bottom: -30px;
-    width: 82px;
-    height: 82px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.04);
-}
 .wc-ta-performer-top {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: block;
+    min-height: 32px;
 }
-.wc-ta-performer-icon {
-    width: 24px;
-    height: 24px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: #357a45;
-    color: #ffffff;
-    font-size: .72rem;
-    font-weight: 900;
-}
-.wc-ta-avatar {
-    width: 100%;
-    min-height: 62px;
-    border-radius: 8px;
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px;
-    background:
-        linear-gradient(135deg, color-mix(in srgb, var(--team-primary, #2d6fa8) 34%, transparent), rgba(7, 20, 35, .86)),
-        radial-gradient(circle at 90% 10%, var(--team-glow, rgba(113,223,85,.18)), transparent 44%);
-    color: #ffffff;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
-}
-.wc-ta-avatar-initials {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: rgba(255,255,255,.13);
-    color: #ffffff;
-    font-size: .95rem;
-    font-weight: 900;
-    flex: 0 0 auto;
-}
-.wc-ta-avatar-meta {
-    min-width: 0;
+.wc-ta-performer-top .wc-ta-performer-label {
+    color: rgba(239, 246, 255, .88);
+    line-height: 1.3;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 .wc-ta-position-pill {
     display: inline-flex;
@@ -1631,23 +1755,39 @@ h1, h2, h3 {
 }
 .wc-ta-performer-name {
     color: #ffffff;
-    font-size: .86rem;
-    font-weight: 800;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 1.02rem;
+    font-weight: 900;
+    line-height: 1.3;
+    min-height: 2.6em;
+    margin: 12px 0 8px;
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: anywhere;
 }
 .wc-ta-performer-value {
     color: var(--team-accent, #71df55);
     font-size: 1.55rem;
     line-height: 1;
     font-weight: 900;
-    margin-top: 4px;
+}
+.wc-ta-performer-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 7px;
+}
+.wc-ta-performer-number {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    min-width: 0;
 }
 .wc-ta-performer-unit {
     color: rgba(235, 244, 255, .78);
     font-size: .75rem;
-    margin-top: 3px;
+    white-space: nowrap;
 }
 .wc-ta-outlook-row {
     margin: 0 0 18px;
@@ -1716,9 +1856,10 @@ h1, h2, h3 {
 .wc-ta-crest {
     width: 86px;
     height: 58px;
-    object-fit: cover;
-    border-radius: 6px;
-    box-shadow: 0 12px 28px rgba(0,0,0,.30), 0 0 0 1px rgba(255,255,255,.18);
+    object-fit: contain;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 .wc-ta-record-grid {
     display: grid;
@@ -1771,10 +1912,11 @@ h1, h2, h3 {
     text-overflow: ellipsis;
 }
 .wc-ta-score {
-    border-radius: 5px;
-    background: rgba(255,255,255,.12);
-    padding: 6px 8px;
     text-align: center;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 900;
+    white-space: nowrap;
 }
 .wc-team-impact-row {
     display: grid;
@@ -1878,6 +2020,32 @@ h1, h2, h3 {
     .wc-next-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.wc-schedule-heading {
+    color: #ffffff;
+    font-size: .82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 2px 0 9px;
+}
+.wc-schedule-date {
+    color: #75df48;
+    font-size: .75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 7px 2px 3px;
+}
+div[data-testid="stVerticalBlockBorderWrapper"] button {
+    min-height: 48px;
+    border-radius: 6px;
+}
+div[data-testid="stVerticalBlockBorderWrapper"] button p {
+    width: 100%;
+    text-align: left;
+    font-size: .72rem;
+    line-height: 1.25;
+    white-space: normal;
 }
 
 .wc-detail-shell {
@@ -1999,6 +2167,40 @@ h1, h2, h3 {
     width: var(--w);
     background: linear-gradient(90deg, #6fa8dc, #9fd4ff);
 }
+.wc-detail-score-feature {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 15px 22px;
+    text-align: center;
+    border: 1px solid rgba(117, 223, 72, .28);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(23, 76, 120, .25), rgba(13, 49, 38, .68));
+}
+.wc-score-model-note {
+    color: rgba(203, 216, 229, .68);
+    font-size: .7rem;
+    margin-top: 8px;
+}
+.wc-score-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.wc-score-comparison > div {
+    padding: 2px 18px;
+}
+.wc-score-comparison > div + div {
+    border-left: 1px solid rgba(255,255,255,.13);
+}
+.wc-score-comparison-label {
+    color: rgba(226, 236, 246, .74);
+    font-size: .68rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.wc-score-big-predicted {
+    color: #75df48;
+}
 .wc-factor-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2051,6 +2253,12 @@ h1, h2, h3 {
     grid-template-columns: .8fr 1.05fr 1.35fr;
     gap: 12px;
     margin-top: 14px;
+}
+.wc-detail-bottom-two {
+    grid-template-columns: .85fr 1.15fr;
+}
+.wc-detail-bottom-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .wc-detail-mini {
     background: rgba(13, 31, 49, .72);
@@ -2109,6 +2317,29 @@ h1, h2, h3 {
     width: 100%;
     height: 118px;
 }
+.wc-detail-shell-compact {
+    padding: 16px;
+}
+.wc-detail-shell-compact .wc-detail-back {
+    display: none;
+}
+.wc-detail-shell-compact .wc-detail-teams {
+    grid-template-columns: minmax(90px, .75fr) minmax(230px, 1.5fr) minmax(90px, .75fr);
+    gap: 10px;
+}
+.wc-detail-shell-compact .wc-detail-team-flag {
+    width: 132px;
+    height: 88px;
+}
+.wc-detail-shell-compact .wc-detail-prob-value {
+    font-size: 1.32rem;
+}
+.wc-detail-shell-compact .wc-detail-prob-label {
+    font-size: .59rem;
+}
+.wc-detail-shell-compact .wc-detail-score-feature {
+    max-width: 360px;
+}
 @media (max-width: 900px) {
     .wc-detail-teams,
     .wc-detail-bottom,
@@ -2137,14 +2368,34 @@ def fifa_overview_dashboard(
     teams: list,
     round_reach,
     player_stats=None,
+    knockout_matches=None,
     next_match: dict | None = None,
     trophy_src: str = "",
+    data_updated: str = "Unavailable",
 ):
     teams_by_name = {team.name: team for team in teams}
-    played = matches[matches["played"]].copy()
-    upcoming = matches[~matches["played"]].copy()
-    total_matches = len(matches)
-    completed = int(matches["played"].sum()) if total_matches else 0
+    group_played = matches[matches["played"]].copy()
+    group_upcoming = matches[~matches["played"]].copy()
+    played = group_played
+    upcoming = group_upcoming
+    knockout_total = len(knockout_matches) if knockout_matches is not None else 0
+    knockout_completed = 0
+    knockout_goals = 0
+    if knockout_matches is not None and not knockout_matches.empty:
+        knockout_status = knockout_matches["status"].astype(str).str.upper()
+        finished_knockout = knockout_matches[
+            knockout_status.isin({"FINISHED", "FT", "AET", "PEN"})
+            & knockout_matches["home_goals"].notna()
+            & knockout_matches["away_goals"].notna()
+        ]
+        knockout_completed = len(finished_knockout)
+        knockout_goals = int(
+            pd.to_numeric(finished_knockout["home_goals"], errors="coerce").fillna(0).sum()
+            + pd.to_numeric(finished_knockout["away_goals"], errors="coerce").fillna(0).sum()
+        )
+
+    total_matches = len(matches) + knockout_total
+    completed = int(matches["played"].sum()) + knockout_completed if total_matches else 0
     remaining = max(total_matches - completed, 0)
     progress = (completed / total_matches * 100) if total_matches else 0
     progress_on = round((progress / 100) * 18)
@@ -2153,12 +2404,30 @@ def fifa_overview_dashboard(
         for idx in range(18)
     )
 
-    total_goals = 0
-    if not played.empty:
-        total_goals = int(
-            pd.to_numeric(played["home_goals"], errors="coerce").fillna(0).sum()
-            + pd.to_numeric(played["away_goals"], errors="coerce").fillna(0).sum()
+    total_goals = knockout_goals
+    if not group_played.empty:
+        total_goals += int(
+            pd.to_numeric(group_played["home_goals"], errors="coerce").fillna(0).sum()
+            + pd.to_numeric(group_played["away_goals"], errors="coerce").fillna(0).sum()
         )
+
+    dashboard_columns = {
+        "played", "is_resolved", "home_team", "away_team", "match_date", "kickoff_time_utc",
+        "home_win_probability", "draw_probability", "away_win_probability", "upset_risk_score",
+    }
+    if knockout_matches is not None and dashboard_columns.issubset(knockout_matches.columns):
+        resolved = knockout_matches["is_resolved"].fillna(False).astype(str).str.lower().isin({"true", "1"})
+        known_teams = knockout_matches["home_team"].notna() & knockout_matches["away_team"].notna()
+        knockout_played = knockout_matches[knockout_matches["played"].astype(bool) & known_teams]
+        knockout_upcoming = knockout_matches[
+            ~knockout_matches["played"].astype(bool)
+            & resolved
+            & known_teams
+            & knockout_matches["home_win_probability"].notna()
+        ]
+        played = pd.concat([group_played, knockout_played], ignore_index=True, sort=False)
+        upcoming = pd.concat([group_upcoming, knockout_upcoming], ignore_index=True, sort=False)
+
     avg_goals = total_goals / completed if completed else 0
     avg_confidence = (1 - upcoming["upset_risk_score"].mean()) * 100 if not upcoming.empty else 0
     yellow_cards = red_cards = 0
@@ -2176,8 +2445,7 @@ def fifa_overview_dashboard(
         return f"{float(value) * 100:.0f}%"
 
     def date_label(date_value: object, kickoff: object = "") -> str:
-        date_text = str(date_value or "")
-        kickoff_text = str(kickoff or "")
+        date_text, kickoff_text, timezone_label = belgian_kickoff(date_value, kickoff)
         if not date_text:
             return "TBD"
         try:
@@ -2185,8 +2453,8 @@ def fifa_overview_dashboard(
             day = parsed.strftime("%b %d").upper()
         except Exception:
             day = date_text
-        if kickoff_text and kickoff_text != "nan":
-            return f"{day}<br><span>{escape(kickoff_text)} UTC</span>"
+        if kickoff_text:
+            return f"{day}<br><span>{escape(kickoff_text)} {escape(timezone_label)}</span>"
         return day
 
     next_data = next_match or {}
@@ -2209,8 +2477,9 @@ def fifa_overview_dashboard(
     next_draw_prob = float(next_data.get("draw_probability", 0) or 0)
     next_away_prob = float(next_data.get("away_win_probability", 0) or 0)
     next_stage = escape(str(next_data.get("stage", "Next Match")).replace("_", " ").title())
-    next_date = str(next_data.get("date", ""))
-    next_kickoff = str(next_data.get("kickoff_time", ""))
+    next_date, next_kickoff, next_timezone = belgian_kickoff(
+        next_data.get("date", ""), next_data.get("kickoff_time", "")
+    )
     try:
         next_date_display = pd.to_datetime(next_date).strftime("%B %d, %Y").upper()
     except Exception:
@@ -2227,7 +2496,7 @@ def fifa_overview_dashboard(
         ("♟", "Teams", str(len(teams)), "from 6 confederations", "#4aa7ff"),
         ("▣", "Yellow Cards", str(yellow_cards), "player stats total", "#e2b43e"),
         ("▮", "Red Cards", str(red_cards), "player stats total", "#ff4141"),
-        ("↗", "Avg Model Confidence", f"{avg_confidence:.0f}%", "across upcoming matches", "#58e0d2"),
+        ("↗", "Avg Prediction Spread", f"{avg_confidence:.0f}%", "across upcoming matches", "#58e0d2"),
     ]
     kpi_html = "".join(
         f"""<div class="wc-overview-kpi">
@@ -2264,9 +2533,9 @@ def fifa_overview_dashboard(
                     <span>{escape(str(row.away_team)[:3].upper())}</span>{flag_html(row.away_team)}
                 </div>
                 <div class="wc-overview-prob-grid">
-                    <div class="wc-overview-prob-chip wc-overview-prob-chip-home">{row.home_win_probability * 100:.0f}%</div>
-                    <div class="wc-overview-prob-chip wc-overview-prob-chip-draw">{row.draw_probability * 100:.0f}%</div>
-                    <div class="wc-overview-prob-chip wc-overview-prob-chip-away">{row.away_win_probability * 100:.0f}%</div>
+                    <div class="wc-overview-prob-chip wc-overview-prob-chip-home" title="Home win probability">H {row.home_win_probability * 100:.0f}%</div>
+                    <div class="wc-overview-prob-chip wc-overview-prob-chip-draw" title="Draw probability">D {row.draw_probability * 100:.0f}%</div>
+                    <div class="wc-overview-prob-chip wc-overview-prob-chip-away" title="Away win probability">A {row.away_win_probability * 100:.0f}%</div>
                 </div>
             </div>"""
         )
@@ -2301,7 +2570,7 @@ def fifa_overview_dashboard(
         challenger = risk_row.away_team if fav == risk_row.home_team else risk_row.home_team
         risk_html = f"""<div class="wc-risk-layout">
             <div>
-                <div class="wc-overview-panel-head" style="margin-bottom:8px;">Biggest Upset Risk</div>
+                <div class="wc-overview-panel-head" style="margin-bottom:8px;">Highest Prediction Uncertainty</div>
                 <div class="wc-overview-result-team" style="font-size:1.05rem;">{flag_html(challenger)}<span>{escape(str(challenger))}</span></div>
                 <div class="wc-overview-match-date" style="margin:10px 0;">could surprise</div>
                 <div class="wc-overview-result-team" style="font-size:1.05rem;">{flag_html(fav)}<span>{escape(str(fav))}</span></div>
@@ -2309,9 +2578,9 @@ def fifa_overview_dashboard(
             <div class="wc-risk-big">{risk_row.upset_risk_score * 100:.0f}%</div>
         </div>"""
     else:
-        risk_html = '<div class="wc-risk-layout"><div>No upcoming upset risk</div></div>'
+        risk_html = '<div class="wc-risk-layout"><div>No upcoming prediction uncertainty</div></div>'
 
-    scorer_html = '<div class="wc-scorer-card"><div class="wc-scorer-avatar">?</div><div><div class="wc-scorer-name">No player stats</div></div><div class="wc-scorer-goals">0</div></div>'
+    scorer_html = '<div class="wc-scorer-card"><div><div class="wc-scorer-name">No player stats</div></div><div class="wc-scorer-goals">0</div></div>'
     if player_stats is not None and not player_stats.empty and {"player_name", "team", "goals"}.issubset(player_stats.columns):
         scorers = player_stats.copy()
         scorers["goals"] = pd.to_numeric(scorers["goals"], errors="coerce").fillna(0)
@@ -2320,7 +2589,6 @@ def fifa_overview_dashboard(
         scorer_name = str(top["player_name"])
         scorer_goals = int(top["goals"])
         scorer_html = f"""<div class="wc-scorer-card">
-            <div class="wc-scorer-avatar">{escape(_name_initials(scorer_name))}</div>
             <div>
                 <div class="wc-scorer-name">{escape(scorer_name)}</div>
                 <div class="wc-scorer-meta">{flag_html(scorer_team)} {escape(scorer_team)}</div>
@@ -2338,6 +2606,7 @@ def fifa_overview_dashboard(
             <div class="wc-overview-hero-subtitle">Live Tournament Overview</div>
             <div class="wc-overview-copy">Real-time predictions, live results, resolved fixtures, and advanced analytics.</div>
             <div class="wc-live-chip"><span class="wc-live-dot"></span>{escape(live_label)}</div>
+            <div class="wc-data-freshness">Data updated: {escape(data_updated)}</div>
             <div class="wc-progress-box">
                 <div class="wc-progress-head"><span>Tournament Progress</span><span class="wc-progress-value">{progress:.0f}%</span></div>
                 <div class="wc-progress-track">{progress_segments}</div>
@@ -2351,7 +2620,7 @@ def fifa_overview_dashboard(
                 <div class="wc-feature-time">
                     <div class="wc-feature-date">{escape(next_date_display)}</div>
                     <div class="wc-feature-hour">{escape(next_hour)}</div>
-                    <div class="wc-feature-utc">UTC</div>
+                    <div class="wc-feature-utc">{escape(next_timezone or "Belgian time")}</div>
                 </div>
                 <div>{flag_html(away_team, "wc-feature-flag")}<div class="wc-feature-team">{escape(away_team)}</div></div>
             </div>
@@ -2369,7 +2638,7 @@ def fifa_overview_dashboard(
             {strongest_rows}
         </section>
         <section class="wc-overview-panel">
-            <div class="wc-overview-panel-head"><span>Upcoming Matches</span><span class="wc-view-all">View all</span></div>
+            <div class="wc-overview-panel-head"><span>Upcoming Matches</span><a class="wc-view-all" href="?page=Match%20Details" target="_self">View all</a></div>
             {''.join(upcoming_rows)}
         </section>
         <section class="wc-overview-panel">
@@ -2379,7 +2648,7 @@ def fifa_overview_dashboard(
     </div>
     <div class="wc-overview-grid-bottom">
         <section class="wc-overview-panel">
-            <div class="wc-overview-panel-head"><span>Latest Results</span><span class="wc-view-all">View all</span></div>
+            <div class="wc-overview-panel-head"><span>Latest Results</span><a class="wc-view-all" href="?page=Match%20Details" target="_self">View all</a></div>
             {''.join(latest_rows)}
         </section>
         <section class="wc-overview-panel wc-overview-risk">{risk_html}</section>
@@ -2469,46 +2738,32 @@ def _expected_goal_proxy(home_pct: float, away_pct: float) -> tuple[float, float
     return home_xg, away_xg
 
 
-def _probability_profile_svg(home_pct: float, draw_pct: float, away_pct: float) -> str:
-    home_y = 98 - home_pct * 0.72
-    away_y = 98 - away_pct * 0.72
-    draw_y = 98 - draw_pct * 0.72
-    return f"""
-    <svg class="wc-prob-svg" viewBox="0 0 320 118" preserveAspectRatio="none" aria-hidden="true">
-        <line x1="22" y1="18" x2="22" y2="98" stroke="rgba(255,255,255,.16)" />
-        <line x1="22" y1="98" x2="304" y2="98" stroke="rgba(255,255,255,.16)" />
-        <line x1="22" y1="58" x2="304" y2="58" stroke="rgba(255,255,255,.08)" />
-        <text x="0" y="21" fill="rgba(255,255,255,.55)" font-size="9">100%</text>
-        <text x="8" y="101" fill="rgba(255,255,255,.55)" font-size="9">0%</text>
-        <polyline points="22,{home_y + 18:.1f} 70,{home_y + 4:.1f} 125,{home_y:.1f} 190,{home_y - 3:.1f} 245,{home_y - 6:.1f} 304,{home_y - 6:.1f}"
-            fill="none" stroke="#6fa8dc" stroke-width="3" />
-        <polyline points="22,{away_y - 6:.1f} 82,{away_y:.1f} 145,{away_y + 4:.1f} 220,{away_y + 10:.1f} 304,{away_y + 12:.1f}"
-            fill="none" stroke="#6aa84f" stroke-width="3" />
-        <polyline points="22,{draw_y:.1f} 100,{draw_y + 2:.1f} 180,{draw_y + 1:.1f} 304,{draw_y + 3:.1f}"
-            fill="none" stroke="#9aa5b1" stroke-width="2" opacity=".9" />
-        <text x="23" y="114" fill="rgba(255,255,255,.55)" font-size="9">prediction profile</text>
-    </svg>
-    """
-
-
-def match_detail_panel(match_row, team1, team2, focus_team: str | None = None):
+def match_detail_panel(match_row, team1, team2, focus_team: str | None = None, compact: bool = False):
     played = bool(match_row.get("played", False))
+    has_score = bool(match_row.get("has_score", False))
     home_pct = float(match_row.get("home_win_probability", 0) or 0) * 100
     draw_pct = float(match_row.get("draw_probability", 0) or 0) * 100
     away_pct = float(match_row.get("away_win_probability", 0) or 0) * 100
-    confidence = max(home_pct, draw_pct, away_pct)
-    match_date = escape(str(match_row.get("match_date", match_row.get("date", "")) or ""))
-    kickoff = escape(str(match_row.get("kickoff_time_utc", "") or ""))
+    spread_confidence = pd.to_numeric(match_row.get("confidence_score"), errors="coerce")
+    confidence = float(spread_confidence) * 100 if pd.notna(spread_confidence) else max(home_pct, draw_pct, away_pct)
+    local_date, local_kickoff, timezone_label = belgian_kickoff(
+        match_row.get("match_date", match_row.get("date", "")),
+        match_row.get("kickoff_time_utc", ""),
+    )
+    match_date = escape(local_date)
+    kickoff = escape(local_kickoff)
     venue = escape(str(match_row.get("venue", "") or "TBD"))
     city = escape(str(match_row.get("city", "") or ""))
     country = escape(str(match_row.get("country", "") or ""))
     group = escape(str(match_row.get("group", "") or ""))
-    status = escape(str(match_row.get("status", "SCHEDULED") or "SCHEDULED").replace("_", " ").title())
+    status_raw = str(match_row.get("status", "SCHEDULED") or "SCHEDULED").replace("_", " ")
+    status = escape(status_raw.title())
     score = escape(str(match_row.get("score_display", "TBD") or "TBD"))
-    title = f"Group {group} - Match Preview"
+    stage = str(match_row.get("competition_stage", "") or "").strip()
+    title = escape(stage) if stage else f"Group {group}"
     meta_bits = [match_date]
     if kickoff:
-        meta_bits.append(f"{kickoff} UTC")
+        meta_bits.append(f"{kickoff} {escape(timezone_label)}")
     meta_bits.append(", ".join(bit for bit in [venue, city, country] if bit))
     meta = " - ".join(bit for bit in meta_bits if bit)
 
@@ -2516,38 +2771,86 @@ def match_detail_panel(match_row, team1, team2, focus_team: str | None = None):
     away_flag = _flag_image_html(team2, "wc-detail-team-flag")
     home_name = escape(team1.name)
     away_name = escape(team2.name)
-    elo_diff = float(match_row.get("elo_difference", 0) or 0)
+    row_elo_diff = pd.to_numeric(match_row.get("elo_difference"), errors="coerce")
+    elo_diff = float(row_elo_diff) if pd.notna(row_elo_diff) else float(team1.elo - team2.elo)
     stronger = team1.name if elo_diff >= 0 else team2.name
-    if focus_team == team2.name:
-        form_owner = team2
-    elif focus_team == team1.name:
-        form_owner = team1
-    else:
-        form_owner = team1 if team1.campaign_played >= team2.campaign_played else team2
-    form_results = form_owner.campaign_results or form_owner.recent_form
-    form_label = "This World Cup Form" if form_owner.campaign_results else "Recent Form"
-    form_text = (
-        f"{escape(form_owner.name)} current tournament form"
-        if form_owner.campaign_results
-        else f"{escape(form_owner.name)} pre-tournament form"
-    )
     predicted_home, predicted_away = _projected_score(home_pct, draw_pct, away_pct)
 
-    if played and score != "TBD":
-        projected_home, projected_away = score.replace(" ", "").split("-")
+    if has_score and score != "TBD" and "-" in score:
+        projected_home, projected_away = score.replace(" ", "").split("-", 1)
+        score_label = "Final Score" if played else "Live Score"
+        score_sub = status
+        prediction_note = f"Model prediction: {predicted_home} - {predicted_away}"
+    elif played and score != "TBD" and "-" in score:
+        projected_home, projected_away = score.replace(" ", "").split("-", 1)
         score_label = "Final Score"
         score_sub = status
+        prediction_note = f"Model prediction: {predicted_home} - {predicted_away}"
     else:
         projected_home, projected_away = predicted_home, predicted_away
         score_label = "Predicted Score"
         score_sub = team1.name if projected_home > projected_away else team2.name if projected_away > projected_home else "Draw"
-    key_score_label = "Predicted Score"
-    key_score_sub = "Model-derived score proxy"
+        prediction_note = "Model-derived score proxy"
 
-    home_xg, away_xg = _expected_goal_proxy(home_pct, away_pct)
-    profile_svg = _probability_profile_svg(home_pct, draw_pct, away_pct)
+    if has_score or played:
+        score_feature = f"""
+            <div class="wc-score-comparison">
+                <div>
+                    <div class="wc-score-comparison-label">{score_label}</div>
+                    <div class="wc-score-big">{projected_home} - {projected_away}</div>
+                    <div class="wc-score-sub">{escape(str(score_sub))}</div>
+                </div>
+                <div>
+                    <div class="wc-score-comparison-label">Predicted Score</div>
+                    <div class="wc-score-big wc-score-big-predicted">{predicted_home} - {predicted_away}</div>
+                    <div class="wc-score-sub">Model prediction</div>
+                </div>
+            </div>"""
+    else:
+        score_feature = f"""
+            <div class="wc-detail-mini-title">{score_label}</div>
+            <div class="wc-score-big">{projected_home} - {projected_away}</div>
+            <div class="wc-score-sub">{escape(str(score_sub))}</div>
+            <div class="wc-score-model-note">{escape(prediction_note)}</div>"""
 
-    html = f"""<div class="wc-detail-shell">
+    is_knockout = bool(stage and not stage.lower().startswith("group"))
+    if is_knockout:
+        predicted_outcome = team1.name if home_pct >= away_pct else team2.name
+        favorite_probability = max(home_pct, away_pct)
+    else:
+        predicted_value, predicted_outcome = max(
+            [(home_pct, team1.name), (draw_pct, "Draw"), (away_pct, team2.name)],
+            key=lambda item: item[0],
+        )
+        favorite_probability = predicted_value
+
+    uncertainty_value = pd.to_numeric(match_row.get("upset_risk_score"), errors="coerce")
+    uncertainty = float(uncertainty_value) * 100 if pd.notna(uncertainty_value) else max(100 - confidence, 0)
+    confidence_label = escape(str(match_row.get("confidence_label", "Medium")))
+
+    evaluation_card = ""
+    bottom_class = "wc-detail-bottom-two"
+    if played:
+        actual = get_match_source_of_truth(match_row, is_knockout=is_knockout)
+        actual_outcome = (
+            actual.get("winner")
+            or ("Draw" if actual.get("outcome") == "draw" else "Unavailable")
+        )
+        evaluation_available = actual.get("result_source") == "actual"
+        prediction_correct = evaluation_available and predicted_outcome == actual_outcome
+        evaluation_label = "Correct" if prediction_correct else "Incorrect" if evaluation_available else "Unavailable"
+        evaluation_color = "#76dc55" if prediction_correct else "#f1b84b" if not evaluation_available else "#f06b6b"
+        evaluation_card = f"""
+            <div class="wc-detail-mini">
+                <div class="wc-detail-mini-title">Prediction Evaluation</div>
+                <div class="wc-stat-line"><span>Predicted outcome</span><span class="wc-stat-value">{escape(predicted_outcome)}</span></div>
+                <div class="wc-stat-line"><span>Actual outcome</span><span class="wc-stat-value">{escape(str(actual_outcome))}</span></div>
+                <div class="wc-stat-line"><span>Result</span><span class="wc-stat-value" style="color:{evaluation_color};">{evaluation_label}</span></div>
+            </div>"""
+        bottom_class = "wc-detail-bottom-three"
+
+    shell_class = "wc-detail-shell wc-detail-shell-compact" if compact else "wc-detail-shell"
+    html = f"""<div class="{shell_class}">
             <div class="wc-detail-back">&larr; Match Details</div>
             <div class="wc-detail-head">
                 <div class="wc-detail-title">{title}</div>
@@ -2585,55 +2888,30 @@ def match_detail_panel(match_row, team1, team2, focus_team: str | None = None):
             </div>
 
             <div class="wc-detail-confidence">
-                <span>Model Confidence</span>
+                <span>Prediction Spread Confidence</span>
                 <span class="wc-detail-confidence-track"><span class="wc-detail-confidence-fill" style="--w:{confidence:.0f}%"></span></span>
                 <span>{match_row.get("confidence_label", "Medium")}</span>
             </div>
 
-            <div class="wc-detail-mini">
-                <div class="wc-detail-mini-title">Key Factors</div>
-                <div class="wc-factor-grid">
-                    <div class="wc-factor">
-                        <div class="wc-factor-label">Elo Difference</div>
-                        <div class="wc-factor-value">{elo_diff:+.0f}</div>
-                        <div class="wc-factor-sub">{escape(stronger)} stronger based on Elo rating</div>
-                    </div>
-                    <div class="wc-factor">
-                        <div class="wc-factor-label">{form_label}</div>
-                        <div class="wc-form-row">{_form_chips(form_results)}</div>
-                        <div class="wc-factor-sub">{form_text}</div>
-                    </div>
-                    <div class="wc-factor">
-                        <div class="wc-factor-label">Match Status</div>
-                        <div class="wc-factor-value">{score if played else status}</div>
-                        <div class="wc-factor-sub">{'Final result from live data' if played else 'Upcoming fixture from live data'}</div>
-                    </div>
-                    <div class="wc-factor">
-                        <div class="wc-factor-label">{key_score_label}</div>
-                        <div class="wc-factor-value">{predicted_home} - {predicted_away}</div>
-                        <div class="wc-factor-sub">{key_score_sub}</div>
-                    </div>
-                </div>
+            <div class="wc-detail-score-feature">
+                {score_feature}
             </div>
 
-            <div class="wc-detail-bottom">
+            <div class="wc-detail-bottom {bottom_class}">
                 <div class="wc-detail-mini">
-                    <div class="wc-detail-mini-title">{score_label}</div>
-                    <div class="wc-score-big">{projected_home} - {projected_away}</div>
-                    <div class="wc-score-sub">{escape(str(score_sub))}</div>
+                    <div class="wc-detail-mini-title">Elo Comparison</div>
+                    <div class="wc-stat-line"><span>{home_name}</span><span class="wc-stat-value">{int(team1.elo)}</span></div>
+                    <div class="wc-stat-line"><span>{away_name}</span><span class="wc-stat-value">{int(team2.elo)}</span></div>
+                    <div class="wc-stat-line"><span>Rating advantage</span><span class="wc-stat-value">{escape(str(stronger))} ({abs(elo_diff):.0f})</span></div>
                 </div>
                 <div class="wc-detail-mini">
-                    <div class="wc-detail-mini-title">Expected Goals (proxy)</div>
-                    <div class="wc-xg-grid">
-                        <div><div class="wc-xg-value">{home_xg:.2f}</div><div class="wc-xg-team">{home_name}</div></div>
-                        <div class="wc-xg-ball">⚽</div>
-                        <div><div class="wc-xg-value">{away_xg:.2f}</div><div class="wc-xg-team">{away_name}</div></div>
-                    </div>
+                    <div class="wc-detail-mini-title">Prediction Summary</div>
+                    <div class="wc-stat-line"><span>Model favorite</span><span class="wc-stat-value">{escape(predicted_outcome)}</span></div>
+                    <div class="wc-stat-line"><span>Favorite probability</span><span class="wc-stat-value">{favorite_probability:.0f}%</span></div>
+                    <div class="wc-stat-line"><span>Confidence</span><span class="wc-stat-value">{confidence_label}</span></div>
+                    <div class="wc-stat-line"><span>Prediction uncertainty</span><span class="wc-stat-value">{uncertainty:.0f}%</span></div>
                 </div>
-                <div class="wc-detail-mini">
-                    <div class="wc-detail-mini-title">Win Probability Profile</div>
-                    {profile_svg}
-                </div>
+                {evaluation_card}
             </div>
         </div>"""
     st.markdown(_compact_html(html), unsafe_allow_html=True)
@@ -2694,8 +2972,10 @@ def compact_matches_panel(matches, title: str, empty_message: str = "No matches 
     teams_by_name = teams_by_name or {}
     rows = []
     for _, match in matches.iterrows():
-        date = match.get("match_date", match.get("date", ""))
-        kickoff = match.get("kickoff_time_utc", "")
+        date, kickoff, timezone_label = belgian_kickoff(
+            match.get("match_date", match.get("date", "")),
+            match.get("kickoff_time_utc", ""),
+        )
         group = str(match.get("group", "")).replace("GROUP_", "Group ")
         home = match.get("home_team", "")
         away = match.get("away_team", "")
@@ -2721,7 +3001,7 @@ def compact_matches_panel(matches, title: str, empty_message: str = "No matches 
             )
         rows.append(
             f"""<div class="wc-compact-match">
-                <div class="wc-compact-date">{date}<small>{kickoff} UTC<br>{group}</small></div>
+                <div class="wc-compact-date">{date}<small>{kickoff} {timezone_label}<br>{group}</small></div>
                 <div class="wc-compact-teams">
                     <div class="wc-compact-team">{home_flag} {home}</div>
                     <div class="wc-compact-vs">vs</div>
@@ -2822,7 +3102,10 @@ def group_stage_panel(group_name: str, standings, matches, teams_by_name: dict):
         away_obj = teams_by_name.get(match.away_team)
         home_flag = _flag_image_html(home_obj, "wc-group-flag-img") if home_obj else ""
         away_flag = _flag_image_html(away_obj, "wc-group-flag-img") if away_obj else ""
-        date_label = str(match.match_date)[5:].replace("-", " ")
+        local_date, local_kickoff, timezone_label = belgian_kickoff(
+            match.match_date, match.kickoff_time_utc
+        )
+        date_label = local_date[5:].replace("-", " ") if local_date else "TBD"
         next_cards.append(
             f"""<div class="wc-next-card">
                 <div class="wc-next-teams">
@@ -2831,7 +3114,7 @@ def group_stage_panel(group_name: str, standings, matches, teams_by_name: dict):
                     <div class="wc-next-team">{away_flag}<span>{escape(match.away_team)}</span></div>
                 </div>
                 <div class="wc-next-date">{escape(date_label)}</div>
-                <div class="wc-next-status">{escape(str(match.kickoff_time_utc or ""))} UTC</div>
+                <div class="wc-next-status">{escape(local_kickoff)} {escape(timezone_label)}</div>
             </div>"""
         )
     if not next_cards:
@@ -2890,12 +3173,75 @@ def _bracket_team_row(slot: str, team: str, prob: float, teams_by_name: dict, si
     )
 
 
-def _winner_from_pair(pair: tuple[str, str], round_reach, column: str) -> str:
-    a, b = pair
-    return a if _prob_for_round(round_reach, a, column) >= _prob_for_round(round_reach, b, column) else b
+def _match_resolution(pair: tuple[str, str], round_reach, column: str, match_row=None) -> tuple[str, str, str]:
+    home, away = pair
+    home_probability = _prob_for_round(round_reach, home, column)
+    away_probability = _prob_for_round(round_reach, away, column)
+    prediction = {
+        "home_team": home,
+        "away_team": away,
+        "home_win_probability": home_probability,
+        "away_win_probability": away_probability,
+    }
+    match_context = dict(match_row) if match_row else {}
+    context_home = match_context.get("home_team")
+    context_away = match_context.get("away_team")
+    if context_home is None or pd.isna(context_home):
+        match_context["home_team"] = home
+    if context_away is None or pd.isna(context_away):
+        match_context["away_team"] = away
+    truth = get_match_source_of_truth(match_context or prediction, prediction, is_knockout=True)
+    winner = truth["winner"] or "TBD"
+    if truth["result_source"] == "actual":
+        home_score = int(truth["home_score"])
+        away_score = int(truth["away_score"])
+        penalty_text = ""
+        if truth.get("home_penalties") is not None and truth.get("away_penalties") is not None:
+            penalty_text = f" ({int(truth['home_penalties'])}-{int(truth['away_penalties'])} pens)"
+        label = f"Actual result: {winner} won {home_score}-{away_score}{penalty_text}"
+    elif truth["result_source"] == "prediction":
+        label = f"Projected winner: {winner}"
+    else:
+        label = "Winner unresolved"
+    return winner, label, truth["result_source"]
 
 
-def _resolved_r32_pairs(knockout_matches) -> list[tuple[str, str, str, str]]:
+def _winner_sources(rows) -> dict[int, list[int]]:
+    sources = {}
+    for row in rows.itertuples(index=False):
+        if not hasattr(row, "match_number") or pd.isna(row.match_number):
+            continue
+        source_numbers = []
+        for slot in [str(row.home_slot), str(row.away_slot)]:
+            if slot.startswith("W") and slot[1:].isdigit():
+                source_numbers.append(int(slot[1:]))
+        sources[int(row.match_number)] = source_numbers
+    return sources
+
+
+def _bracket_path_order(knockout_matches) -> tuple[list[int], list[int]]:
+    """Return R32 and R16 display order following official winner paths."""
+    if knockout_matches is None or getattr(knockout_matches, "empty", True):
+        return [], []
+    required = {"stage", "match_number", "home_slot", "away_slot"}
+    if not required.issubset(knockout_matches.columns):
+        return [], []
+
+    stage_sources = {
+        stage: _winner_sources(knockout_matches[knockout_matches["stage"].eq(stage)])
+        for stage in ["Round of 16", "Quarter-final", "Semi-final"]
+    }
+    r16_order = []
+    r32_order = []
+    for semifinal_number in sorted(stage_sources["Semi-final"]):
+        for quarterfinal_number in stage_sources["Semi-final"][semifinal_number]:
+            for r16_number in stage_sources["Quarter-final"].get(quarterfinal_number, []):
+                r16_order.append(r16_number)
+                r32_order.extend(stage_sources["Round of 16"].get(r16_number, []))
+    return r32_order, r16_order
+
+
+def _resolved_r32_pairs(knockout_matches) -> list[tuple[str, str, str, str, object]]:
     if knockout_matches is None or getattr(knockout_matches, "empty", True):
         return []
     required = {"stage", "home_slot", "away_slot", "home_team", "away_team"}
@@ -2905,9 +3251,16 @@ def _resolved_r32_pairs(knockout_matches) -> list[tuple[str, str, str, str]]:
     r32 = knockout_matches[knockout_matches["stage"].eq("Round of 32")].copy()
     if r32.empty:
         return []
-    sort_cols = [col for col in ["date", "kickoff_time", "match_id"] if col in r32.columns]
-    if sort_cols:
-        r32 = r32.sort_values(sort_cols)
+    bracket_order, _ = _bracket_path_order(knockout_matches)
+
+    if bracket_order and "match_number" in r32.columns:
+        order_lookup = {match_number: index for index, match_number in enumerate(bracket_order)}
+        r32["_bracket_order"] = r32["match_number"].map(order_lookup).fillna(len(order_lookup))
+        r32 = r32.sort_values(["_bracket_order", "match_number"])
+    else:
+        sort_cols = [col for col in ["date", "kickoff_time", "match_id"] if col in r32.columns]
+        if sort_cols:
+            r32 = r32.sort_values(sort_cols)
 
     pairs = []
     for row in r32.itertuples(index=False):
@@ -2915,11 +3268,37 @@ def _resolved_r32_pairs(knockout_matches) -> list[tuple[str, str, str, str]]:
         away_slot = str(row.away_slot)
         home_team = row.home_team if pd.notna(row.home_team) else home_slot
         away_team = row.away_team if pd.notna(row.away_team) else away_slot
-        pairs.append((home_slot, away_slot, str(home_team), str(away_team)))
+        pairs.append((home_slot, away_slot, str(home_team), str(away_team), row._asdict()))
     return pairs
 
 
-def knockout_bracket_panel(standings, round_reach, teams_by_name: dict, knockout_matches=None):
+def _stage_match_rows(knockout_matches, stage: str) -> list[dict]:
+    if knockout_matches is None or getattr(knockout_matches, "empty", True):
+        return []
+    rows = knockout_matches[knockout_matches["stage"].eq(stage)].copy()
+    if "match_number" in rows.columns:
+        rows = rows.sort_values("match_number")
+    return rows.to_dict("records")
+
+
+def _mirror_card(match_number: object, inner_html: str) -> str:
+    number = int(match_number) if pd.notna(match_number) else "-"
+    return (
+        '<div class="wc-mirror-match">'
+        f'<div class="wc-mirror-match-number">Match {number}</div>'
+        f'{inner_html}</div>'
+    )
+
+
+def knockout_bracket_panel(
+    standings,
+    round_reach,
+    teams_by_name: dict,
+    knockout_matches=None,
+    trophy_src: str = "",
+    zoom: float = 1.0,
+):
+    zoom = max(0.7, min(1.5, float(zoom)))
     ranked_groups = {
         group: g.sort_values(["points", "goal_difference", "goals_for"], ascending=[False, False, False]).reset_index(drop=True)
         for group, g in standings.groupby("group")
@@ -2953,117 +3332,199 @@ def knockout_bracket_panel(standings, round_reach, teams_by_name: dict, knockout
         ("Best 3rd #5", "Best 3rd #6"), ("Best 3rd #7", "Best 3rd #8"),
     ]
     r32_pairs = _resolved_r32_pairs(knockout_matches)
-    r32_title = "Round of 32 - resolved fixtures"
     if not r32_pairs:
-        r32_pairs = [(a, b, slots.get(a, "TBD"), slots.get(b, "TBD")) for a, b in slot_pairs]
-        r32_title = "Round of 32 - projected from live standings"
+        r32_pairs = [(a, b, slots.get(a, "TBD"), slots.get(b, "TBD"), None) for a, b in slot_pairs]
 
     r32_cards = []
     r16_teams = []
-    for slot_a, slot_b, team_a, team_b in r32_pairs:
+    advancers: dict[int, str] = {}
+    eliminated: dict[int, str] = {}
+    for pair_index, (slot_a, slot_b, team_a, team_b, match_row) in enumerate(r32_pairs):
         prob_a = _prob_for_round(round_reach, team_a, "round_of_16")
         prob_b = _prob_for_round(round_reach, team_b, "round_of_16")
-        r16_teams.append(_winner_from_pair((team_a, team_b), round_reach, "round_of_16"))
-        r32_cards.append(
+        winner, source_label, source = _match_resolution(
+            (team_a, team_b), round_reach, "round_of_16", match_row
+        )
+        r16_teams.append(winner)
+        match_number = int(match_row.get("match_number", 73 + pair_index)) if match_row else 73 + pair_index
+        advancers[match_number] = winner
+        if winner != "TBD":
+            eliminated[match_number] = team_b if winner == team_a else team_a
+        card = (
             f'<div class="wc-bracket-match">'
             f'{_bracket_team_row(slot_a, team_a, prob_a, teams_by_name)}'
             f'{_bracket_team_row(slot_b, team_b, prob_b, teams_by_name)}'
+            f'<div class="wc-bracket-source wc-bracket-source-{source}">{escape(source_label)}</div>'
             f'</div>'
         )
+        r32_cards.append(_mirror_card(match_number, card))
 
-    def round_cards(source_teams: list[str], reach_col: str, next_col: str) -> tuple[list[str], list[str]]:
+    def round_cards(
+        source_teams: list[str],
+        reach_col: str,
+        next_col: str,
+        stage: str,
+    ) -> tuple[list[str], list[str]]:
         cards = []
         winners = []
-        for i in range(0, len(source_teams), 2):
-            team_a, team_b = source_teams[i], source_teams[i + 1]
+        official_rows = _stage_match_rows(knockout_matches, stage)
+        row_count = len(official_rows) if official_rows else len(source_teams) // 2
+        for row_index in range(row_count):
+            match_row = official_rows[row_index] if official_rows else None
+            if match_row:
+                home_slot = str(match_row.get("home_slot", ""))
+                away_slot = str(match_row.get("away_slot", ""))
+                team_a = advancers.get(int(home_slot[1:]), "TBD") if home_slot.startswith("W") else "TBD"
+                team_b = advancers.get(int(away_slot[1:]), "TBD") if away_slot.startswith("W") else "TBD"
+                if pd.notna(match_row.get("home_team")) and pd.notna(match_row.get("away_team")):
+                    team_a = str(match_row["home_team"])
+                    team_b = str(match_row["away_team"])
+            else:
+                team_a, team_b = source_teams[row_index * 2:row_index * 2 + 2]
             prob_a = _prob_for_round(round_reach, team_a, reach_col)
             prob_b = _prob_for_round(round_reach, team_b, reach_col)
-            winners.append(_winner_from_pair((team_a, team_b), round_reach, next_col))
-            cards.append(
+            winner, source_label, source = _match_resolution((team_a, team_b), round_reach, next_col, match_row)
+            winners.append(winner)
+            match_number = None
+            if match_row and pd.notna(match_row.get("match_number")):
+                match_number = int(match_row["match_number"])
+                advancers[match_number] = winner
+                if winner != "TBD":
+                    eliminated[match_number] = team_b if winner == team_a else team_a
+            card = (
                 f'<div class="wc-bracket-match">'
                 f'{_bracket_team_row("", team_a, prob_a, teams_by_name, single=True)}'
                 f'{_bracket_team_row("", team_b, prob_b, teams_by_name, single=True)}'
+                f'<div class="wc-bracket-source wc-bracket-source-{source}">{escape(source_label)}</div>'
                 f'</div>'
             )
+            cards.append(_mirror_card(match_number, card))
         return cards, winners
 
-    r16_cards, qf_teams = round_cards(r16_teams, "quarterfinal", "quarterfinal")
-    qf_cards, sf_teams = round_cards(qf_teams, "semifinal", "semifinal")
-    sf_cards, final_teams = round_cards(sf_teams, "final", "final")
+    r16_cards, qf_teams = round_cards(r16_teams, "quarterfinal", "quarterfinal", "Round of 16")
+    qf_cards, sf_teams = round_cards(qf_teams, "semifinal", "semifinal", "Quarter-final")
+    sf_cards, final_teams = round_cards(sf_teams, "final", "final", "Semi-final")
+
+    _, r16_order = _bracket_path_order(knockout_matches)
+    if r16_order:
+        official_r16 = _stage_match_rows(knockout_matches, "Round of 16")
+        cards_by_number = {
+            int(row["match_number"]): card
+            for row, card in zip(official_r16, r16_cards)
+            if pd.notna(row.get("match_number"))
+        }
+        r16_cards = [cards_by_number[number] for number in r16_order if number in cards_by_number]
 
     final_cards = []
+    final_winner = None
     if len(final_teams) >= 2:
-        final_cards.append(
+        final_rows = _stage_match_rows(knockout_matches, "Final")
+        final_row = final_rows[0] if final_rows else None
+        if final_row and pd.notna(final_row.get("home_team")) and pd.notna(final_row.get("away_team")):
+            final_teams = [str(final_row["home_team"]), str(final_row["away_team"])]
+        final_winner, final_label, final_source = _match_resolution(
+            (final_teams[0], final_teams[1]), round_reach, "tournament_win_probability", final_row
+        )
+        final_number = final_row.get("match_number", 104) if final_row else 104
+        final_card = (
             f'<div class="wc-bracket-match">'
             f'{_bracket_team_row("", final_teams[0], _prob_for_round(round_reach, final_teams[0], "tournament_win_probability"), teams_by_name, single=True)}'
             f'{_bracket_team_row("", final_teams[1], _prob_for_round(round_reach, final_teams[1], "tournament_win_probability"), teams_by_name, single=True)}'
+            f'<div class="wc-bracket-source wc-bracket-source-{final_source}">{escape(final_label)}</div>'
             f'</div>'
         )
+        final_cards.append(_mirror_card(final_number, final_card))
+
+    third_place_cards = []
+    third_rows = _stage_match_rows(knockout_matches, "3rd Place Match")
+    third_row = third_rows[0] if third_rows else None
+    third_teams = [eliminated.get(101, "TBD"), eliminated.get(102, "TBD")]
+    if third_row and pd.notna(third_row.get("home_team")) and pd.notna(third_row.get("away_team")):
+        third_teams = [str(third_row["home_team"]), str(third_row["away_team"])]
+    _third_winner, third_label, third_source = _match_resolution(
+        (third_teams[0], third_teams[1]), round_reach, "tournament_win_probability", third_row
+    )
+    third_number = third_row.get("match_number", 103) if third_row else 103
+    third_card = (
+        f'<div class="wc-bracket-match">'
+        f'{_bracket_team_row("", third_teams[0], _prob_for_round(round_reach, third_teams[0], "tournament_win_probability"), teams_by_name, single=True)}'
+        f'{_bracket_team_row("", third_teams[1], _prob_for_round(round_reach, third_teams[1], "tournament_win_probability"), teams_by_name, single=True)}'
+        f'<div class="wc-bracket-source wc-bracket-source-{third_source}">{escape(third_label)}</div>'
+        f'</div>'
+    )
+    third_place_cards.append(_mirror_card(third_number, third_card))
 
     top_winners = round_reach.head(4)
     champion = top_winners.iloc[0]
-    champion_obj = teams_by_name.get(champion.team)
+    champion_name = final_winner if final_winner and final_winner != "TBD" else champion.team
+    champion_probability = _prob_for_round(round_reach, champion_name, "tournament_win_probability")
+    champion_obj = teams_by_name.get(champion_name)
     champion_flag = _flag_image_html(champion_obj, "wc-group-flag-img") if champion_obj else ""
     winner_rows = []
-    title_cards = []
-    for rank, row in enumerate(top_winners.itertuples(index=False), start=1):
+    for row in top_winners.itertuples(index=False):
         team_obj = teams_by_name.get(row.team)
         flag = _flag_image_html(team_obj, "wc-group-flag-img") if team_obj else ""
         winner_rows.append(
             f'<div class="wc-winner-row">{flag}<span>{escape(row.team)}</span><span>{row.tournament_win_probability * 100:.0f}%</span></div>'
         )
-        title_cards.append(
-            f"""<div class="wc-title-card">
-                <div class="wc-title-rank">{rank}</div>
-                <div>
-                    <div class="wc-title-team">{flag} {escape(row.team)}</div>
-                    <div class="wc-title-prob">{row.tournament_win_probability * 100:.0f}%</div>
-                </div>
-            </div>"""
-        )
 
+    trophy_html = (
+        f'<img class="wc-bracket-trophy-image" src="{trophy_src}" alt="World Cup trophy">'
+        if trophy_src else '<div class="wc-trophy">🏆</div>'
+    )
     html = f"""<div class="wc-bracket-shell">
-        <div class="wc-bracket-tabs">
-            <div class="wc-bracket-tab wc-bracket-tab-active">Round of 32</div>
-            <div class="wc-bracket-tab">Round of 16</div>
-            <div class="wc-bracket-tab">Quarter Finals</div>
-            <div class="wc-bracket-tab">Final</div>
-        </div>
-        <div class="wc-bracket-grid">
-            <div>
-                <div class="wc-bracket-col-title">{r32_title}</div>
-                <div class="wc-bracket-col">{''.join(r32_cards)}</div>
+        <div class="wc-bracket-scroll">
+            <div class="wc-bracket-mirror" style="zoom:{zoom:.1f};">
+                <section class="wc-mirror-stage wc-mirror-left">
+                    <div class="wc-mirror-stage-title">Round of 32</div>
+                    <div class="wc-mirror-stage-cards">{''.join(r32_cards[:8])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-left">
+                    <div class="wc-mirror-stage-title">Round of 16</div>
+                    <div class="wc-mirror-stage-cards">{''.join(r16_cards[:4])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-left">
+                    <div class="wc-mirror-stage-title">Quarter-finals</div>
+                    <div class="wc-mirror-stage-cards">{''.join(qf_cards[:2])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-left">
+                    <div class="wc-mirror-stage-title">Semi-final 1</div>
+                    <div class="wc-mirror-stage-cards">{''.join(sf_cards[:1])}</div>
+                </section>
+
+                <section class="wc-mirror-center">
+                    <div class="wc-mirror-stage-title">Final</div>
+                    {''.join(final_cards)}
+                    {trophy_html}
+                    <div class="wc-bracket-winner">
+                        <div class="wc-winner-title">Winner</div>
+                        <div class="wc-winner-main">{champion_flag}<span>{escape(champion_name)}</span><span>{champion_probability * 100:.0f}%</span></div>
+                        <div class="wc-winner-list">{''.join(winner_rows[1:])}</div>
+                    </div>
+                    <div class="wc-third-place-title">Third Place</div>
+                    {''.join(third_place_cards)}
+                </section>
+
+                <section class="wc-mirror-stage wc-mirror-right">
+                    <div class="wc-mirror-stage-title">Semi-final 2</div>
+                    <div class="wc-mirror-stage-cards">{''.join(sf_cards[1:])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-right">
+                    <div class="wc-mirror-stage-title">Quarter-finals</div>
+                    <div class="wc-mirror-stage-cards">{''.join(qf_cards[2:])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-right">
+                    <div class="wc-mirror-stage-title">Round of 16</div>
+                    <div class="wc-mirror-stage-cards">{''.join(r16_cards[4:])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-right">
+                    <div class="wc-mirror-stage-title">Round of 32</div>
+                    <div class="wc-mirror-stage-cards">{''.join(r32_cards[8:])}</div>
+                </section>
             </div>
-            <div>
-                <div class="wc-bracket-col-title">Round of 16</div>
-                <div class="wc-bracket-col wc-bracket-col-r16">{''.join(r16_cards)}</div>
-            </div>
-            <div>
-                <div class="wc-bracket-col-title">Quarter Finals</div>
-                <div class="wc-bracket-col wc-bracket-col-qf">{''.join(qf_cards)}</div>
-            </div>
-            <div>
-                <div class="wc-bracket-col-title">Semi Finals</div>
-                <div class="wc-bracket-col wc-bracket-col-sf">{''.join(sf_cards)}</div>
-            </div>
-            <div class="wc-bracket-winner">
-                <div class="wc-trophy">🏆</div>
-                <div class="wc-winner-title">Winner</div>
-                <div class="wc-winner-main">{champion_flag}<span>{escape(champion.team)}</span><span>{champion.tournament_win_probability * 100:.0f}%</span></div>
-                <div class="wc-winner-list">{''.join(winner_rows[1:])}</div>
-            </div>
-        </div>
-        <div class="wc-detail-mini" style="margin-top:18px;">
-            <div class="wc-detail-mini-title">Chance to Win the Tournament</div>
-            <div class="wc-title-card-grid">{''.join(title_cards)}</div>
         </div>
     </div>"""
     st.markdown(_compact_html(html), unsafe_allow_html=True)
-
-
-def _name_initials(name: str) -> str:
-    parts = [part for part in str(name).replace("-", " ").split() if part]
-    return "".join(part[0] for part in parts[:2]).upper() or "P"
 
 
 TEAM_THEME_COLORS = {
@@ -3176,7 +3637,16 @@ def _available_player_performers(player_stats, team_name: str) -> tuple[list[tup
     return performers, len(team_players)
 
 
-def team_stats_dashboard(teams: list, standings, round_reach, matches=None, player_stats=None, selected_team: str | None = None):
+def team_stats_dashboard(
+    teams: list,
+    standings,
+    round_reach,
+    matches=None,
+    player_stats=None,
+    selected_team: str | None = None,
+    show_team_list: bool = True,
+    player_data_updated: str = "Unavailable",
+):
     teams_by_name = {t.name: t for t in teams}
     rr = round_reach.set_index("team")
     st_by_team = standings.set_index("team")
@@ -3202,26 +3672,22 @@ def team_stats_dashboard(teams: list, standings, round_reach, matches=None, play
         else f"GF {selected.goals_for_l5} / GA {selected.goals_against_l5}"
     )
 
-    side_teams = ranked_teams[:14]
-    if selected.name not in {team.name for team in side_teams}:
-        side_teams = [selected] + side_teams[:13]
     side_rows = []
-    for team in side_teams:
+    for team in ranked_teams:
         active = " wc-ta-list-row-active" if team.name == selected.name else ""
         active_dot = '<span class="wc-ta-active-dot"></span>' if team.name == selected.name else ""
         flag = _flag_image_html(team, "wc-group-flag-img")
+        team_url = f"?page=Teams&team={quote(team.name)}"
         side_rows.append(
-            f"""<div class="wc-ta-list-row{active}">
+            f"""<a class="wc-ta-list-row{active}" href="{team_url}" target="_self">
                 <div class="wc-ta-list-team">{flag}<span>{escape(team.name)}</span></div>
                 {active_dot}
-            </div>"""
+            </a>"""
         )
 
     performers, player_count = _available_player_performers(player_stats, selected.name)
     performer_rows = []
-    color_palette = ["#3fa659", "#2f7bd8", "#7d49dc", "#d46a2f", "#d5a52a", "#34a9b2", "#c04578", "#579bd8"]
-    for idx, (label, player, value, unit, token, position) in enumerate(performers[:12]):
-        color = color_palette[idx % len(color_palette)]
+    for label, player, value, unit, _token, position in performers[:12]:
         position_badge = (
             f'<span class="wc-ta-position-pill">{escape(position)}</span>'
             if position and position.lower() != "nan"
@@ -3230,42 +3696,38 @@ def team_stats_dashboard(teams: list, standings, round_reach, matches=None, play
         performer_rows.append(
             f"""<div class="wc-ta-performer">
                 <div class="wc-ta-performer-top">
-                    <div class="wc-ta-performer-icon" style="background:{color};">{escape(token)}</div>
                     <div class="wc-ta-performer-label">{escape(label)}</div>
                 </div>
-                <div class="wc-ta-avatar">
-                    <div class="wc-ta-avatar-initials">{escape(_name_initials(player))}</div>
-                    <div class="wc-ta-avatar-meta">
-                        <div class="wc-ta-performer-name">{escape(player)}</div>
-                        {position_badge}
+                <div class="wc-ta-performer-name">{escape(player)}</div>
+                <div class="wc-ta-performer-stat">
+                    <div class="wc-ta-performer-number">
+                        <div class="wc-ta-performer-value">{value}</div>
+                        <div class="wc-ta-performer-unit">{escape(unit)}</div>
                     </div>
+                    {position_badge}
                 </div>
-                <div class="wc-ta-performer-value">{value}</div>
-                <div class="wc-ta-performer-unit">{escape(unit)}</div>
             </div>"""
         )
     if not performer_rows:
         performer_rows.append(
             """<div class="wc-ta-performer">
                 <div class="wc-ta-performer-top">
-                    <div class="wc-ta-performer-icon">NA</div>
                     <div class="wc-ta-performer-label">Player Data</div>
                 </div>
-                <div class="wc-ta-avatar">
-                    <div class="wc-ta-avatar-initials">?</div>
-                    <div class="wc-ta-avatar-meta">
-                        <div class="wc-ta-performer-name">No player rows available</div>
+                <div class="wc-ta-performer-name">No player rows available</div>
+                <div class="wc-ta-performer-stat">
+                    <div class="wc-ta-performer-number">
+                        <div class="wc-ta-performer-value">-</div>
+                        <div class="wc-ta-performer-unit">No statistics</div>
                     </div>
                 </div>
-                <div class="wc-ta-performer-value">-</div>
-                <div class="wc-ta-performer-unit">Run player data pipeline</div>
             </div>"""
         )
     player_note = (
         f"Real StatBunker player data loaded for {player_count} {escape(selected.name)} players. "
-        "Unavailable advanced fields are hidden."
+        f"Unavailable advanced fields are hidden. Refreshed: {escape(player_data_updated)}."
         if player_count
-        else "No player data available for this team yet."
+        else f"No player data available for this team yet. Last refresh: {escape(player_data_updated)}."
     )
 
     match_rows = []
@@ -3325,12 +3787,15 @@ def team_stats_dashboard(teams: list, standings, round_reach, matches=None, play
         for label, prob, accent in outlook_rows
     )
 
-    html = f"""<div class="wc-ta-shell" style="{theme_style}">
-        <aside class="wc-ta-panel wc-ta-side">
+    side_html = f"""<aside class="wc-ta-panel wc-ta-side">
             <div class="wc-ta-side-label">All Teams</div>
             <div class="wc-ta-list">{''.join(side_rows)}</div>
             <div class="wc-ta-selected-box" style="justify-content:center;margin-top:18px;color:#9be36c;">Compare Teams</div>
-        </aside>
+        </aside>""" if show_team_list else ""
+    shell_class = "wc-ta-shell" if show_team_list else "wc-ta-shell wc-ta-shell-no-side"
+
+    html = f"""<div class="{shell_class}" style="{theme_style}">
+        {side_html}
 
         <main class="wc-ta-main">
             <section class="wc-ta-hero">
@@ -3393,8 +3858,10 @@ def match_card(match_row, team1, team2):
     played = bool(match_row.get("played", False))
     score_display = match_row.get("score_display", "TBD")
     status = match_row.get("status", "SCHEDULED")
-    match_date = match_row.get("match_date", match_row.get("date", ""))
-    kickoff_time = match_row.get("kickoff_time_utc", "")
+    match_date, kickoff_time, timezone_label = belgian_kickoff(
+        match_row.get("match_date", match_row.get("date", "")),
+        match_row.get("kickoff_time_utc", ""),
+    )
     if played:
         st.markdown(
             f"""<div class="wc-team-row">
@@ -3423,7 +3890,7 @@ def match_card(match_row, team1, team2):
     probability_bar(home_pct, draw_pct, away_pct, team1.name, team2.name)
     if match_date or kickoff_time:
         st.markdown(
-            f'<div class="wc-match-meta">Kickoff: {match_date} {kickoff_time} UTC</div>',
+            f'<div class="wc-match-meta">Kickoff: {match_date} {kickoff_time} {timezone_label}</div>',
             unsafe_allow_html=True,
         )
     c1, c2 = st.columns(2)
@@ -3434,6 +3901,6 @@ def match_card(match_row, team1, team2):
         )
     with c2:
         if match_row["upset_risk_score"] >= 0.7:
-            st.markdown(f'<span class="wc-upset">\u26a0 Upset potential ({match_row["upset_risk_score"]:.2f})</span>',
+            st.markdown(f'<span class="wc-upset">\u26a0 Prediction uncertainty ({match_row["upset_risk_score"]:.2f})</span>',
                          unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)

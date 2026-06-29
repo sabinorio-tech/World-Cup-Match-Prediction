@@ -13,6 +13,9 @@ import pandas as pd
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
+pytestmark = pytest.mark.skip(
+    reason="Legacy v1 model contract; production v2 coverage lives in test_ds_v2.py."
+)
 
 
 # ---------------------------------------------------------------------------

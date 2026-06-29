@@ -27,12 +27,11 @@ Methodology (kept deliberately transparent, see About page):
 
 from __future__ import annotations
 
-from functools import lru_cache
-
 import numpy as np
 import pandas as pd
 
 import realdata as rd
+from cache_utils import ttl_cache
 
 N_SIMS = 3000
 RNG_SEED = 2026
@@ -42,14 +41,14 @@ def _elo_win_prob(elo_a: float, elo_b: float) -> float:
     return 1.0 / (1.0 + 10 ** (-(elo_a - elo_b) / 400.0))
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def _team_index():
     teams = rd.load_teams()
     names = teams["team"].tolist()
     return {name: i for i, name in enumerate(names)}, names, teams.set_index("team")["elo"].to_dict()
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def run_simulation(n_sims: int = N_SIMS, seed: int = RNG_SEED):
     rng = np.random.default_rng(seed)
     idx_of, names, elo_of = _team_index()
