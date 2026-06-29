@@ -6,12 +6,15 @@ from src.cleaning.clean_elo import clean_elo
 from src.cleaning.clean_results import clean_results
 from src.cleaning.standardize_teams import standardize_teams
 from src.enrichment.enrich_fixtures import enrich_fixtures
+from src.enrichment.fetch_player_data import run_player_data_pipeline
 from src.export.build_model_dataset import build_model_dataset
+from src.export.build_prediction_evaluation import build_prediction_evaluation
 from src.extract.football_data_api import fetch_competition_matches, get_api_key, save_json
 from src.features.build_features import build_features
 from src.models.train_poisson import train_poisson
 from src.models.train_xgb import train_xgb
 from src.predict.batch_predict import batch_predict
+from src.transform.knockout_matches import build_knockout_matches
 from src.transform.live_matches import load_raw_matches, transform_matches, save_matches
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -45,7 +48,7 @@ def run_live_data_pipeline() -> None:
 def main() -> None:
     """Run the complete Data Engineering and Machine Learning pipeline."""
     run_stage(
-        "[1/10] Cleaning historical results...",
+        "[1/13] Cleaning historical results...",
         lambda: clean_results(
             input_path=RAW_DIR / "IF_1872_2026" / "results.csv",
             output_dir=PROCESSED_DIR,
@@ -53,7 +56,7 @@ def main() -> None:
     )
 
     run_stage(
-        "[2/10] Processing Elo ratings...",
+        "[2/13] Processing Elo ratings...",
         lambda: clean_elo(
             input_path=RAW_DIR / "FIFA_WK_Elo_Ratings" / "elo_ratings_wc2026.csv",
             teams_path=RAW_DIR / "FIFA_WC_1930_2026" / "wc_2026_teams.csv",
@@ -62,7 +65,7 @@ def main() -> None:
     )
 
     run_stage(
-        "[3/10] Standardizing team and fixture references...",
+        "[3/13] Standardizing team and fixture references...",
         lambda: standardize_teams(
             teams_input_path=RAW_DIR / "FIFA_WC_1930_2026" / "wc_2026_teams.csv",
             fixtures_input_path=RAW_DIR / "FIFA_WC_1930_2026" / "wc_2026_fixtures.csv",
@@ -73,7 +76,7 @@ def main() -> None:
     )
 
     run_stage(
-        "[4/10] Enriching World Cup 2026 fixtures...",
+        "[4/13] Enriching World Cup 2026 fixtures...",
         lambda: enrich_fixtures(
             fixtures_path=PROCESSED_DIR / "wc_2026_fixtures_validated.csv",
             teams_path=PROCESSED_DIR / "wc_2026_teams_cleaned.csv",
@@ -83,18 +86,21 @@ def main() -> None:
     )
 
     run_stage(
-        "[5/10] Building base model dataset...",
+        "[5/13] Building base model dataset...",
         lambda: build_model_dataset(
             historical_results_path=PROCESSED_DIR / "results_historical.csv",
             output_path=PROCESSED_DIR / "model_training_base.csv",
         ),
     )
 
-    run_stage("[6/10] Fetching and transforming live World Cup matches...", run_live_data_pipeline)
-    run_stage("[7/10] Building ML features...", build_features)
-    run_stage("[8/10] Training XGBoost...", train_xgb)
-    run_stage("[9/10] Training Poisson model...", train_poisson)
-    run_stage("[10/10] Generating World Cup predictions...", batch_predict)
+    run_stage("[6/13] Fetching and transforming live World Cup matches...", run_live_data_pipeline)
+    run_stage("[7/13] Resolving knockout fixtures...", build_knockout_matches)
+    run_stage("[8/13] Fetching and transforming player data...", run_player_data_pipeline)
+    run_stage("[9/13] Building ML features...", build_features)
+    run_stage("[10/13] Training XGBoost...", train_xgb)
+    run_stage("[11/13] Training Poisson model...", train_poisson)
+    run_stage("[12/13] Generating World Cup predictions...", batch_predict)
+    run_stage("[13/13] Evaluating completed predictions...", build_prediction_evaluation)
 
     print("Pipeline completed successfully.")
 

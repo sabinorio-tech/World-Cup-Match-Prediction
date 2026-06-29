@@ -1,8 +1,10 @@
 # Processed Data Report
 
+> **Scope note:** this report profiles the original core Data Engineering outputs. Newer live, knockout, player, feature, prediction, and evaluation datasets are documented in `README.md` and their dedicated pipeline documents.
+
 ## Overview
 
-This report summarizes every CSV currently available in `data/processed`.
+This report summarizes the original core CSV set in `data/processed`.
 
 Reviewed files:
 

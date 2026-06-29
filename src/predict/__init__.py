@@ -28,6 +28,10 @@ _MODEL_CACHE: dict[str, object] = {}
 _MODEL_MTIMES: dict[Path, float] = {}
 _DATA_CACHE: dict[str, pd.DataFrame] = {}
 _DATA_MTIMES: dict[Path, float] = {}
+H2H_FALLBACK = {
+    "h2h_home_win_rate": 0.5,
+    "h2h_avg_goal_diff": 0.0,
+}
 
 
 def _load_pickle(path: Path) -> dict:
@@ -116,6 +120,42 @@ def _get_elo(team: str) -> float:
     return float(row.iloc[-1]["rating"])
 
 
+def _get_h2h(
+    home_team: str,
+    away_team: str,
+    date: pd.Timestamp,
+    n: int = 10,
+    min_matches: int = 3,
+    fallback: dict | None = None,
+) -> dict:
+    matches, _ = _prediction_inputs()
+    mask = (
+        (
+            ((matches["home_team"] == home_team) & (matches["away_team"] == away_team))
+            | ((matches["home_team"] == away_team) & (matches["away_team"] == home_team))
+        )
+        & (matches["date"] < date)
+    )
+    recent = matches[mask].tail(n)
+    if len(recent) < min_matches:
+        return (fallback or H2H_FALLBACK).copy()
+
+    home_wins = 0
+    goal_diffs = []
+    for _, row in recent.iterrows():
+        if row["home_team"] == home_team:
+            home_wins += int(row["result"] == "home_win")
+            goal_diffs.append(row["home_score"] - row["away_score"])
+        else:
+            home_wins += int(row["result"] == "away_win")
+            goal_diffs.append(row["away_score"] - row["home_score"])
+
+    return {
+        "h2h_home_win_rate": home_wins / len(recent),
+        "h2h_avg_goal_diff": float(np.mean(goal_diffs)),
+    }
+
+
 def _poisson_proba(lam_home: float, lam_away: float, max_goals: int = 10) -> np.ndarray:
     p_home = p_draw = p_away = 0.0
     for i in range(max_goals + 1):
@@ -149,6 +189,7 @@ def predict_match(
     home_elo = _get_elo(home)
     away_elo = _get_elo(away)
     elo_diff = home_elo - away_elo
+    h2h = _get_h2h(home, away, date, fallback=xgb.get("h2h_fallback", H2H_FALLBACK))
 
     xgb_row = {
         "home_win_rate": home_form["win_rate"],
@@ -162,6 +203,8 @@ def predict_match(
         "elo_diff": elo_diff,
         "neutral": int(neutral),
         "tournament": xgb["le_tournament"].transform([tournament])[0],
+        "h2h_home_win_rate": h2h["h2h_home_win_rate"],
+        "h2h_avg_goal_diff": h2h["h2h_avg_goal_diff"],
     }
     x_xgb = pd.DataFrame([xgb_row])[xgb["feature_cols"]]
     proba_xgb = xgb["model"].predict_proba(x_xgb)[0]
@@ -174,6 +217,7 @@ def predict_match(
                 "home_win_rate": home_form["win_rate"],
                 "elo_diff": elo_diff,
                 "neutral": int(neutral),
+                "h2h_avg_goal_diff": h2h["h2h_avg_goal_diff"],
             }
         ]
     )[poi["feats_home"]]
@@ -185,6 +229,7 @@ def predict_match(
                 "away_win_rate": away_form["win_rate"],
                 "elo_diff": elo_diff,
                 "neutral": int(neutral),
+                "h2h_avg_goal_diff": h2h["h2h_avg_goal_diff"],
             }
         ]
     )[poi["feats_away"]]

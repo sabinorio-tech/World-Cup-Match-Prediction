@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sys
 
 import pandas as pd
 
-from src.predict import predict_match
-
 BASE_DIR = Path(__file__).resolve().parents[2]
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
+
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
+from src.predict import predict_match
 
 
 def _atomic_to_csv(df: pd.DataFrame, output_path: Path) -> Path:

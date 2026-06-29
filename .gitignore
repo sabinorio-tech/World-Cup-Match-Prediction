@@ -4,7 +4,7 @@
 
 # =========================
 
-**pycache**/
+__pycache__/
 *.py[cod]
 *$py.class
 *.so
@@ -69,6 +69,10 @@ models/saved_models/*
 *.joblib
 *.h5
 *.onnx
+
+# Production artifacts required by the Streamlit dashboard
+!models/xgb_model.pkl
+!models/poisson_model.pkl
 
 # =========================
 

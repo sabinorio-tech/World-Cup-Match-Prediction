@@ -12,7 +12,11 @@ on:
     paths:
       - "main.py"
       - "src/**"
-      - "data/raw/**"
+      - "dashboard/**"
+      - "tests/**"
+      - "data/raw/IF_1872_2026/**"
+      - "data/raw/FIFA_WK_Elo_Ratings/**"
+      - "data/raw/FIFA_WC_1930_2026/**"
       - "requirements.txt"
       - "requirements/**"
       - ".github/workflows/de_pipeline.yml"
@@ -70,10 +74,22 @@ jobs:
           test -s data/processed/model_training_base.csv
           test -s data/raw/live/football_data_wc_matches.json
           test -s data/processed/live_matches.csv
+          test -s data/processed/knockout_matches.csv
+          test -s data/processed/player_profiles.csv
+          test -s data/processed/player_stats.csv
+          test -s data/raw/player_data/statbunker_player_standings.html
+          test -s data/raw/player_data/statbunker_fantasy_players.html
+          test -s data/raw/player_data/statbunker_shots_on_goal.html
           test -s data/processed/features.csv
           test -s models/xgb_model.pkl
           test -s models/poisson_model.pkl
           test -s data/processed/predictions_2026.csv
+          test -s data/processed/prediction_evaluation.csv
+          python -c "import pandas as pd; f=pd.read_csv('data/processed/features.csv'); assert {'h2h_home_win_rate','h2h_avg_goal_diff'}.issubset(f.columns)"
+          python -c "import pickle; x=pickle.load(open('models/xgb_model.pkl','rb')); p=pickle.load(open('models/poisson_model.pkl','rb')); assert x.get('model_version') == 'v2_h2h'; assert p.get('model_version') == 'v2_h2h'"
+
+      - name: Run model and dashboard regression tests
+        run: python -m pytest tests/test_ds_v2.py tests/test_dashboard_results.py -q
 
       - name: Upload generated datasets and models
         uses: actions/upload-artifact@v4
@@ -82,6 +98,7 @@ jobs:
           path: |
             data/processed/
             data/raw/live/football_data_wc_matches.json
+            data/raw/player_data/
             models/xgb_model.pkl
             models/poisson_model.pkl
 
@@ -89,6 +106,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/raw/live/football_data_wc_matches.json data/processed/live_matches.csv data/processed/features.csv data/processed/predictions_2026.csv
+          git add data/raw/live/football_data_wc_matches.json data/processed/*.csv
+          git add -f models/xgb_model.pkl models/poisson_model.pkl
           git commit -m "Update generated World Cup data" || echo "No changes to commit"
           git push origin HEAD:${{ github.ref_name }}

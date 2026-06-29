@@ -40,6 +40,8 @@ OUTPUT_COLUMNS = [
     "away_score_full_time",
     "home_score_half_time",
     "away_score_half_time",
+    "home_score_penalties",
+    "away_score_penalties",
     "score_display",
 ]
 
@@ -65,6 +67,7 @@ def flatten_match(match: dict[str, Any]) -> dict[str, Any]:
     score = _as_dict(match.get("score"))
     full_time = _as_dict(score.get("fullTime"))
     half_time = _as_dict(score.get("halfTime"))
+    penalties = _as_dict(score.get("penalties"))
 
     home_full_time = full_time.get("home")
     away_full_time = full_time.get("away")
@@ -105,6 +108,8 @@ def flatten_match(match: dict[str, Any]) -> dict[str, Any]:
         "away_score_full_time": away_full_time,
         "home_score_half_time": half_time.get("home"),
         "away_score_half_time": half_time.get("away"),
+        "home_score_penalties": penalties.get("home"),
+        "away_score_penalties": penalties.get("away"),
         "score_display": _score_display(home_full_time, away_full_time),
     }
 

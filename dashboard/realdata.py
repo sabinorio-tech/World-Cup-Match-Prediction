@@ -11,6 +11,7 @@ Inputs (data/raw/, produced by the DE/DS notebooks):
     results_historical.csv          full historical results, incl. WC2026 matches already played
     wc_2026_fixtures_enriched.csv   fixtures + venue/city/Elo context, PLUS the 32 official
                                      knockout placeholder rows (R32 -> Final bracket skeleton)
+    knockout_matches.csv            resolved knockout slots where group standings are final
 
 This module does the joining/cleaning once (cached) and exposes plain
 DataFrames/dicts that simulate.py and data.py build on.
@@ -18,17 +19,13 @@ DataFrames/dicts that simulate.py and data.py build on.
 
 from __future__ import annotations
 
-from functools import lru_cache
 from pathlib import Path
 
 import pandas as pd
 
-RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "processed"
+from cache_utils import ttl_cache
 
-# "Today" for this snapshot of the dataset — matches played up to and
-# including this date are treated as final; everything else is "upcoming"
-# and gets the model's predicted probabilities instead of a real score.
-SNAPSHOT_DATE = pd.Timestamp("2026-06-18")
+RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "processed"
 
 _ISO2_OVERRIDES = {
     "South Korea": "KR", "USA": "US", "Ivory Coast": "CI", "Türkiye": "TR",
@@ -64,7 +61,7 @@ def _pair_key(a, b):
     return frozenset([a, b])
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def load_teams() -> pd.DataFrame:
     teams = pd.read_csv(RAW_DIR / "wc_2026_teams_cleaned.csv")
     elo = pd.read_csv(RAW_DIR / "elo_latest.csv")
@@ -82,7 +79,7 @@ def load_teams() -> pd.DataFrame:
     return df
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def load_live_matches() -> pd.DataFrame:
     """football-data.org match status and scores, normalized to project team names."""
     path = RAW_DIR / "live_matches.csv"
@@ -98,7 +95,7 @@ def load_live_matches() -> pd.DataFrame:
     return live
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def load_group_matches() -> pd.DataFrame:
     """All 72 group-stage fixtures: model probabilities + live status/scores."""
     pred = pd.read_csv(RAW_DIR / "predictions_2026.csv", parse_dates=["date"])
@@ -183,14 +180,27 @@ def load_group_matches() -> pd.DataFrame:
     return merged.sort_values(["group", "date"]).reset_index(drop=True)
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def load_knockout_skeleton() -> pd.DataFrame:
     """The 32 official placeholder rows: R32 -> R16 -> QF -> SF -> 3rd place -> Final."""
     fixtures = pd.read_csv(RAW_DIR / "wc_2026_fixtures_enriched.csv")
     return fixtures[fixtures["is_placeholder_match"] == True].reset_index(drop=True)  # noqa: E712
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
+def load_knockout_matches() -> pd.DataFrame:
+    """Resolved knockout fixtures produced by the pipeline, when available."""
+    path = RAW_DIR / "knockout_matches.csv"
+    if not path.exists():
+        return pd.DataFrame()
+    knockout = pd.read_csv(path)
+    for column in ["home_team", "away_team"]:
+        if column in knockout.columns:
+            knockout[column] = knockout[column].replace(_LIVE_TEAM_NAME_MAP)
+    return knockout
+
+
+@ttl_cache()
 def load_recent_form() -> dict:
     """Last 5 *actual* matches played by each team before the tournament started,
     from real historical results (not synthetic)."""
@@ -217,7 +227,7 @@ def load_recent_form() -> dict:
     return form
 
 
-@lru_cache(maxsize=1)
+@ttl_cache()
 def load_campaign_stats() -> dict:
     """Actual results *within* this World Cup so far, per team."""
     matches = load_group_matches()

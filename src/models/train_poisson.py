@@ -25,6 +25,7 @@ FEATS_HOME = [
     "home_win_rate",
     "elo_diff",
     "neutral",
+    "h2h_avg_goal_diff",
 ]
 FEATS_AWAY = [
     "away_avg_goals_scored",
@@ -32,6 +33,7 @@ FEATS_AWAY = [
     "away_win_rate",
     "elo_diff",
     "neutral",
+    "h2h_avg_goal_diff",
 ]
 
 
@@ -125,6 +127,7 @@ def train_poisson_model(data: pd.DataFrame) -> dict:
     return {
         "model_home": model_home,
         "model_away": model_away,
+        "model_version": "v2_h2h",
         "scaler_home": scaler_home,
         "scaler_away": scaler_away,
         "feats_home": FEATS_HOME,

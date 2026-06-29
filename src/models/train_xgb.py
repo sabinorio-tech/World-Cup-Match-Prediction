@@ -24,10 +24,16 @@ FEATURE_COLS = [
     "elo_diff",
     "neutral",
     "tournament",
+    "h2h_home_win_rate",
+    "h2h_avg_goal_diff",
 ]
 TARGET_COL = "result"
 RESULT_MAP = {"home_win": 0, "draw": 1, "away_win": 2}
 RESULT_MAP_INV = {0: "home_win", 1: "draw", 2: "away_win"}
+H2H_FALLBACK = {
+    "h2h_home_win_rate": 0.5,
+    "h2h_avg_goal_diff": 0.0,
+}
 WC_2022_START = pd.Timestamp("2022-11-20")
 WC_2026_START = pd.Timestamp("2026-06-11")
 
@@ -109,10 +115,12 @@ def train_xgb_model(features: pd.DataFrame) -> dict:
 
     return {
         "model": model,
+        "model_version": "v2_h2h",
         "le_tournament": le_tournament,
         "feature_cols": FEATURE_COLS,
         "result_map": RESULT_MAP,
         "result_map_inv": RESULT_MAP_INV,
+        "h2h_fallback": H2H_FALLBACK,
         "metrics": metrics,
     }
 

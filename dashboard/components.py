@@ -4,8 +4,13 @@ Keeps app.py focused on page composition rather than markup.
 """
 
 from html import escape
+from urllib.parse import quote
 
+import pandas as pd
 import streamlit as st
+
+from src.utils.match_results import get_match_source_of_truth
+from time_utils import belgian_kickoff
 
 _FLAG_IMAGE_CODES = {
     "England": "gb-eng",
@@ -24,7 +29,7 @@ def _flag_image_url(team, size: str = "w40") -> str | None:
 
 
 def _flag_image_html(team, class_name: str = "wc-team-flag-img") -> str:
-    size = "w320" if class_name in {"wc-detail-team-flag", "wc-elo-flag", "wc-ta-hero-flag", "wc-ta-crest"} else "w40"
+    size = "w320" if class_name in {"wc-detail-team-flag", "wc-elo-flag", "wc-ta-hero-flag", "wc-ta-crest", "wc-feature-flag"} else "w40"
     url = _flag_image_url(team, size)
     if not url:
         return f'<span class="wc-team-flag">{team.flag}</span>'
@@ -42,11 +47,24 @@ def _flag_image_html(team, class_name: str = "wc-team-flag-img") -> str:
 
 CSS = """
 <style>
+:root {
+    --wc-midnight: #030812;
+    --wc-ink: #06101b;
+    --wc-pitch: #0a2f28;
+    --wc-pitch-soft: rgba(17, 91, 62, .30);
+    --wc-gold: #d7a83f;
+    --wc-gold-soft: rgba(215, 168, 63, .24);
+    --wc-red: #b92d35;
+    --wc-red-soft: rgba(185, 45, 53, .20);
+    --wc-blue: #174c78;
+    --wc-line: rgba(231, 195, 96, .18);
+}
 html, body, [data-testid="stAppViewContainer"] {
     background:
-        radial-gradient(circle at 20% 0%, rgba(29, 83, 132, 0.30), transparent 34%),
-        radial-gradient(circle at 92% 6%, rgba(97, 74, 20, 0.22), transparent 30%),
-        linear-gradient(135deg, #050b14 0%, #071624 46%, #04101b 100%);
+        linear-gradient(115deg, rgba(185, 45, 53, .10) 0%, transparent 22%),
+        linear-gradient(245deg, rgba(215, 168, 63, .16) 0%, transparent 24%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 72px),
+        linear-gradient(135deg, var(--wc-midnight) 0%, var(--wc-ink) 34%, #071f1d 68%, #03070f 100%);
     color: #f5f7fb;
 }
 
@@ -62,9 +80,10 @@ html, body, [data-testid="stAppViewContainer"] {
 
 [data-testid="stSidebar"] {
     background:
-        linear-gradient(180deg, rgba(8, 24, 42, 0.98), rgba(2, 11, 22, 0.98)),
-        radial-gradient(circle at top left, rgba(32, 92, 156, 0.25), transparent 38%);
-    border-right: 1px solid rgba(129, 173, 223, 0.12);
+        linear-gradient(180deg, rgba(7, 28, 24, 0.98), rgba(3, 9, 18, 0.99)),
+        linear-gradient(145deg, rgba(215, 168, 63, .16), transparent 42%),
+        linear-gradient(35deg, rgba(185, 45, 53, .13), transparent 44%);
+    border-right: 1px solid var(--wc-line);
 }
 
 [data-testid="stSidebar"] * {
@@ -89,12 +108,31 @@ h1, h2, h3 {
     color: #ffffff;
 }
 
+.wc-page-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+.wc-page-emblem {
+    width: 138px;
+    height: 138px;
+    object-fit: contain;
+    flex: 0 0 auto;
+    position: relative;
+    top: -18px;
+    filter: drop-shadow(0 8px 18px rgba(215, 168, 63, .24));
+}
+.wc-page-header-text {
+    min-width: 0;
+}
+
 .wc-top-spacer {
     height: 44px;
 }
 
 .wc-page-subtitle {
-    color: #9bb8d7;
+    color: #d9bd6a;
     font-size: 0.92rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -102,8 +140,10 @@ h1, h2, h3 {
 }
 
 .wc-panel {
-    background: linear-gradient(145deg, rgba(9, 28, 46, 0.94), rgba(5, 17, 30, 0.96));
-    border: 1px solid rgba(130, 173, 222, 0.16);
+    background:
+        linear-gradient(145deg, rgba(10, 35, 35, 0.94), rgba(5, 15, 27, 0.96)),
+        linear-gradient(35deg, rgba(215, 168, 63, .08), transparent 40%);
+    border: 1px solid rgba(215, 168, 63, 0.18);
     border-radius: 8px;
     padding: 16px;
     box-shadow: 0 18px 50px rgba(0,0,0,0.22);
@@ -119,8 +159,10 @@ h1, h2, h3 {
 }
 
 .wc-card {
-    background: linear-gradient(135deg, rgba(9, 36, 66, 0.96) 0%, rgba(5, 20, 38, 0.98) 100%);
-    border: 1px solid rgba(118, 165, 224, 0.22);
+    background:
+        linear-gradient(135deg, rgba(12, 48, 58, 0.96) 0%, rgba(5, 19, 32, 0.98) 100%),
+        linear-gradient(90deg, rgba(215, 168, 63, .10), transparent);
+    border: 1px solid rgba(215, 168, 63, 0.22);
     border-radius: 8px;
     padding: 18px 20px;
     color: #f4f7f5;
@@ -128,17 +170,18 @@ h1, h2, h3 {
     margin-bottom: 10px;
     min-height: 116px;
 }
-.wc-card-green { background: linear-gradient(135deg, rgba(13, 56, 35, 0.96), rgba(7, 41, 26, 0.96)); border-color: rgba(93, 181, 102, 0.28); }
-.wc-card-purple { background: linear-gradient(135deg, rgba(33, 22, 66, 0.96), rgba(17, 13, 44, 0.96)); border-color: rgba(135, 90, 218, 0.32); }
-.wc-card-gold { background: linear-gradient(135deg, rgba(78, 55, 10, 0.96), rgba(44, 31, 5, 0.96)); border-color: rgba(214, 166, 54, 0.32); }
+.wc-card-green { background: linear-gradient(135deg, rgba(12, 70, 44, 0.96), rgba(6, 38, 29, 0.96)); border-color: rgba(111, 198, 112, 0.30); }
+.wc-card-purple { background: linear-gradient(135deg, rgba(46, 31, 70, 0.96), rgba(17, 13, 44, 0.96)); border-color: rgba(215, 168, 63, 0.30); }
+.wc-card-gold { background: linear-gradient(135deg, rgba(91, 64, 13, 0.96), rgba(45, 30, 7, 0.96)); border-color: rgba(226, 184, 70, 0.42); }
 .wc-kpi-label { font-size: 0.78rem; opacity: 0.86; text-transform: uppercase; letter-spacing: 0.04em; }
 .wc-kpi-value { font-size: 1.75rem; font-weight: 800; margin-top: 8px; color: #ffffff; }
 .wc-kpi-sub { font-size: 0.82rem; opacity: 0.85; margin-top: 5px; max-width: 14rem; }
 .wc-kpi-icon { float: right; font-size: 2.5rem; opacity: 0.35; margin-top: -4px; }
 
 .wc-match-card {
-    background: rgba(11, 30, 48, 0.72);
-    border: 1px solid rgba(139, 177, 219, 0.14);
+    background:
+        linear-gradient(145deg, rgba(9, 39, 41, 0.76), rgba(7, 20, 33, 0.82));
+    border: 1px solid rgba(215, 168, 63, 0.14);
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 10px;
@@ -156,6 +199,453 @@ h1, h2, h3 {
 .wc-pill-low { background: #b8333322; color: #ef7b7b; }
 .wc-upset { color: #f0b94d; font-size: 0.8rem; }
 .wc-match-meta { margin-top: 8px; font-size: 0.78rem; opacity: 0.78; }
+
+.wc-overview-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(340px, .82fr);
+    gap: 18px;
+    margin-bottom: 14px;
+}
+.wc-overview-hero-left,
+.wc-overview-next {
+    border: 1px solid rgba(215, 168, 63, .20);
+    border-radius: 8px;
+    background:
+        linear-gradient(112deg, rgba(4, 12, 23, .96), rgba(8, 31, 32, .74) 54%, rgba(4, 10, 18, .94)),
+        linear-gradient(32deg, rgba(185,45,53,.14), transparent 40%);
+    min-height: 276px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 22px 58px rgba(0,0,0,.30);
+}
+.wc-overview-hero-left {
+    padding: 28px 34px;
+}
+.wc-overview-hero-left::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 72% 44%, rgba(215,168,63,.30), transparent 18%),
+        radial-gradient(circle at 72% 52%, rgba(17,91,62,.30), transparent 34%),
+        repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 1px, transparent 1px 18px);
+    opacity: .65;
+}
+.wc-overview-hero-title {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
+    line-height: .95;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    max-width: 520px;
+}
+.wc-overview-hero-subtitle {
+    position: relative;
+    z-index: 1;
+    color: #78df49;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-top: 12px;
+}
+.wc-overview-copy {
+    position: relative;
+    z-index: 1;
+    color: rgba(240,246,255,.86);
+    max-width: 340px;
+    line-height: 1.45;
+    margin-top: 16px;
+}
+.wc-overview-trophy {
+    position: absolute;
+    right: 7%;
+    bottom: -32px;
+    width: min(32vw, 300px);
+    max-height: 330px;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 34px rgba(215,168,63,.28));
+    z-index: 0;
+}
+.wc-live-chip {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 8px 16px;
+    border: 1px solid rgba(100,215,80,.38);
+    border-radius: 999px;
+    color: #f3fff1;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: .82rem;
+    background: rgba(11, 35, 30, .68);
+}
+.wc-data-freshness {
+    color: rgba(222, 233, 245, .62);
+    font-size: .68rem;
+    margin-top: 9px;
+}
+.wc-live-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #e73232;
+    box-shadow: 0 0 14px rgba(231,50,50,.8);
+}
+.wc-progress-box {
+    position: relative;
+    z-index: 1;
+    width: min(440px, 100%);
+    margin-top: 16px;
+    padding: 13px 16px;
+    border-radius: 8px;
+    background: rgba(3, 11, 20, .70);
+    border: 1px solid rgba(215,168,63,.18);
+}
+.wc-progress-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #70df49;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.wc-progress-value {
+    color: #70df49;
+    font-size: 1.65rem;
+    line-height: 1;
+}
+.wc-progress-track {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+}
+.wc-progress-seg {
+    height: 12px;
+    transform: skewX(-18deg);
+    background: rgba(114,135,155,.22);
+}
+.wc-progress-seg-on {
+    background: linear-gradient(90deg, #62cb39, #a2e45d);
+}
+.wc-progress-meta {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(244,249,255,.86);
+    font-size: .78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.wc-overview-next {
+    padding: 22px;
+}
+.wc-next-head {
+    display: flex;
+    justify-content: space-between;
+    color: #7ee54f;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: .8rem;
+    letter-spacing: .05em;
+}
+.wc-next-feature {
+    display: grid;
+    grid-template-columns: 1fr minmax(110px, .7fr) 1fr;
+    align-items: center;
+    gap: 16px;
+    margin-top: 26px;
+    text-align: center;
+}
+.wc-feature-flag {
+    width: 126px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 9px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.34), 0 0 0 1px rgba(255,255,255,.14);
+}
+.wc-feature-team {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: 12px;
+}
+.wc-feature-time {
+    color: #ffffff;
+}
+.wc-feature-date {
+    font-size: .76rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(243,247,255,.84);
+}
+.wc-feature-hour {
+    font-size: 2.65rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: 8px;
+}
+.wc-feature-utc {
+    font-size: .75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(243,247,255,.82);
+    margin-top: 4px;
+}
+.wc-feature-probs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.10);
+}
+.wc-feature-prob {
+    text-align: center;
+    color: rgba(235,244,255,.76);
+    font-size: .72rem;
+    text-transform: uppercase;
+}
+.wc-feature-prob strong {
+    display: block;
+    color: #ffffff;
+    font-size: 1.55rem;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+.wc-feature-prob-home strong { color: #70df49; }
+.wc-feature-prob-away strong { color: #70a9ff; }
+.wc-overview-kpis {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+}
+.wc-overview-kpi {
+    min-height: 96px;
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 13px;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid rgba(215,168,63,.16);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(10,34,37,.86), rgba(7,19,31,.92));
+}
+.wc-overview-kpi-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    font-weight: 900;
+    border: 1px solid currentColor;
+    background: rgba(255,255,255,.06);
+}
+.wc-overview-kpi-value {
+    color: #ffffff;
+    font-size: 1.55rem;
+    font-weight: 900;
+    line-height: 1;
+}
+.wc-overview-kpi-label {
+    color: rgba(239,246,255,.86);
+    font-size: .72rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-top: 5px;
+}
+.wc-overview-kpi-sub {
+    color: rgba(221,232,245,.64);
+    font-size: .70rem;
+    margin-top: 2px;
+}
+.wc-overview-grid {
+    display: grid;
+    grid-template-columns: .95fr 1.4fr 1.2fr;
+    gap: 14px;
+    align-items: stretch;
+}
+.wc-overview-grid-bottom {
+    display: grid;
+    grid-template-columns: 1.1fr .95fr 1.05fr;
+    gap: 14px;
+    margin-top: 14px;
+}
+.wc-overview-panel {
+    border: 1px solid rgba(215,168,63,.16);
+    border-radius: 8px;
+    background: linear-gradient(145deg, rgba(8,31,34,.88), rgba(5,17,30,.94));
+    padding: 16px;
+    min-height: 100%;
+}
+.wc-overview-panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #75df48;
+    font-size: .82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.wc-view-all {
+    color: #7fe34f;
+    font-size: .68rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+.wc-view-all:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+.wc-overview-team-row {
+    display: grid;
+    grid-template-columns: 24px minmax(110px, 1fr) minmax(80px, 120px) 46px;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    color: #ffffff;
+    font-size: .84rem;
+    font-weight: 800;
+}
+.wc-overview-bar {
+    height: 7px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.10);
+    overflow: hidden;
+}
+.wc-overview-bar span {
+    display: block;
+    width: var(--w);
+    height: 100%;
+    background: linear-gradient(90deg, #65c73b, #a4dc55);
+}
+.wc-overview-match-row,
+.wc-overview-result-row {
+    display: grid;
+    grid-template-columns: 74px minmax(0, 1fr) minmax(154px, .9fr);
+    gap: 10px;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    color: #ffffff;
+}
+.wc-overview-result-row {
+    grid-template-columns: 72px minmax(0, 1fr) 72px minmax(0, 1fr);
+}
+.wc-overview-match-date {
+    color: rgba(233,242,255,.72);
+    font-size: .72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.wc-overview-match-teams,
+.wc-overview-result-team {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-weight: 900;
+}
+.wc-overview-match-teams span,
+.wc-overview-result-team span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wc-overview-prob-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+.wc-overview-prob-chip {
+    padding: 7px 5px;
+    text-align: center;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: .70rem;
+    font-weight: 900;
+    background: rgba(255,255,255,.08);
+}
+.wc-overview-prob-chip-home { background: rgba(54, 143, 64, .70); }
+.wc-overview-prob-chip-draw { background: rgba(92, 104, 116, .72); }
+.wc-overview-prob-chip-away { background: rgba(36, 82, 145, .72); }
+.wc-overview-score {
+    text-align: center;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 900;
+    padding: 7px 10px;
+    border-radius: 5px;
+    background: rgba(255,255,255,.08);
+}
+.wc-overview-donut-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(70px, 1fr));
+    gap: 14px 10px;
+}
+.wc-overview-risk {
+    min-height: 178px;
+    background:
+        linear-gradient(115deg, rgba(81, 54, 5, .92), rgba(8, 17, 25, .88)),
+        radial-gradient(circle at 82% 52%, rgba(215,168,63,.35), transparent 28%);
+    border-color: rgba(215,168,63,.40);
+}
+.wc-risk-layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 18px;
+    color: #ffffff;
+}
+.wc-risk-big {
+    color: #efc24b;
+    font-size: 2rem;
+    font-weight: 900;
+}
+.wc-scorer-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 78px;
+    gap: 14px;
+    align-items: center;
+    min-height: 116px;
+}
+.wc-scorer-name {
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 1.05rem;
+}
+.wc-scorer-meta {
+    color: rgba(231,240,252,.72);
+    font-size: .78rem;
+    margin-top: 5px;
+}
+.wc-scorer-goals {
+    color: #75df48;
+    font-size: 2.7rem;
+    font-weight: 900;
+    text-align: center;
+}
+@media (max-width: 1100px) {
+    .wc-overview-hero,
+    .wc-overview-grid,
+    .wc-overview-grid-bottom {
+        grid-template-columns: 1fr;
+    }
+    .wc-overview-kpis {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
 
 .wc-team-rank {
     display: grid;
@@ -220,9 +710,9 @@ h1, h2, h3 {
     align-items: center;
     padding: 8px 10px;
     margin-bottom: 7px;
-    border: 1px solid rgba(130, 173, 222, 0.13);
+    border: 1px solid rgba(215, 168, 63, 0.13);
     border-radius: 8px;
-    background: rgba(10, 27, 43, 0.76);
+    background: linear-gradient(135deg, rgba(10, 36, 36, 0.78), rgba(8, 23, 37, 0.78));
     font-size: 0.84rem;
 }
 .wc-compact-date {
@@ -303,9 +793,10 @@ h1, h2, h3 {
 
 .wc-group-shell {
     background:
-        radial-gradient(circle at 16% 0%, rgba(34, 90, 151, 0.22), transparent 34%),
-        linear-gradient(145deg, rgba(5, 18, 31, 0.98), rgba(2, 11, 20, 0.98));
-    border: 1px solid rgba(130, 173, 222, 0.22);
+        linear-gradient(120deg, rgba(185, 45, 53, .10), transparent 34%),
+        linear-gradient(245deg, rgba(215, 168, 63, .14), transparent 30%),
+        linear-gradient(145deg, rgba(6, 29, 30, 0.98), rgba(2, 11, 20, 0.98));
+    border: 1px solid rgba(215, 168, 63, 0.24);
     border-radius: 8px;
     padding: 18px;
     box-shadow: 0 22px 58px rgba(0,0,0,0.32);
@@ -492,14 +983,11 @@ h1, h2, h3 {
 }
 
 .wc-bracket-shell {
-    background:
-        radial-gradient(circle at 18% 0%, rgba(34, 90, 151, 0.22), transparent 34%),
-        radial-gradient(circle at 82% 18%, rgba(115, 84, 16, 0.18), transparent 28%),
-        linear-gradient(145deg, rgba(5, 18, 31, 0.98), rgba(2, 11, 20, 0.98));
-    border: 1px solid rgba(130, 173, 222, 0.22);
-    border-radius: 8px;
-    padding: 18px;
-    box-shadow: 0 22px 58px rgba(0,0,0,0.32);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
 }
 .wc-bracket-tabs {
     display: grid;
@@ -520,8 +1008,8 @@ h1, h2, h3 {
 }
 .wc-bracket-tab-active {
     color: #ffffff;
-    background: linear-gradient(135deg, rgba(58, 102, 161, .92), rgba(28, 55, 94, .92));
-    border-color: rgba(119, 168, 226, .28);
+    background: linear-gradient(135deg, rgba(134, 92, 20, .92), rgba(40, 91, 61, .92));
+    border-color: rgba(226, 184, 70, .35);
 }
 .wc-bracket-grid {
     display: grid;
@@ -547,8 +1035,8 @@ h1, h2, h3 {
     position: relative;
     border-radius: 7px;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(17, 38, 58, .92), rgba(10, 24, 39, .96));
-    border: 1px solid rgba(130, 173, 222, 0.15);
+    background: linear-gradient(135deg, rgba(13, 42, 39, .92), rgba(10, 24, 39, .96));
+    border: 1px solid rgba(215, 168, 63, 0.15);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
 }
 .wc-bracket-team {
@@ -583,6 +1071,121 @@ h1, h2, h3 {
 .wc-bracket-single {
     grid-template-columns: 28px minmax(90px, 1fr) 48px;
     min-height: 36px;
+}
+.wc-bracket-source {
+    padding: 4px 8px;
+    color: rgba(222, 233, 245, .68);
+    font-size: .58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wc-bracket-source-actual {
+    color: #9be36c;
+    background: rgba(63, 139, 65, .12);
+}
+.wc-bracket-scroll {
+    width: 100%;
+    overflow-x: auto;
+    padding: 6px 2px 14px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(215,168,63,.52) rgba(255,255,255,.05);
+}
+.wc-bracket-mirror {
+    min-width: 2200px;
+    min-height: 1280px;
+    display: grid;
+    grid-template-columns: 245px 225px 216px 208px 260px 208px 216px 225px 245px;
+    gap: 22px;
+    align-items: stretch;
+}
+.wc-bracket-mirror .wc-bracket-team {
+    grid-template-columns: 32px 30px minmax(76px, 1fr) 46px;
+    gap: 7px;
+    min-height: 38px;
+    padding: 7px 9px;
+    font-size: .84rem;
+}
+.wc-bracket-mirror .wc-bracket-single {
+    grid-template-columns: 30px minmax(82px, 1fr) 48px;
+}
+.wc-bracket-mirror .wc-group-flag-img {
+    width: 30px;
+    height: 20px;
+}
+.wc-bracket-mirror .wc-bracket-source {
+    font-size: .64rem;
+    padding: 6px 9px;
+}
+.wc-mirror-stage {
+    min-height: 1280px;
+    display: flex;
+    flex-direction: column;
+}
+.wc-mirror-stage-title {
+    min-height: 32px;
+    display: grid;
+    place-items: center;
+    color: rgba(235,243,252,.72);
+    font-size: .78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.wc-mirror-stage-cards {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 8px;
+}
+.wc-mirror-match {
+    position: relative;
+}
+.wc-mirror-match-number {
+    color: rgba(222,233,245,.52);
+    font-size: .66rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0 0 3px 4px;
+}
+.wc-mirror-left .wc-mirror-match::after,
+.wc-mirror-right .wc-mirror-match::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 22px;
+    height: 1px;
+    background: rgba(196, 210, 224, .32);
+}
+.wc-mirror-left .wc-mirror-match::after { right: -22px; }
+.wc-mirror-right .wc-mirror-match::before { left: -22px; }
+.wc-mirror-center {
+    min-height: 1280px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 16px;
+}
+.wc-bracket-trophy-image {
+    width: 132px;
+    height: 190px;
+    object-fit: contain;
+    margin: 6px auto;
+    filter: drop-shadow(0 18px 26px rgba(215,168,63,.28));
+}
+.wc-mirror-center .wc-bracket-winner {
+    margin-top: 2px;
+}
+.wc-third-place-title {
+    color: rgba(235,243,252,.64);
+    font-size: .62rem;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 8px;
 }
 .wc-bracket-winner {
     background: linear-gradient(145deg, rgba(60, 44, 8, .96), rgba(22, 22, 12, .96));
@@ -904,9 +1507,40 @@ h1, h2, h3 {
     gap: 16px;
     align-items: start;
 }
+.wc-ta-shell-no-side {
+    grid-template-columns: minmax(0, 1.42fr) minmax(330px, .92fr);
+}
+.wc-native-team-title {
+    color: rgba(234, 244, 252, .82);
+    font-size: .76rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 2px 0 9px;
+}
+.wc-native-team-flag {
+    display: block;
+    width: 28px;
+    height: 18px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.16);
+    margin: 0 auto;
+}
+.st-key-team_selector div[data-testid="stButton"] button {
+    min-height: 36px;
+    padding: 5px 8px;
+    border-radius: 6px;
+}
+.st-key-team_selector div[data-testid="stButton"] button p {
+    text-align: left;
+    font-size: .76rem;
+    white-space: normal;
+}
 .wc-ta-panel {
-    background: linear-gradient(145deg, rgba(9, 28, 46, .94), rgba(5, 17, 30, .96));
-    border: 1px solid rgba(130, 173, 222, .16);
+    background:
+        linear-gradient(145deg, rgba(9, 35, 35, .94), rgba(5, 17, 30, .96)),
+        linear-gradient(35deg, rgba(215, 168, 63, .07), transparent 42%);
+    border: 1px solid rgba(215, 168, 63, .18);
     border-radius: 8px;
     padding: 16px;
     box-shadow: 0 18px 50px rgba(0,0,0,.22);
@@ -939,6 +1573,24 @@ h1, h2, h3 {
     display: grid;
     gap: 3px;
     margin-top: 10px;
+    max-height: calc(100vh - 230px);
+    min-height: 360px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(117, 223, 72, .52) rgba(255,255,255,.05);
+}
+.wc-ta-list::-webkit-scrollbar {
+    width: 7px;
+}
+.wc-ta-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,.04);
+    border-radius: 8px;
+}
+.wc-ta-list::-webkit-scrollbar-thumb {
+    background: rgba(117, 223, 72, .48);
+    border-radius: 8px;
 }
 .wc-ta-list-row {
     display: flex;
@@ -951,10 +1603,17 @@ h1, h2, h3 {
     color: #eaf2fb;
     font-size: .84rem;
     font-weight: 700;
+    text-decoration: none;
+    transition: background .16s ease, color .16s ease;
+}
+.wc-ta-list-row:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background: rgba(255,255,255,.08);
 }
 .wc-ta-list-row-active {
-    background: rgba(84, 177, 80, .18);
-    box-shadow: inset 3px 0 0 #6fd34e;
+    background: color-mix(in srgb, var(--team-primary, #54b150) 25%, transparent);
+    box-shadow: inset 3px 0 0 var(--team-accent, #6fd34e);
 }
 .wc-ta-list-team {
     display: flex;
@@ -971,7 +1630,7 @@ h1, h2, h3 {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #6fd34e;
+    background: var(--team-accent, #6fd34e);
     flex: 0 0 auto;
 }
 .wc-ta-main,
@@ -987,7 +1646,7 @@ h1, h2, h3 {
     padding: 34px 34px;
     border: 1px solid rgba(130, 173, 222, .18);
     background:
-        linear-gradient(110deg, rgba(105, 17, 24, .88), rgba(8, 23, 41, .72) 58%, rgba(5, 14, 26, .92)),
+        linear-gradient(110deg, var(--team-primary, rgba(105, 17, 24, .88)), rgba(8, 23, 41, .72) 58%, var(--team-secondary, rgba(5, 14, 26, .92))),
         radial-gradient(circle at 68% 18%, rgba(255,255,255,.22), transparent 12%),
         linear-gradient(0deg, rgba(255,255,255,.08) 0 1px, transparent 1px 100%),
         linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 100%);
@@ -999,7 +1658,7 @@ h1, h2, h3 {
     position: absolute;
     inset: auto -8% 0 -8%;
     height: 80px;
-    background: radial-gradient(ellipse at center, rgba(87, 139, 67, .34), rgba(16, 49, 31, .18) 45%, transparent 72%);
+    background: radial-gradient(ellipse at center, var(--team-glow, rgba(87, 139, 67, .34)), rgba(16, 49, 31, .18) 45%, transparent 72%);
 }
 .wc-ta-hero::after {
     content: "";
@@ -1019,9 +1678,10 @@ h1, h2, h3 {
 .wc-ta-hero-flag {
     width: 112px;
     height: 112px;
-    object-fit: cover;
-    border-radius: 24px;
-    box-shadow: 0 18px 38px rgba(0,0,0,.34), 0 0 0 1px rgba(255,255,255,.20);
+    object-fit: contain;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 .wc-ta-country {
     color: #ffffff;
@@ -1048,7 +1708,7 @@ h1, h2, h3 {
     font-size: .78rem;
 }
 .wc-ta-meta-value {
-    color: #67e05b;
+    color: var(--team-accent, #67e05b);
     font-size: 1.35rem;
     font-weight: 900;
     margin-top: 8px;
@@ -1058,7 +1718,7 @@ h1, h2, h3 {
 }
 .wc-ta-performer-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
     gap: 10px;
 }
 .wc-ta-performer {
@@ -1070,65 +1730,64 @@ h1, h2, h3 {
     position: relative;
     overflow: hidden;
 }
-.wc-ta-performer::after {
-    content: "";
-    position: absolute;
-    right: -26px;
-    bottom: -30px;
-    width: 82px;
-    height: 82px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.04);
-}
 .wc-ta-performer-top {
-    display: flex;
+    display: block;
+    min-height: 32px;
+}
+.wc-ta-performer-top .wc-ta-performer-label {
+    color: rgba(239, 246, 255, .88);
+    line-height: 1.3;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+.wc-ta-position-pill {
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-}
-.wc-ta-performer-icon {
-    width: 24px;
-    height: 24px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: #357a45;
-    color: #ffffff;
-    font-size: .72rem;
-    font-weight: 900;
-}
-.wc-ta-avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    margin-top: 18px;
-    display: grid;
-    place-items: center;
-    background: linear-gradient(145deg, rgba(92, 151, 210, .38), rgba(16, 42, 66, .86));
-    color: #ffffff;
-    font-size: 1.05rem;
-    font-weight: 900;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.14);
+    min-height: 20px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.13);
+    color: rgba(235,244,255,.82);
+    font-size: .68rem;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 .wc-ta-performer-name {
     color: #ffffff;
-    font-size: .86rem;
-    font-weight: 800;
-    margin-top: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 1.02rem;
+    font-weight: 900;
+    line-height: 1.3;
+    min-height: 2.6em;
+    margin: 12px 0 8px;
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: anywhere;
 }
 .wc-ta-performer-value {
-    color: #71df55;
+    color: var(--team-accent, #71df55);
     font-size: 1.55rem;
     line-height: 1;
     font-weight: 900;
-    margin-top: 4px;
+}
+.wc-ta-performer-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 7px;
+}
+.wc-ta-performer-number {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    min-width: 0;
 }
 .wc-ta-performer-unit {
     color: rgba(235, 244, 255, .78);
     font-size: .75rem;
-    margin-top: 3px;
+    white-space: nowrap;
 }
 .wc-ta-outlook-row {
     margin: 0 0 18px;
@@ -1192,14 +1851,15 @@ h1, h2, h3 {
     grid-template-columns: 1fr 96px;
     align-items: center;
     gap: 14px;
-    background: linear-gradient(120deg, rgba(11, 31, 53, .94), rgba(82, 15, 32, .82));
+    background: linear-gradient(120deg, rgba(11, 31, 53, .94), var(--team-primary, rgba(82, 15, 32, .82)));
 }
 .wc-ta-crest {
     width: 86px;
     height: 58px;
-    object-fit: cover;
-    border-radius: 6px;
-    box-shadow: 0 12px 28px rgba(0,0,0,.30), 0 0 0 1px rgba(255,255,255,.18);
+    object-fit: contain;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 .wc-ta-record-grid {
     display: grid;
@@ -1207,7 +1867,7 @@ h1, h2, h3 {
     gap: 18px;
 }
 .wc-ta-record-value {
-    color: #baf3a5;
+    color: var(--team-accent, #baf3a5);
     font-size: 1.35rem;
     font-weight: 900;
     margin-bottom: 6px;
@@ -1252,10 +1912,11 @@ h1, h2, h3 {
     text-overflow: ellipsis;
 }
 .wc-ta-score {
-    border-radius: 5px;
-    background: rgba(255,255,255,.12);
-    padding: 6px 8px;
     text-align: center;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 900;
+    white-space: nowrap;
 }
 .wc-team-impact-row {
     display: grid;
@@ -1361,12 +2022,38 @@ h1, h2, h3 {
     }
 }
 
+.wc-schedule-heading {
+    color: #ffffff;
+    font-size: .82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 2px 0 9px;
+}
+.wc-schedule-date {
+    color: #75df48;
+    font-size: .75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 7px 2px 3px;
+}
+div[data-testid="stVerticalBlockBorderWrapper"] button {
+    min-height: 48px;
+    border-radius: 6px;
+}
+div[data-testid="stVerticalBlockBorderWrapper"] button p {
+    width: 100%;
+    text-align: left;
+    font-size: .72rem;
+    line-height: 1.25;
+    white-space: normal;
+}
+
 .wc-detail-shell {
     background:
-        radial-gradient(circle at 22% 14%, rgba(34, 90, 151, 0.22), transparent 35%),
-        radial-gradient(circle at 78% 18%, rgba(44, 106, 89, 0.18), transparent 30%),
+        linear-gradient(120deg, rgba(185, 45, 53, .12), transparent 35%),
+        linear-gradient(245deg, rgba(18, 92, 62, .22), transparent 32%),
         linear-gradient(145deg, rgba(5, 18, 31, 0.98), rgba(2, 11, 20, 0.98));
-    border: 1px solid rgba(130, 173, 222, 0.22);
+    border: 1px solid rgba(215, 168, 63, 0.24);
     border-radius: 8px;
     padding: 18px;
     box-shadow: 0 22px 58px rgba(0,0,0,0.32);
@@ -1480,6 +2167,40 @@ h1, h2, h3 {
     width: var(--w);
     background: linear-gradient(90deg, #6fa8dc, #9fd4ff);
 }
+.wc-detail-score-feature {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 15px 22px;
+    text-align: center;
+    border: 1px solid rgba(117, 223, 72, .28);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(23, 76, 120, .25), rgba(13, 49, 38, .68));
+}
+.wc-score-model-note {
+    color: rgba(203, 216, 229, .68);
+    font-size: .7rem;
+    margin-top: 8px;
+}
+.wc-score-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.wc-score-comparison > div {
+    padding: 2px 18px;
+}
+.wc-score-comparison > div + div {
+    border-left: 1px solid rgba(255,255,255,.13);
+}
+.wc-score-comparison-label {
+    color: rgba(226, 236, 246, .74);
+    font-size: .68rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.wc-score-big-predicted {
+    color: #75df48;
+}
 .wc-factor-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1532,6 +2253,12 @@ h1, h2, h3 {
     grid-template-columns: .8fr 1.05fr 1.35fr;
     gap: 12px;
     margin-top: 14px;
+}
+.wc-detail-bottom-two {
+    grid-template-columns: .85fr 1.15fr;
+}
+.wc-detail-bottom-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .wc-detail-mini {
     background: rgba(13, 31, 49, .72);
@@ -1590,6 +2317,29 @@ h1, h2, h3 {
     width: 100%;
     height: 118px;
 }
+.wc-detail-shell-compact {
+    padding: 16px;
+}
+.wc-detail-shell-compact .wc-detail-back {
+    display: none;
+}
+.wc-detail-shell-compact .wc-detail-teams {
+    grid-template-columns: minmax(90px, .75fr) minmax(230px, 1.5fr) minmax(90px, .75fr);
+    gap: 10px;
+}
+.wc-detail-shell-compact .wc-detail-team-flag {
+    width: 132px;
+    height: 88px;
+}
+.wc-detail-shell-compact .wc-detail-prob-value {
+    font-size: 1.32rem;
+}
+.wc-detail-shell-compact .wc-detail-prob-label {
+    font-size: .59rem;
+}
+.wc-detail-shell-compact .wc-detail-score-feature {
+    max-width: 360px;
+}
 @media (max-width: 900px) {
     .wc-detail-teams,
     .wc-detail-bottom,
@@ -1611,6 +2361,303 @@ def inject_css():
 
 def _compact_html(html: str) -> str:
     return "".join(line.strip() for line in html.splitlines() if line.strip())
+
+
+def fifa_overview_dashboard(
+    matches,
+    teams: list,
+    round_reach,
+    player_stats=None,
+    knockout_matches=None,
+    next_match: dict | None = None,
+    trophy_src: str = "",
+    data_updated: str = "Unavailable",
+):
+    teams_by_name = {team.name: team for team in teams}
+    group_played = matches[matches["played"]].copy()
+    group_upcoming = matches[~matches["played"]].copy()
+    played = group_played
+    upcoming = group_upcoming
+    knockout_total = len(knockout_matches) if knockout_matches is not None else 0
+    knockout_completed = 0
+    knockout_goals = 0
+    if knockout_matches is not None and not knockout_matches.empty:
+        knockout_status = knockout_matches["status"].astype(str).str.upper()
+        finished_knockout = knockout_matches[
+            knockout_status.isin({"FINISHED", "FT", "AET", "PEN"})
+            & knockout_matches["home_goals"].notna()
+            & knockout_matches["away_goals"].notna()
+        ]
+        knockout_completed = len(finished_knockout)
+        knockout_goals = int(
+            pd.to_numeric(finished_knockout["home_goals"], errors="coerce").fillna(0).sum()
+            + pd.to_numeric(finished_knockout["away_goals"], errors="coerce").fillna(0).sum()
+        )
+
+    total_matches = len(matches) + knockout_total
+    completed = int(matches["played"].sum()) + knockout_completed if total_matches else 0
+    remaining = max(total_matches - completed, 0)
+    progress = (completed / total_matches * 100) if total_matches else 0
+    progress_on = round((progress / 100) * 18)
+    progress_segments = "".join(
+        f'<span class="wc-progress-seg{" wc-progress-seg-on" if idx < progress_on else ""}"></span>'
+        for idx in range(18)
+    )
+
+    total_goals = knockout_goals
+    if not group_played.empty:
+        total_goals += int(
+            pd.to_numeric(group_played["home_goals"], errors="coerce").fillna(0).sum()
+            + pd.to_numeric(group_played["away_goals"], errors="coerce").fillna(0).sum()
+        )
+
+    dashboard_columns = {
+        "played", "is_resolved", "home_team", "away_team", "match_date", "kickoff_time_utc",
+        "home_win_probability", "draw_probability", "away_win_probability", "upset_risk_score",
+    }
+    if knockout_matches is not None and dashboard_columns.issubset(knockout_matches.columns):
+        resolved = knockout_matches["is_resolved"].fillna(False).astype(str).str.lower().isin({"true", "1"})
+        known_teams = knockout_matches["home_team"].notna() & knockout_matches["away_team"].notna()
+        knockout_played = knockout_matches[knockout_matches["played"].astype(bool) & known_teams]
+        knockout_upcoming = knockout_matches[
+            ~knockout_matches["played"].astype(bool)
+            & resolved
+            & known_teams
+            & knockout_matches["home_win_probability"].notna()
+        ]
+        played = pd.concat([group_played, knockout_played], ignore_index=True, sort=False)
+        upcoming = pd.concat([group_upcoming, knockout_upcoming], ignore_index=True, sort=False)
+
+    avg_goals = total_goals / completed if completed else 0
+    avg_confidence = (1 - upcoming["upset_risk_score"].mean()) * 100 if not upcoming.empty else 0
+    yellow_cards = red_cards = 0
+    if player_stats is not None and not player_stats.empty:
+        if "yellow_cards" in player_stats.columns:
+            yellow_cards = int(pd.to_numeric(player_stats["yellow_cards"], errors="coerce").fillna(0).sum())
+        if "red_cards" in player_stats.columns:
+            red_cards = int(pd.to_numeric(player_stats["red_cards"], errors="coerce").fillna(0).sum())
+
+    def flag_html(team_name: str, class_name: str = "wc-group-flag-img") -> str:
+        team = teams_by_name.get(team_name)
+        return _flag_image_html(team, class_name) if team else ""
+
+    def pct(value: float) -> str:
+        return f"{float(value) * 100:.0f}%"
+
+    def date_label(date_value: object, kickoff: object = "") -> str:
+        date_text, kickoff_text, timezone_label = belgian_kickoff(date_value, kickoff)
+        if not date_text:
+            return "TBD"
+        try:
+            parsed = pd.to_datetime(date_text)
+            day = parsed.strftime("%b %d").upper()
+        except Exception:
+            day = date_text
+        if kickoff_text:
+            return f"{day}<br><span>{escape(kickoff_text)} {escape(timezone_label)}</span>"
+        return day
+
+    next_data = next_match or {}
+    if not next_data and not upcoming.empty:
+        row = upcoming.sort_values(["match_date", "kickoff_time_utc"]).iloc[0]
+        next_data = {
+            "home_team": row.home_team,
+            "away_team": row.away_team,
+            "date": row.match_date,
+            "kickoff_time": row.kickoff_time_utc,
+            "stage": f"Group {row.group}",
+            "home_win_probability": row.home_win_probability,
+            "draw_probability": row.draw_probability,
+            "away_win_probability": row.away_win_probability,
+        }
+
+    home_team = str(next_data.get("home_team", "TBD"))
+    away_team = str(next_data.get("away_team", "TBD"))
+    next_home_prob = float(next_data.get("home_win_probability", 0) or 0)
+    next_draw_prob = float(next_data.get("draw_probability", 0) or 0)
+    next_away_prob = float(next_data.get("away_win_probability", 0) or 0)
+    next_stage = escape(str(next_data.get("stage", "Next Match")).replace("_", " ").title())
+    next_date, next_kickoff, next_timezone = belgian_kickoff(
+        next_data.get("date", ""), next_data.get("kickoff_time", "")
+    )
+    try:
+        next_date_display = pd.to_datetime(next_date).strftime("%B %d, %Y").upper()
+    except Exception:
+        next_date_display = next_date or "TBD"
+    next_hour = next_kickoff or "TBD"
+
+    trophy_img = f'<img class="wc-overview-trophy" src="{trophy_src}" alt="World Cup trophy">' if trophy_src else ""
+    live_count = len(played[played["status"].astype(str).str.upper().isin(["IN_PLAY", "PAUSED"])]) if "status" in played else 0
+    live_label = f"{live_count} live matches" if live_count else f"{completed} matches completed"
+
+    kpis = [
+        ("⌗", "Total Matches", str(total_matches), f"{completed} completed", "#68d445"),
+        ("●", "Total Goals", str(total_goals), f"{avg_goals:.2f} avg per match", "#d443e5"),
+        ("♟", "Teams", str(len(teams)), "from 6 confederations", "#4aa7ff"),
+        ("▣", "Yellow Cards", str(yellow_cards), "player stats total", "#e2b43e"),
+        ("▮", "Red Cards", str(red_cards), "player stats total", "#ff4141"),
+        ("↗", "Avg Prediction Spread", f"{avg_confidence:.0f}%", "across upcoming matches", "#58e0d2"),
+    ]
+    kpi_html = "".join(
+        f"""<div class="wc-overview-kpi">
+            <div class="wc-overview-kpi-icon" style="color:{color};">{icon}</div>
+            <div>
+                <div class="wc-overview-kpi-value">{escape(value)}</div>
+                <div class="wc-overview-kpi-label">{escape(label)}</div>
+                <div class="wc-overview-kpi-sub">{escape(sub)}</div>
+            </div>
+        </div>"""
+        for icon, label, value, sub, color in kpis
+    )
+
+    strongest = sorted(teams, key=lambda team: (-team.elo, team.name))[:5]
+    max_elo = max((team.elo for team in strongest), default=1)
+    strongest_rows = "".join(
+        f"""<div class="wc-overview-team-row">
+            <div>{idx}</div>
+            <div class="wc-overview-result-team">{_flag_image_html(team, "wc-group-flag-img")}<span>{escape(team.name)}</span></div>
+            <div class="wc-overview-bar"><span style="--w:{team.elo / max_elo * 100:.0f}%;"></span></div>
+            <div>{int(team.elo)}</div>
+        </div>"""
+        for idx, team in enumerate(strongest, start=1)
+    )
+
+    upcoming_rows = []
+    for row in upcoming.sort_values(["match_date", "kickoff_time_utc"]).head(4).itertuples(index=False):
+        upcoming_rows.append(
+            f"""<div class="wc-overview-match-row">
+                <div class="wc-overview-match-date">{date_label(row.match_date, row.kickoff_time_utc)}</div>
+                <div class="wc-overview-match-teams">
+                    {flag_html(row.home_team)}<span>{escape(str(row.home_team)[:3].upper())}</span>
+                    <span style="opacity:.62;">vs</span>
+                    <span>{escape(str(row.away_team)[:3].upper())}</span>{flag_html(row.away_team)}
+                </div>
+                <div class="wc-overview-prob-grid">
+                    <div class="wc-overview-prob-chip wc-overview-prob-chip-home" title="Home win probability">H {row.home_win_probability * 100:.0f}%</div>
+                    <div class="wc-overview-prob-chip wc-overview-prob-chip-draw" title="Draw probability">D {row.draw_probability * 100:.0f}%</div>
+                    <div class="wc-overview-prob-chip wc-overview-prob-chip-away" title="Away win probability">A {row.away_win_probability * 100:.0f}%</div>
+                </div>
+            </div>"""
+        )
+    if not upcoming_rows:
+        upcoming_rows.append('<div class="wc-overview-match-row"><div>No upcoming matches</div></div>')
+
+    rr_top = round_reach.sort_values("group_qualification_probability", ascending=False).head(8)
+    qualification_html = "".join(
+        f"""<div class="wc-donut-item">
+            <div class="wc-donut" style="--p:{row.group_qualification_probability * 100:.0f};">{row.group_qualification_probability * 100:.0f}%</div>
+            <div class="wc-donut-name">{escape(str(row.team))}</div>
+        </div>"""
+        for row in rr_top.itertuples(index=False)
+    )
+
+    latest_rows = []
+    for row in played.sort_values(["match_date", "kickoff_time_utc"], ascending=[False, False]).head(3).itertuples(index=False):
+        latest_rows.append(
+            f"""<div class="wc-overview-result-row">
+                <div class="wc-overview-match-date">{date_label(row.match_date)}<br><span>FT</span></div>
+                <div class="wc-overview-result-team">{flag_html(row.home_team)}<span>{escape(str(row.home_team))}</span></div>
+                <div class="wc-overview-score">{escape(str(row.score_display))}</div>
+                <div class="wc-overview-result-team">{flag_html(row.away_team)}<span>{escape(str(row.away_team))}</span></div>
+            </div>"""
+        )
+    if not latest_rows:
+        latest_rows.append('<div class="wc-overview-result-row"><div>No latest results</div></div>')
+
+    if not upcoming.empty:
+        risk_row = upcoming.loc[upcoming["upset_risk_score"].idxmax()]
+        fav = risk_row.home_team if risk_row.home_win_probability >= risk_row.away_win_probability else risk_row.away_team
+        challenger = risk_row.away_team if fav == risk_row.home_team else risk_row.home_team
+        risk_html = f"""<div class="wc-risk-layout">
+            <div>
+                <div class="wc-overview-panel-head" style="margin-bottom:8px;">Highest Prediction Uncertainty</div>
+                <div class="wc-overview-result-team" style="font-size:1.05rem;">{flag_html(challenger)}<span>{escape(str(challenger))}</span></div>
+                <div class="wc-overview-match-date" style="margin:10px 0;">could surprise</div>
+                <div class="wc-overview-result-team" style="font-size:1.05rem;">{flag_html(fav)}<span>{escape(str(fav))}</span></div>
+            </div>
+            <div class="wc-risk-big">{risk_row.upset_risk_score * 100:.0f}%</div>
+        </div>"""
+    else:
+        risk_html = '<div class="wc-risk-layout"><div>No upcoming prediction uncertainty</div></div>'
+
+    scorer_html = '<div class="wc-scorer-card"><div><div class="wc-scorer-name">No player stats</div></div><div class="wc-scorer-goals">0</div></div>'
+    if player_stats is not None and not player_stats.empty and {"player_name", "team", "goals"}.issubset(player_stats.columns):
+        scorers = player_stats.copy()
+        scorers["goals"] = pd.to_numeric(scorers["goals"], errors="coerce").fillna(0)
+        top = scorers.sort_values(["goals", "player_name"], ascending=[False, True]).iloc[0]
+        scorer_team = str(top["team"])
+        scorer_name = str(top["player_name"])
+        scorer_goals = int(top["goals"])
+        scorer_html = f"""<div class="wc-scorer-card">
+            <div>
+                <div class="wc-scorer-name">{escape(scorer_name)}</div>
+                <div class="wc-scorer-meta">{flag_html(scorer_team)} {escape(scorer_team)}</div>
+            </div>
+            <div>
+                <div class="wc-scorer-goals">{scorer_goals}</div>
+                <div class="wc-overview-match-date" style="text-align:center;">Goals</div>
+            </div>
+        </div>"""
+
+    html = f"""<div class="wc-overview-hero">
+        <section class="wc-overview-hero-left">
+            {trophy_img}
+            <div class="wc-overview-hero-title">FIFA World Cup<br>2026</div>
+            <div class="wc-overview-hero-subtitle">Live Tournament Overview</div>
+            <div class="wc-overview-copy">Real-time predictions, live results, resolved fixtures, and advanced analytics.</div>
+            <div class="wc-live-chip"><span class="wc-live-dot"></span>{escape(live_label)}</div>
+            <div class="wc-data-freshness">Data updated: {escape(data_updated)}</div>
+            <div class="wc-progress-box">
+                <div class="wc-progress-head"><span>Tournament Progress</span><span class="wc-progress-value">{progress:.0f}%</span></div>
+                <div class="wc-progress-track">{progress_segments}</div>
+                <div class="wc-progress-meta"><span>{completed} of {total_matches} matches completed</span><span>{remaining} remaining</span></div>
+            </div>
+        </section>
+        <section class="wc-overview-next">
+            <div class="wc-next-head"><span>Next Match</span><span>{next_stage}</span></div>
+            <div class="wc-next-feature">
+                <div>{flag_html(home_team, "wc-feature-flag")}<div class="wc-feature-team">{escape(home_team)}</div></div>
+                <div class="wc-feature-time">
+                    <div class="wc-feature-date">{escape(next_date_display)}</div>
+                    <div class="wc-feature-hour">{escape(next_hour)}</div>
+                    <div class="wc-feature-utc">{escape(next_timezone or "Belgian time")}</div>
+                </div>
+                <div>{flag_html(away_team, "wc-feature-flag")}<div class="wc-feature-team">{escape(away_team)}</div></div>
+            </div>
+            <div class="wc-feature-probs">
+                <div class="wc-feature-prob wc-feature-prob-home"><strong>{pct(next_home_prob)}</strong>Win Probability</div>
+                <div class="wc-feature-prob"><strong>{pct(next_draw_prob)}</strong>Draw</div>
+                <div class="wc-feature-prob wc-feature-prob-away"><strong>{pct(next_away_prob)}</strong>Win Probability</div>
+            </div>
+        </section>
+    </div>
+    <div class="wc-overview-kpis">{kpi_html}</div>
+    <div class="wc-overview-grid">
+        <section class="wc-overview-panel">
+            <div class="wc-overview-panel-head"><span>Strongest Teams <span style="color:#fff;">(by Elo)</span></span></div>
+            {strongest_rows}
+        </section>
+        <section class="wc-overview-panel">
+            <div class="wc-overview-panel-head"><span>Upcoming Matches</span><a class="wc-view-all" href="?page=Match%20Details" target="_self">View all</a></div>
+            {''.join(upcoming_rows)}
+        </section>
+        <section class="wc-overview-panel">
+            <div class="wc-overview-panel-head"><span>Qualification Chance <span style="color:#fff;">(top 8)</span></span></div>
+            <div class="wc-overview-donut-grid">{qualification_html}</div>
+        </section>
+    </div>
+    <div class="wc-overview-grid-bottom">
+        <section class="wc-overview-panel">
+            <div class="wc-overview-panel-head"><span>Latest Results</span><a class="wc-view-all" href="?page=Match%20Details" target="_self">View all</a></div>
+            {''.join(latest_rows)}
+        </section>
+        <section class="wc-overview-panel wc-overview-risk">{risk_html}</section>
+        <section class="wc-overview-panel">
+            <div class="wc-overview-panel-head"><span>Top Goalscorer</span><span class="wc-view-all">View all</span></div>
+            {scorer_html}
+        </section>
+    </div>"""
+    st.markdown(_compact_html(html), unsafe_allow_html=True)
 
 
 def kpi_card(label: str, value: str, sub: str = "", accent: str = "", icon: str = ""):
@@ -1691,46 +2738,32 @@ def _expected_goal_proxy(home_pct: float, away_pct: float) -> tuple[float, float
     return home_xg, away_xg
 
 
-def _probability_profile_svg(home_pct: float, draw_pct: float, away_pct: float) -> str:
-    home_y = 98 - home_pct * 0.72
-    away_y = 98 - away_pct * 0.72
-    draw_y = 98 - draw_pct * 0.72
-    return f"""
-    <svg class="wc-prob-svg" viewBox="0 0 320 118" preserveAspectRatio="none" aria-hidden="true">
-        <line x1="22" y1="18" x2="22" y2="98" stroke="rgba(255,255,255,.16)" />
-        <line x1="22" y1="98" x2="304" y2="98" stroke="rgba(255,255,255,.16)" />
-        <line x1="22" y1="58" x2="304" y2="58" stroke="rgba(255,255,255,.08)" />
-        <text x="0" y="21" fill="rgba(255,255,255,.55)" font-size="9">100%</text>
-        <text x="8" y="101" fill="rgba(255,255,255,.55)" font-size="9">0%</text>
-        <polyline points="22,{home_y + 18:.1f} 70,{home_y + 4:.1f} 125,{home_y:.1f} 190,{home_y - 3:.1f} 245,{home_y - 6:.1f} 304,{home_y - 6:.1f}"
-            fill="none" stroke="#6fa8dc" stroke-width="3" />
-        <polyline points="22,{away_y - 6:.1f} 82,{away_y:.1f} 145,{away_y + 4:.1f} 220,{away_y + 10:.1f} 304,{away_y + 12:.1f}"
-            fill="none" stroke="#6aa84f" stroke-width="3" />
-        <polyline points="22,{draw_y:.1f} 100,{draw_y + 2:.1f} 180,{draw_y + 1:.1f} 304,{draw_y + 3:.1f}"
-            fill="none" stroke="#9aa5b1" stroke-width="2" opacity=".9" />
-        <text x="23" y="114" fill="rgba(255,255,255,.55)" font-size="9">prediction profile</text>
-    </svg>
-    """
-
-
-def match_detail_panel(match_row, team1, team2, focus_team: str | None = None):
+def match_detail_panel(match_row, team1, team2, focus_team: str | None = None, compact: bool = False):
     played = bool(match_row.get("played", False))
+    has_score = bool(match_row.get("has_score", False))
     home_pct = float(match_row.get("home_win_probability", 0) or 0) * 100
     draw_pct = float(match_row.get("draw_probability", 0) or 0) * 100
     away_pct = float(match_row.get("away_win_probability", 0) or 0) * 100
-    confidence = max(home_pct, draw_pct, away_pct)
-    match_date = escape(str(match_row.get("match_date", match_row.get("date", "")) or ""))
-    kickoff = escape(str(match_row.get("kickoff_time_utc", "") or ""))
+    spread_confidence = pd.to_numeric(match_row.get("confidence_score"), errors="coerce")
+    confidence = float(spread_confidence) * 100 if pd.notna(spread_confidence) else max(home_pct, draw_pct, away_pct)
+    local_date, local_kickoff, timezone_label = belgian_kickoff(
+        match_row.get("match_date", match_row.get("date", "")),
+        match_row.get("kickoff_time_utc", ""),
+    )
+    match_date = escape(local_date)
+    kickoff = escape(local_kickoff)
     venue = escape(str(match_row.get("venue", "") or "TBD"))
     city = escape(str(match_row.get("city", "") or ""))
     country = escape(str(match_row.get("country", "") or ""))
     group = escape(str(match_row.get("group", "") or ""))
-    status = escape(str(match_row.get("status", "SCHEDULED") or "SCHEDULED").replace("_", " ").title())
+    status_raw = str(match_row.get("status", "SCHEDULED") or "SCHEDULED").replace("_", " ")
+    status = escape(status_raw.title())
     score = escape(str(match_row.get("score_display", "TBD") or "TBD"))
-    title = f"Group {group} - Match Preview"
+    stage = str(match_row.get("competition_stage", "") or "").strip()
+    title = escape(stage) if stage else f"Group {group}"
     meta_bits = [match_date]
     if kickoff:
-        meta_bits.append(f"{kickoff} UTC")
+        meta_bits.append(f"{kickoff} {escape(timezone_label)}")
     meta_bits.append(", ".join(bit for bit in [venue, city, country] if bit))
     meta = " - ".join(bit for bit in meta_bits if bit)
 
@@ -1738,38 +2771,86 @@ def match_detail_panel(match_row, team1, team2, focus_team: str | None = None):
     away_flag = _flag_image_html(team2, "wc-detail-team-flag")
     home_name = escape(team1.name)
     away_name = escape(team2.name)
-    elo_diff = float(match_row.get("elo_difference", 0) or 0)
+    row_elo_diff = pd.to_numeric(match_row.get("elo_difference"), errors="coerce")
+    elo_diff = float(row_elo_diff) if pd.notna(row_elo_diff) else float(team1.elo - team2.elo)
     stronger = team1.name if elo_diff >= 0 else team2.name
-    if focus_team == team2.name:
-        form_owner = team2
-    elif focus_team == team1.name:
-        form_owner = team1
-    else:
-        form_owner = team1 if team1.campaign_played >= team2.campaign_played else team2
-    form_results = form_owner.campaign_results or form_owner.recent_form
-    form_label = "This World Cup Form" if form_owner.campaign_results else "Recent Form"
-    form_text = (
-        f"{escape(form_owner.name)} current tournament form"
-        if form_owner.campaign_results
-        else f"{escape(form_owner.name)} pre-tournament form"
-    )
     predicted_home, predicted_away = _projected_score(home_pct, draw_pct, away_pct)
 
-    if played and score != "TBD":
-        projected_home, projected_away = score.replace(" ", "").split("-")
+    if has_score and score != "TBD" and "-" in score:
+        projected_home, projected_away = score.replace(" ", "").split("-", 1)
+        score_label = "Final Score" if played else "Live Score"
+        score_sub = status
+        prediction_note = f"Model prediction: {predicted_home} - {predicted_away}"
+    elif played and score != "TBD" and "-" in score:
+        projected_home, projected_away = score.replace(" ", "").split("-", 1)
         score_label = "Final Score"
         score_sub = status
+        prediction_note = f"Model prediction: {predicted_home} - {predicted_away}"
     else:
         projected_home, projected_away = predicted_home, predicted_away
         score_label = "Predicted Score"
         score_sub = team1.name if projected_home > projected_away else team2.name if projected_away > projected_home else "Draw"
-    key_score_label = "Predicted Score"
-    key_score_sub = "Model-derived score proxy"
+        prediction_note = "Model-derived score proxy"
 
-    home_xg, away_xg = _expected_goal_proxy(home_pct, away_pct)
-    profile_svg = _probability_profile_svg(home_pct, draw_pct, away_pct)
+    if has_score or played:
+        score_feature = f"""
+            <div class="wc-score-comparison">
+                <div>
+                    <div class="wc-score-comparison-label">{score_label}</div>
+                    <div class="wc-score-big">{projected_home} - {projected_away}</div>
+                    <div class="wc-score-sub">{escape(str(score_sub))}</div>
+                </div>
+                <div>
+                    <div class="wc-score-comparison-label">Predicted Score</div>
+                    <div class="wc-score-big wc-score-big-predicted">{predicted_home} - {predicted_away}</div>
+                    <div class="wc-score-sub">Model prediction</div>
+                </div>
+            </div>"""
+    else:
+        score_feature = f"""
+            <div class="wc-detail-mini-title">{score_label}</div>
+            <div class="wc-score-big">{projected_home} - {projected_away}</div>
+            <div class="wc-score-sub">{escape(str(score_sub))}</div>
+            <div class="wc-score-model-note">{escape(prediction_note)}</div>"""
 
-    html = f"""<div class="wc-detail-shell">
+    is_knockout = bool(stage and not stage.lower().startswith("group"))
+    if is_knockout:
+        predicted_outcome = team1.name if home_pct >= away_pct else team2.name
+        favorite_probability = max(home_pct, away_pct)
+    else:
+        predicted_value, predicted_outcome = max(
+            [(home_pct, team1.name), (draw_pct, "Draw"), (away_pct, team2.name)],
+            key=lambda item: item[0],
+        )
+        favorite_probability = predicted_value
+
+    uncertainty_value = pd.to_numeric(match_row.get("upset_risk_score"), errors="coerce")
+    uncertainty = float(uncertainty_value) * 100 if pd.notna(uncertainty_value) else max(100 - confidence, 0)
+    confidence_label = escape(str(match_row.get("confidence_label", "Medium")))
+
+    evaluation_card = ""
+    bottom_class = "wc-detail-bottom-two"
+    if played:
+        actual = get_match_source_of_truth(match_row, is_knockout=is_knockout)
+        actual_outcome = (
+            actual.get("winner")
+            or ("Draw" if actual.get("outcome") == "draw" else "Unavailable")
+        )
+        evaluation_available = actual.get("result_source") == "actual"
+        prediction_correct = evaluation_available and predicted_outcome == actual_outcome
+        evaluation_label = "Correct" if prediction_correct else "Incorrect" if evaluation_available else "Unavailable"
+        evaluation_color = "#76dc55" if prediction_correct else "#f1b84b" if not evaluation_available else "#f06b6b"
+        evaluation_card = f"""
+            <div class="wc-detail-mini">
+                <div class="wc-detail-mini-title">Prediction Evaluation</div>
+                <div class="wc-stat-line"><span>Predicted outcome</span><span class="wc-stat-value">{escape(predicted_outcome)}</span></div>
+                <div class="wc-stat-line"><span>Actual outcome</span><span class="wc-stat-value">{escape(str(actual_outcome))}</span></div>
+                <div class="wc-stat-line"><span>Result</span><span class="wc-stat-value" style="color:{evaluation_color};">{evaluation_label}</span></div>
+            </div>"""
+        bottom_class = "wc-detail-bottom-three"
+
+    shell_class = "wc-detail-shell wc-detail-shell-compact" if compact else "wc-detail-shell"
+    html = f"""<div class="{shell_class}">
             <div class="wc-detail-back">&larr; Match Details</div>
             <div class="wc-detail-head">
                 <div class="wc-detail-title">{title}</div>
@@ -1807,55 +2888,30 @@ def match_detail_panel(match_row, team1, team2, focus_team: str | None = None):
             </div>
 
             <div class="wc-detail-confidence">
-                <span>Model Confidence</span>
+                <span>Prediction Spread Confidence</span>
                 <span class="wc-detail-confidence-track"><span class="wc-detail-confidence-fill" style="--w:{confidence:.0f}%"></span></span>
                 <span>{match_row.get("confidence_label", "Medium")}</span>
             </div>
 
-            <div class="wc-detail-mini">
-                <div class="wc-detail-mini-title">Key Factors</div>
-                <div class="wc-factor-grid">
-                    <div class="wc-factor">
-                        <div class="wc-factor-label">Elo Difference</div>
-                        <div class="wc-factor-value">{elo_diff:+.0f}</div>
-                        <div class="wc-factor-sub">{escape(stronger)} stronger based on Elo rating</div>
-                    </div>
-                    <div class="wc-factor">
-                        <div class="wc-factor-label">{form_label}</div>
-                        <div class="wc-form-row">{_form_chips(form_results)}</div>
-                        <div class="wc-factor-sub">{form_text}</div>
-                    </div>
-                    <div class="wc-factor">
-                        <div class="wc-factor-label">Match Status</div>
-                        <div class="wc-factor-value">{score if played else status}</div>
-                        <div class="wc-factor-sub">{'Final result from live data' if played else 'Upcoming fixture from live data'}</div>
-                    </div>
-                    <div class="wc-factor">
-                        <div class="wc-factor-label">{key_score_label}</div>
-                        <div class="wc-factor-value">{predicted_home} - {predicted_away}</div>
-                        <div class="wc-factor-sub">{key_score_sub}</div>
-                    </div>
-                </div>
+            <div class="wc-detail-score-feature">
+                {score_feature}
             </div>
 
-            <div class="wc-detail-bottom">
+            <div class="wc-detail-bottom {bottom_class}">
                 <div class="wc-detail-mini">
-                    <div class="wc-detail-mini-title">{score_label}</div>
-                    <div class="wc-score-big">{projected_home} - {projected_away}</div>
-                    <div class="wc-score-sub">{escape(str(score_sub))}</div>
+                    <div class="wc-detail-mini-title">Elo Comparison</div>
+                    <div class="wc-stat-line"><span>{home_name}</span><span class="wc-stat-value">{int(team1.elo)}</span></div>
+                    <div class="wc-stat-line"><span>{away_name}</span><span class="wc-stat-value">{int(team2.elo)}</span></div>
+                    <div class="wc-stat-line"><span>Rating advantage</span><span class="wc-stat-value">{escape(str(stronger))} ({abs(elo_diff):.0f})</span></div>
                 </div>
                 <div class="wc-detail-mini">
-                    <div class="wc-detail-mini-title">Expected Goals (proxy)</div>
-                    <div class="wc-xg-grid">
-                        <div><div class="wc-xg-value">{home_xg:.2f}</div><div class="wc-xg-team">{home_name}</div></div>
-                        <div class="wc-xg-ball">⚽</div>
-                        <div><div class="wc-xg-value">{away_xg:.2f}</div><div class="wc-xg-team">{away_name}</div></div>
-                    </div>
+                    <div class="wc-detail-mini-title">Prediction Summary</div>
+                    <div class="wc-stat-line"><span>Model favorite</span><span class="wc-stat-value">{escape(predicted_outcome)}</span></div>
+                    <div class="wc-stat-line"><span>Favorite probability</span><span class="wc-stat-value">{favorite_probability:.0f}%</span></div>
+                    <div class="wc-stat-line"><span>Confidence</span><span class="wc-stat-value">{confidence_label}</span></div>
+                    <div class="wc-stat-line"><span>Prediction uncertainty</span><span class="wc-stat-value">{uncertainty:.0f}%</span></div>
                 </div>
-                <div class="wc-detail-mini">
-                    <div class="wc-detail-mini-title">Win Probability Profile</div>
-                    {profile_svg}
-                </div>
+                {evaluation_card}
             </div>
         </div>"""
     st.markdown(_compact_html(html), unsafe_allow_html=True)
@@ -1916,8 +2972,10 @@ def compact_matches_panel(matches, title: str, empty_message: str = "No matches 
     teams_by_name = teams_by_name or {}
     rows = []
     for _, match in matches.iterrows():
-        date = match.get("match_date", match.get("date", ""))
-        kickoff = match.get("kickoff_time_utc", "")
+        date, kickoff, timezone_label = belgian_kickoff(
+            match.get("match_date", match.get("date", "")),
+            match.get("kickoff_time_utc", ""),
+        )
         group = str(match.get("group", "")).replace("GROUP_", "Group ")
         home = match.get("home_team", "")
         away = match.get("away_team", "")
@@ -1943,7 +3001,7 @@ def compact_matches_panel(matches, title: str, empty_message: str = "No matches 
             )
         rows.append(
             f"""<div class="wc-compact-match">
-                <div class="wc-compact-date">{date}<small>{kickoff} UTC<br>{group}</small></div>
+                <div class="wc-compact-date">{date}<small>{kickoff} {timezone_label}<br>{group}</small></div>
                 <div class="wc-compact-teams">
                     <div class="wc-compact-team">{home_flag} {home}</div>
                     <div class="wc-compact-vs">vs</div>
@@ -2044,7 +3102,10 @@ def group_stage_panel(group_name: str, standings, matches, teams_by_name: dict):
         away_obj = teams_by_name.get(match.away_team)
         home_flag = _flag_image_html(home_obj, "wc-group-flag-img") if home_obj else ""
         away_flag = _flag_image_html(away_obj, "wc-group-flag-img") if away_obj else ""
-        date_label = str(match.match_date)[5:].replace("-", " ")
+        local_date, local_kickoff, timezone_label = belgian_kickoff(
+            match.match_date, match.kickoff_time_utc
+        )
+        date_label = local_date[5:].replace("-", " ") if local_date else "TBD"
         next_cards.append(
             f"""<div class="wc-next-card">
                 <div class="wc-next-teams">
@@ -2053,7 +3114,7 @@ def group_stage_panel(group_name: str, standings, matches, teams_by_name: dict):
                     <div class="wc-next-team">{away_flag}<span>{escape(match.away_team)}</span></div>
                 </div>
                 <div class="wc-next-date">{escape(date_label)}</div>
-                <div class="wc-next-status">{escape(str(match.kickoff_time_utc or ""))} UTC</div>
+                <div class="wc-next-status">{escape(local_kickoff)} {escape(timezone_label)}</div>
             </div>"""
         )
     if not next_cards:
@@ -2112,12 +3173,132 @@ def _bracket_team_row(slot: str, team: str, prob: float, teams_by_name: dict, si
     )
 
 
-def _winner_from_pair(pair: tuple[str, str], round_reach, column: str) -> str:
-    a, b = pair
-    return a if _prob_for_round(round_reach, a, column) >= _prob_for_round(round_reach, b, column) else b
+def _match_resolution(pair: tuple[str, str], round_reach, column: str, match_row=None) -> tuple[str, str, str]:
+    home, away = pair
+    home_probability = _prob_for_round(round_reach, home, column)
+    away_probability = _prob_for_round(round_reach, away, column)
+    prediction = {
+        "home_team": home,
+        "away_team": away,
+        "home_win_probability": home_probability,
+        "away_win_probability": away_probability,
+    }
+    match_context = dict(match_row) if match_row else {}
+    context_home = match_context.get("home_team")
+    context_away = match_context.get("away_team")
+    if context_home is None or pd.isna(context_home):
+        match_context["home_team"] = home
+    if context_away is None or pd.isna(context_away):
+        match_context["away_team"] = away
+    truth = get_match_source_of_truth(match_context or prediction, prediction, is_knockout=True)
+    winner = truth["winner"] or "TBD"
+    if truth["result_source"] == "actual":
+        home_score = int(truth["home_score"])
+        away_score = int(truth["away_score"])
+        penalty_text = ""
+        if truth.get("home_penalties") is not None and truth.get("away_penalties") is not None:
+            penalty_text = f" ({int(truth['home_penalties'])}-{int(truth['away_penalties'])} pens)"
+        label = f"Actual result: {winner} won {home_score}-{away_score}{penalty_text}"
+    elif truth["result_source"] == "prediction":
+        label = f"Projected winner: {winner}"
+    else:
+        label = "Winner unresolved"
+    return winner, label, truth["result_source"]
 
 
-def knockout_bracket_panel(standings, round_reach, teams_by_name: dict):
+def _winner_sources(rows) -> dict[int, list[int]]:
+    sources = {}
+    for row in rows.itertuples(index=False):
+        if not hasattr(row, "match_number") or pd.isna(row.match_number):
+            continue
+        source_numbers = []
+        for slot in [str(row.home_slot), str(row.away_slot)]:
+            if slot.startswith("W") and slot[1:].isdigit():
+                source_numbers.append(int(slot[1:]))
+        sources[int(row.match_number)] = source_numbers
+    return sources
+
+
+def _bracket_path_order(knockout_matches) -> tuple[list[int], list[int]]:
+    """Return R32 and R16 display order following official winner paths."""
+    if knockout_matches is None or getattr(knockout_matches, "empty", True):
+        return [], []
+    required = {"stage", "match_number", "home_slot", "away_slot"}
+    if not required.issubset(knockout_matches.columns):
+        return [], []
+
+    stage_sources = {
+        stage: _winner_sources(knockout_matches[knockout_matches["stage"].eq(stage)])
+        for stage in ["Round of 16", "Quarter-final", "Semi-final"]
+    }
+    r16_order = []
+    r32_order = []
+    for semifinal_number in sorted(stage_sources["Semi-final"]):
+        for quarterfinal_number in stage_sources["Semi-final"][semifinal_number]:
+            for r16_number in stage_sources["Quarter-final"].get(quarterfinal_number, []):
+                r16_order.append(r16_number)
+                r32_order.extend(stage_sources["Round of 16"].get(r16_number, []))
+    return r32_order, r16_order
+
+
+def _resolved_r32_pairs(knockout_matches) -> list[tuple[str, str, str, str, object]]:
+    if knockout_matches is None or getattr(knockout_matches, "empty", True):
+        return []
+    required = {"stage", "home_slot", "away_slot", "home_team", "away_team"}
+    if not required.issubset(set(knockout_matches.columns)):
+        return []
+
+    r32 = knockout_matches[knockout_matches["stage"].eq("Round of 32")].copy()
+    if r32.empty:
+        return []
+    bracket_order, _ = _bracket_path_order(knockout_matches)
+
+    if bracket_order and "match_number" in r32.columns:
+        order_lookup = {match_number: index for index, match_number in enumerate(bracket_order)}
+        r32["_bracket_order"] = r32["match_number"].map(order_lookup).fillna(len(order_lookup))
+        r32 = r32.sort_values(["_bracket_order", "match_number"])
+    else:
+        sort_cols = [col for col in ["date", "kickoff_time", "match_id"] if col in r32.columns]
+        if sort_cols:
+            r32 = r32.sort_values(sort_cols)
+
+    pairs = []
+    for row in r32.itertuples(index=False):
+        home_slot = str(row.home_slot)
+        away_slot = str(row.away_slot)
+        home_team = row.home_team if pd.notna(row.home_team) else home_slot
+        away_team = row.away_team if pd.notna(row.away_team) else away_slot
+        pairs.append((home_slot, away_slot, str(home_team), str(away_team), row._asdict()))
+    return pairs
+
+
+def _stage_match_rows(knockout_matches, stage: str) -> list[dict]:
+    if knockout_matches is None or getattr(knockout_matches, "empty", True):
+        return []
+    rows = knockout_matches[knockout_matches["stage"].eq(stage)].copy()
+    if "match_number" in rows.columns:
+        rows = rows.sort_values("match_number")
+    return rows.to_dict("records")
+
+
+def _mirror_card(match_number: object, inner_html: str) -> str:
+    number = int(match_number) if pd.notna(match_number) else "-"
+    return (
+        '<div class="wc-mirror-match">'
+        f'<div class="wc-mirror-match-number">Match {number}</div>'
+        f'{inner_html}</div>'
+    )
+
+
+def knockout_bracket_panel(
+    standings,
+    round_reach,
+    teams_by_name: dict,
+    knockout_matches=None,
+    trophy_src: str = "",
+    zoom: float = 1.0,
+):
+    zoom = max(0.7, min(1.5, float(zoom)))
     ranked_groups = {
         group: g.sort_values(["points", "goal_difference", "goals_for"], ascending=[False, False, False]).reset_index(drop=True)
         for group, g in standings.groupby("group")
@@ -2150,195 +3331,334 @@ def knockout_bracket_panel(standings, round_reach, teams_by_name: dict):
         ("Best 3rd #1", "Best 3rd #2"), ("Best 3rd #3", "Best 3rd #4"),
         ("Best 3rd #5", "Best 3rd #6"), ("Best 3rd #7", "Best 3rd #8"),
     ]
-    r32_pairs = [(a, b, slots.get(a, "TBD"), slots.get(b, "TBD")) for a, b in slot_pairs]
+    r32_pairs = _resolved_r32_pairs(knockout_matches)
+    if not r32_pairs:
+        r32_pairs = [(a, b, slots.get(a, "TBD"), slots.get(b, "TBD"), None) for a, b in slot_pairs]
 
     r32_cards = []
     r16_teams = []
-    for slot_a, slot_b, team_a, team_b in r32_pairs:
+    advancers: dict[int, str] = {}
+    eliminated: dict[int, str] = {}
+    for pair_index, (slot_a, slot_b, team_a, team_b, match_row) in enumerate(r32_pairs):
         prob_a = _prob_for_round(round_reach, team_a, "round_of_16")
         prob_b = _prob_for_round(round_reach, team_b, "round_of_16")
-        r16_teams.append(_winner_from_pair((team_a, team_b), round_reach, "round_of_16"))
-        r32_cards.append(
+        winner, source_label, source = _match_resolution(
+            (team_a, team_b), round_reach, "round_of_16", match_row
+        )
+        r16_teams.append(winner)
+        match_number = int(match_row.get("match_number", 73 + pair_index)) if match_row else 73 + pair_index
+        advancers[match_number] = winner
+        if winner != "TBD":
+            eliminated[match_number] = team_b if winner == team_a else team_a
+        card = (
             f'<div class="wc-bracket-match">'
             f'{_bracket_team_row(slot_a, team_a, prob_a, teams_by_name)}'
             f'{_bracket_team_row(slot_b, team_b, prob_b, teams_by_name)}'
+            f'<div class="wc-bracket-source wc-bracket-source-{source}">{escape(source_label)}</div>'
             f'</div>'
         )
+        r32_cards.append(_mirror_card(match_number, card))
 
-    def round_cards(source_teams: list[str], reach_col: str, next_col: str) -> tuple[list[str], list[str]]:
+    def round_cards(
+        source_teams: list[str],
+        reach_col: str,
+        next_col: str,
+        stage: str,
+    ) -> tuple[list[str], list[str]]:
         cards = []
         winners = []
-        for i in range(0, len(source_teams), 2):
-            team_a, team_b = source_teams[i], source_teams[i + 1]
+        official_rows = _stage_match_rows(knockout_matches, stage)
+        row_count = len(official_rows) if official_rows else len(source_teams) // 2
+        for row_index in range(row_count):
+            match_row = official_rows[row_index] if official_rows else None
+            if match_row:
+                home_slot = str(match_row.get("home_slot", ""))
+                away_slot = str(match_row.get("away_slot", ""))
+                team_a = advancers.get(int(home_slot[1:]), "TBD") if home_slot.startswith("W") else "TBD"
+                team_b = advancers.get(int(away_slot[1:]), "TBD") if away_slot.startswith("W") else "TBD"
+                if pd.notna(match_row.get("home_team")) and pd.notna(match_row.get("away_team")):
+                    team_a = str(match_row["home_team"])
+                    team_b = str(match_row["away_team"])
+            else:
+                team_a, team_b = source_teams[row_index * 2:row_index * 2 + 2]
             prob_a = _prob_for_round(round_reach, team_a, reach_col)
             prob_b = _prob_for_round(round_reach, team_b, reach_col)
-            winners.append(_winner_from_pair((team_a, team_b), round_reach, next_col))
-            cards.append(
+            winner, source_label, source = _match_resolution((team_a, team_b), round_reach, next_col, match_row)
+            winners.append(winner)
+            match_number = None
+            if match_row and pd.notna(match_row.get("match_number")):
+                match_number = int(match_row["match_number"])
+                advancers[match_number] = winner
+                if winner != "TBD":
+                    eliminated[match_number] = team_b if winner == team_a else team_a
+            card = (
                 f'<div class="wc-bracket-match">'
                 f'{_bracket_team_row("", team_a, prob_a, teams_by_name, single=True)}'
                 f'{_bracket_team_row("", team_b, prob_b, teams_by_name, single=True)}'
+                f'<div class="wc-bracket-source wc-bracket-source-{source}">{escape(source_label)}</div>'
                 f'</div>'
             )
+            cards.append(_mirror_card(match_number, card))
         return cards, winners
 
-    r16_cards, qf_teams = round_cards(r16_teams, "quarterfinal", "quarterfinal")
-    qf_cards, sf_teams = round_cards(qf_teams, "semifinal", "semifinal")
-    sf_cards, final_teams = round_cards(sf_teams, "final", "final")
+    r16_cards, qf_teams = round_cards(r16_teams, "quarterfinal", "quarterfinal", "Round of 16")
+    qf_cards, sf_teams = round_cards(qf_teams, "semifinal", "semifinal", "Quarter-final")
+    sf_cards, final_teams = round_cards(sf_teams, "final", "final", "Semi-final")
+
+    _, r16_order = _bracket_path_order(knockout_matches)
+    if r16_order:
+        official_r16 = _stage_match_rows(knockout_matches, "Round of 16")
+        cards_by_number = {
+            int(row["match_number"]): card
+            for row, card in zip(official_r16, r16_cards)
+            if pd.notna(row.get("match_number"))
+        }
+        r16_cards = [cards_by_number[number] for number in r16_order if number in cards_by_number]
 
     final_cards = []
+    final_winner = None
     if len(final_teams) >= 2:
-        final_cards.append(
+        final_rows = _stage_match_rows(knockout_matches, "Final")
+        final_row = final_rows[0] if final_rows else None
+        if final_row and pd.notna(final_row.get("home_team")) and pd.notna(final_row.get("away_team")):
+            final_teams = [str(final_row["home_team"]), str(final_row["away_team"])]
+        final_winner, final_label, final_source = _match_resolution(
+            (final_teams[0], final_teams[1]), round_reach, "tournament_win_probability", final_row
+        )
+        final_number = final_row.get("match_number", 104) if final_row else 104
+        final_card = (
             f'<div class="wc-bracket-match">'
             f'{_bracket_team_row("", final_teams[0], _prob_for_round(round_reach, final_teams[0], "tournament_win_probability"), teams_by_name, single=True)}'
             f'{_bracket_team_row("", final_teams[1], _prob_for_round(round_reach, final_teams[1], "tournament_win_probability"), teams_by_name, single=True)}'
+            f'<div class="wc-bracket-source wc-bracket-source-{final_source}">{escape(final_label)}</div>'
             f'</div>'
         )
+        final_cards.append(_mirror_card(final_number, final_card))
+
+    third_place_cards = []
+    third_rows = _stage_match_rows(knockout_matches, "3rd Place Match")
+    third_row = third_rows[0] if third_rows else None
+    third_teams = [eliminated.get(101, "TBD"), eliminated.get(102, "TBD")]
+    if third_row and pd.notna(third_row.get("home_team")) and pd.notna(third_row.get("away_team")):
+        third_teams = [str(third_row["home_team"]), str(third_row["away_team"])]
+    _third_winner, third_label, third_source = _match_resolution(
+        (third_teams[0], third_teams[1]), round_reach, "tournament_win_probability", third_row
+    )
+    third_number = third_row.get("match_number", 103) if third_row else 103
+    third_card = (
+        f'<div class="wc-bracket-match">'
+        f'{_bracket_team_row("", third_teams[0], _prob_for_round(round_reach, third_teams[0], "tournament_win_probability"), teams_by_name, single=True)}'
+        f'{_bracket_team_row("", third_teams[1], _prob_for_round(round_reach, third_teams[1], "tournament_win_probability"), teams_by_name, single=True)}'
+        f'<div class="wc-bracket-source wc-bracket-source-{third_source}">{escape(third_label)}</div>'
+        f'</div>'
+    )
+    third_place_cards.append(_mirror_card(third_number, third_card))
 
     top_winners = round_reach.head(4)
     champion = top_winners.iloc[0]
-    champion_obj = teams_by_name.get(champion.team)
+    champion_name = final_winner if final_winner and final_winner != "TBD" else champion.team
+    champion_probability = _prob_for_round(round_reach, champion_name, "tournament_win_probability")
+    champion_obj = teams_by_name.get(champion_name)
     champion_flag = _flag_image_html(champion_obj, "wc-group-flag-img") if champion_obj else ""
     winner_rows = []
-    title_cards = []
-    for rank, row in enumerate(top_winners.itertuples(index=False), start=1):
+    for row in top_winners.itertuples(index=False):
         team_obj = teams_by_name.get(row.team)
         flag = _flag_image_html(team_obj, "wc-group-flag-img") if team_obj else ""
         winner_rows.append(
             f'<div class="wc-winner-row">{flag}<span>{escape(row.team)}</span><span>{row.tournament_win_probability * 100:.0f}%</span></div>'
         )
-        title_cards.append(
-            f"""<div class="wc-title-card">
-                <div class="wc-title-rank">{rank}</div>
-                <div>
-                    <div class="wc-title-team">{flag} {escape(row.team)}</div>
-                    <div class="wc-title-prob">{row.tournament_win_probability * 100:.0f}%</div>
-                </div>
-            </div>"""
-        )
 
+    trophy_html = (
+        f'<img class="wc-bracket-trophy-image" src="{trophy_src}" alt="World Cup trophy">'
+        if trophy_src else '<div class="wc-trophy">🏆</div>'
+    )
     html = f"""<div class="wc-bracket-shell">
-        <div class="wc-bracket-tabs">
-            <div class="wc-bracket-tab wc-bracket-tab-active">Round of 32</div>
-            <div class="wc-bracket-tab">Round of 16</div>
-            <div class="wc-bracket-tab">Quarter Finals</div>
-            <div class="wc-bracket-tab">Final</div>
-        </div>
-        <div class="wc-bracket-grid">
-            <div>
-                <div class="wc-bracket-col-title">Round of 32 - projected from live standings</div>
-                <div class="wc-bracket-col">{''.join(r32_cards)}</div>
+        <div class="wc-bracket-scroll">
+            <div class="wc-bracket-mirror" style="zoom:{zoom:.1f};">
+                <section class="wc-mirror-stage wc-mirror-left">
+                    <div class="wc-mirror-stage-title">Round of 32</div>
+                    <div class="wc-mirror-stage-cards">{''.join(r32_cards[:8])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-left">
+                    <div class="wc-mirror-stage-title">Round of 16</div>
+                    <div class="wc-mirror-stage-cards">{''.join(r16_cards[:4])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-left">
+                    <div class="wc-mirror-stage-title">Quarter-finals</div>
+                    <div class="wc-mirror-stage-cards">{''.join(qf_cards[:2])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-left">
+                    <div class="wc-mirror-stage-title">Semi-final 1</div>
+                    <div class="wc-mirror-stage-cards">{''.join(sf_cards[:1])}</div>
+                </section>
+
+                <section class="wc-mirror-center">
+                    <div class="wc-mirror-stage-title">Final</div>
+                    {''.join(final_cards)}
+                    {trophy_html}
+                    <div class="wc-bracket-winner">
+                        <div class="wc-winner-title">Winner</div>
+                        <div class="wc-winner-main">{champion_flag}<span>{escape(champion_name)}</span><span>{champion_probability * 100:.0f}%</span></div>
+                        <div class="wc-winner-list">{''.join(winner_rows[1:])}</div>
+                    </div>
+                    <div class="wc-third-place-title">Third Place</div>
+                    {''.join(third_place_cards)}
+                </section>
+
+                <section class="wc-mirror-stage wc-mirror-right">
+                    <div class="wc-mirror-stage-title">Semi-final 2</div>
+                    <div class="wc-mirror-stage-cards">{''.join(sf_cards[1:])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-right">
+                    <div class="wc-mirror-stage-title">Quarter-finals</div>
+                    <div class="wc-mirror-stage-cards">{''.join(qf_cards[2:])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-right">
+                    <div class="wc-mirror-stage-title">Round of 16</div>
+                    <div class="wc-mirror-stage-cards">{''.join(r16_cards[4:])}</div>
+                </section>
+                <section class="wc-mirror-stage wc-mirror-right">
+                    <div class="wc-mirror-stage-title">Round of 32</div>
+                    <div class="wc-mirror-stage-cards">{''.join(r32_cards[8:])}</div>
+                </section>
             </div>
-            <div>
-                <div class="wc-bracket-col-title">Round of 16</div>
-                <div class="wc-bracket-col wc-bracket-col-r16">{''.join(r16_cards)}</div>
-            </div>
-            <div>
-                <div class="wc-bracket-col-title">Quarter Finals</div>
-                <div class="wc-bracket-col wc-bracket-col-qf">{''.join(qf_cards)}</div>
-            </div>
-            <div>
-                <div class="wc-bracket-col-title">Semi Finals</div>
-                <div class="wc-bracket-col wc-bracket-col-sf">{''.join(sf_cards)}</div>
-            </div>
-            <div class="wc-bracket-winner">
-                <div class="wc-trophy">🏆</div>
-                <div class="wc-winner-title">Winner</div>
-                <div class="wc-winner-main">{champion_flag}<span>{escape(champion.team)}</span><span>{champion.tournament_win_probability * 100:.0f}%</span></div>
-                <div class="wc-winner-list">{''.join(winner_rows[1:])}</div>
-            </div>
-        </div>
-        <div class="wc-detail-mini" style="margin-top:18px;">
-            <div class="wc-detail-mini-title">Chance to Win the Tournament</div>
-            <div class="wc-title-card-grid">{''.join(title_cards)}</div>
         </div>
     </div>"""
     st.markdown(_compact_html(html), unsafe_allow_html=True)
 
 
-_MOCK_PERFORMERS = {
-    "Spain": [
-        ("Most Goals", "Alvaro Morata", 3, "Goals", "MG"),
-        ("Most Assists", "Pedri", 2, "Assists", "AS"),
-        ("Most Passes", "Rodri", 246, "Passes", "PS"),
-        ("Best Pass Accuracy", "Rodri", "92%", "Accuracy", "PA"),
-        ("Most Shots", "Dani Olmo", 11, "Shots", "SH"),
-        ("Most Chances Created", "Pedri", 7, "Chances", "CC"),
-        ("Most Tackles", "Rodri", 8, "Tackles", "TK"),
-        ("Most Interceptions", "Laporte", 6, "Interceptions", "IN"),
-        ("Most Dribbles", "Nico Williams", 9, "Dribbles", "DR"),
-        ("Most Duels Won", "Aymeric Laporte", 15, "Duels", "DU"),
-        ("Most Fouls Won", "Lamine Yamal", 6, "Fouls Won", "FW"),
-        ("Team Minutes Played", "Unai Simon", 180, "Minutes", "MIN"),
-    ],
-    "Argentina": [
-        ("Most Goals", "Lautaro Martinez", 4, "Goals", "MG"),
-        ("Most Assists", "Lionel Messi", 3, "Assists", "AS"),
-        ("Most Passes", "Enzo Fernandez", 231, "Passes", "PS"),
-        ("Best Pass Accuracy", "Mac Allister", "91%", "Accuracy", "PA"),
-        ("Most Shots", "Julian Alvarez", 12, "Shots", "SH"),
-        ("Most Chances Created", "Lionel Messi", 9, "Chances", "CC"),
-        ("Most Tackles", "De Paul", 10, "Tackles", "TK"),
-        ("Most Interceptions", "Cristian Romero", 7, "Interceptions", "IN"),
-        ("Most Dribbles", "Nico Gonzalez", 8, "Dribbles", "DR"),
-        ("Most Duels Won", "Otamendi", 14, "Duels", "DU"),
-        ("Most Fouls Won", "Lionel Messi", 7, "Fouls Won", "FW"),
-        ("Team Minutes Played", "Emiliano Martinez", 180, "Minutes", "MIN"),
-    ],
-    "France": [
-        ("Most Goals", "Kylian Mbappe", 5, "Goals", "MG"),
-        ("Most Assists", "Antoine Griezmann", 3, "Assists", "AS"),
-        ("Most Passes", "Aurelien Tchouameni", 220, "Passes", "PS"),
-        ("Best Pass Accuracy", "William Saliba", "93%", "Accuracy", "PA"),
-        ("Most Shots", "Kylian Mbappe", 15, "Shots", "SH"),
-        ("Most Chances Created", "Ousmane Dembele", 8, "Chances", "CC"),
-        ("Most Tackles", "N'Golo Kante", 12, "Tackles", "TK"),
-        ("Most Interceptions", "William Saliba", 7, "Interceptions", "IN"),
-        ("Most Dribbles", "Kylian Mbappe", 10, "Dribbles", "DR"),
-        ("Most Duels Won", "Dayot Upamecano", 16, "Duels", "DU"),
-        ("Most Fouls Won", "Ousmane Dembele", 6, "Fouls Won", "FW"),
-        ("Team Minutes Played", "Mike Maignan", 180, "Minutes", "MIN"),
-    ],
+TEAM_THEME_COLORS = {
+    "Algeria": ("rgba(24, 112, 62, .88)", "rgba(246, 246, 246, .18)", "#e84c5c"),
+    "Argentina": ("rgba(77, 145, 205, .88)", "rgba(246, 246, 246, .20)", "#9fd4ff"),
+    "Australia": ("rgba(18, 96, 68, .88)", "rgba(216, 174, 44, .34)", "#f2c744"),
+    "Austria": ("rgba(178, 24, 36, .88)", "rgba(246, 246, 246, .16)", "#ffffff"),
+    "Belgium": ("rgba(112, 14, 27, .88)", "rgba(39, 35, 19, .88)", "#f1c232"),
+    "Bosnia and Herzegovina": ("rgba(20, 76, 156, .88)", "rgba(214, 177, 36, .34)", "#f1d24f"),
+    "Brazil": ("rgba(21, 115, 57, .88)", "rgba(24, 55, 120, .82)", "#f5d441"),
+    "Canada": ("rgba(147, 18, 28, .88)", "rgba(246, 246, 246, .18)", "#ff6d72"),
+    "Cape Verde": ("rgba(20, 61, 145, .88)", "rgba(181, 30, 40, .68)", "#f1d24f"),
+    "Colombia": ("rgba(185, 145, 25, .88)", "rgba(22, 62, 136, .82)", "#f1d24f"),
+    "Croatia": ("rgba(170, 26, 44, .88)", "rgba(21, 54, 126, .82)", "#ffffff"),
+    "Curaçao": ("rgba(29, 79, 174, .88)", "rgba(235, 196, 37, .34)", "#f1d24f"),
+    "Czechia": ("rgba(22, 67, 151, .88)", "rgba(177, 28, 43, .76)", "#ffffff"),
+    "DR Congo": ("rgba(39, 127, 207, .88)", "rgba(194, 42, 45, .72)", "#f1d24f"),
+    "Ecuador": ("rgba(196, 151, 29, .88)", "rgba(29, 64, 138, .82)", "#ef4d4d"),
+    "Egypt": ("rgba(174, 27, 36, .88)", "rgba(27, 27, 27, .82)", "#ffffff"),
+    "England": ("rgba(180, 28, 44, .82)", "rgba(246, 246, 246, .16)", "#ffffff"),
+    "France": ("rgba(20, 53, 138, .88)", "rgba(160, 18, 35, .76)", "#ffffff"),
+    "Germany": ("rgba(22, 22, 22, .88)", "rgba(156, 21, 31, .76)", "#f1c232"),
+    "Ghana": ("rgba(186, 32, 42, .88)", "rgba(21, 105, 55, .76)", "#f1d24f"),
+    "Haiti": ("rgba(28, 72, 155, .88)", "rgba(168, 28, 45, .76)", "#ffffff"),
+    "Iran": ("rgba(25, 126, 67, .88)", "rgba(174, 30, 44, .76)", "#ffffff"),
+    "Iraq": ("rgba(28, 124, 67, .88)", "rgba(178, 26, 39, .76)", "#ffffff"),
+    "Ivory Coast": ("rgba(210, 112, 37, .88)", "rgba(24, 126, 69, .76)", "#ffffff"),
+    "Japan": ("rgba(137, 19, 45, .88)", "rgba(246, 246, 246, .18)", "#ffffff"),
+    "Jordan": ("rgba(28, 117, 65, .88)", "rgba(174, 28, 43, .76)", "#ffffff"),
+    "Mexico": ("rgba(23, 105, 56, .88)", "rgba(137, 24, 37, .78)", "#ffffff"),
+    "Morocco": ("rgba(151, 25, 35, .88)", "rgba(19, 93, 55, .76)", "#4fce78"),
+    "Netherlands": ("rgba(210, 90, 30, .86)", "rgba(17, 48, 128, .82)", "#ffffff"),
+    "New Zealand": ("rgba(22, 26, 31, .88)", "rgba(178, 32, 46, .70)", "#ffffff"),
+    "Norway": ("rgba(174, 27, 42, .88)", "rgba(24, 50, 132, .82)", "#ffffff"),
+    "Panama": ("rgba(181, 32, 47, .88)", "rgba(26, 78, 159, .78)", "#ffffff"),
+    "Paraguay": ("rgba(184, 31, 46, .88)", "rgba(28, 70, 147, .78)", "#ffffff"),
+    "Portugal": ("rgba(21, 104, 51, .88)", "rgba(147, 22, 34, .78)", "#f1d24f"),
+    "Qatar": ("rgba(111, 24, 58, .88)", "rgba(246, 246, 246, .14)", "#ffffff"),
+    "Saudi Arabia": ("rgba(20, 118, 64, .88)", "rgba(246, 246, 246, .14)", "#ffffff"),
+    "Scotland": ("rgba(29, 83, 164, .88)", "rgba(246, 246, 246, .16)", "#ffffff"),
+    "Senegal": ("rgba(24, 121, 68, .88)", "rgba(197, 44, 46, .70)", "#f1d24f"),
+    "South Africa": ("rgba(22, 112, 65, .88)", "rgba(200, 161, 34, .36)", "#f1d24f"),
+    "South Korea": ("rgba(175, 25, 45, .84)", "rgba(18, 50, 130, .78)", "#ffffff"),
+    "Spain": ("rgba(155, 26, 32, .88)", "rgba(172, 123, 18, .36)", "#f2d14b"),
+    "Sweden": ("rgba(31, 88, 168, .88)", "rgba(209, 170, 34, .38)", "#f1d24f"),
+    "Switzerland": ("rgba(185, 18, 30, .88)", "rgba(246, 246, 246, .16)", "#ffffff"),
+    "Tunisia": ("rgba(176, 28, 42, .88)", "rgba(246, 246, 246, .16)", "#ffffff"),
+    "Türkiye": ("rgba(181, 27, 42, .88)", "rgba(246, 246, 246, .14)", "#ffffff"),
+    "USA": ("rgba(30, 62, 138, .88)", "rgba(157, 24, 44, .78)", "#ffffff"),
+    "Uruguay": ("rgba(67, 138, 201, .88)", "rgba(218, 174, 43, .32)", "#f1c232"),
+    "Uzbekistan": ("rgba(31, 131, 183, .88)", "rgba(31, 142, 80, .70)", "#ffffff"),
 }
 
 
-def _mock_performers_for(team_name: str) -> list[tuple[str, str, object, str, str]]:
-    if team_name in _MOCK_PERFORMERS:
-        return _MOCK_PERFORMERS[team_name]
-    short = team_name.split()[0]
-    return [
-        ("Most Goals", f"{short} Forward", 3, "Goals", "MG"),
-        ("Most Assists", f"{short} Creator", 2, "Assists", "AS"),
-        ("Most Passes", f"{short} Midfielder", 210, "Passes", "PS"),
-        ("Best Pass Accuracy", f"{short} Defender", "90%", "Accuracy", "PA"),
-        ("Most Shots", f"{short} Attacker", 10, "Shots", "SH"),
-        ("Most Chances Created", f"{short} Playmaker", 6, "Chances", "CC"),
-        ("Most Tackles", f"{short} Ball Winner", 8, "Tackles", "TK"),
-        ("Most Interceptions", f"{short} Centre Back", 6, "Interceptions", "IN"),
-        ("Most Dribbles", f"{short} Winger", 7, "Dribbles", "DR"),
-        ("Most Duels Won", f"{short} Defender", 13, "Duels", "DU"),
-        ("Most Fouls Won", f"{short} Winger", 5, "Fouls Won", "FW"),
-        ("Team Minutes Played", f"{short} Goalkeeper", 180, "Minutes", "MIN"),
+def _team_theme_style(team_name: str) -> str:
+    primary, secondary, accent = TEAM_THEME_COLORS.get(
+        team_name,
+        ("rgba(37, 87, 128, .88)", "rgba(8, 23, 41, .82)", "#71df55"),
+    )
+    return (
+        f"--team-primary:{primary};"
+        f"--team-secondary:{secondary};"
+        f"--team-accent:{accent};"
+        f"--team-glow:color-mix(in srgb, {accent} 34%, transparent);"
+    )
+
+
+def _available_player_performers(player_stats, team_name: str) -> tuple[list[tuple[str, str, object, str, str, str]], int]:
+    if player_stats is None or player_stats.empty or "team" not in player_stats.columns:
+        return [], 0
+
+    team_players = player_stats[player_stats["team"] == team_name].copy()
+    if team_players.empty:
+        return [], 0
+
+    specs = [
+        ("Most Goals", "goals", "Goals", "MG"),
+        ("Most Assists", "assists", "Assists", "AS"),
+        ("Most Appearances", "appearances", "Apps", "AP"),
+        ("Most Starts", "starts", "Starts", "ST"),
+        ("Most Yellow Cards", "yellow_cards", "Yellow Cards", "YC"),
+        ("Most Red Cards", "red_cards", "Red Cards", "RC"),
+        ("Most Shots", "shots", "Shots", "SH"),
+        ("Most Shots on Target", "shots_on_target", "On Target", "SOT"),
+        ("Most Passes", "passes", "Passes", "PS"),
+        ("Best Pass Accuracy", "pass_accuracy", "Accuracy", "PA"),
+        ("Most Key Passes", "key_passes", "Key Passes", "KP"),
+        ("Most Tackles", "tackles", "Tackles", "TK"),
     ]
+    performers = []
+    for label, column, unit, token in specs:
+        if column not in team_players.columns:
+            continue
+        values = pd.to_numeric(team_players[column], errors="coerce")
+        valid = team_players[values.notna()].copy()
+        if valid.empty:
+            continue
+        valid[column] = values[values.notna()]
+        best = valid.sort_values([column, "player_name"], ascending=[False, True]).iloc[0]
+        value = best[column]
+        if pd.isna(value):
+            continue
+        if float(value) == 0 and column not in {"appearances", "starts"}:
+            continue
+        display_value = f"{float(value):.0f}" if float(value).is_integer() else f"{float(value):.1f}"
+        if column == "pass_accuracy":
+            display_value = f"{display_value}%"
+        position = str(best.get("position", "") or "").strip()
+        performers.append((label, str(best["player_name"]), display_value, unit, token, position))
+    return performers, len(team_players)
 
 
-def _name_initials(name: str) -> str:
-    parts = [part for part in str(name).replace("-", " ").split() if part]
-    return "".join(part[0] for part in parts[:2]).upper() or "P"
-
-
-def team_stats_dashboard(teams: list, standings, round_reach, matches=None, selected_team: str | None = None):
+def team_stats_dashboard(
+    teams: list,
+    standings,
+    round_reach,
+    matches=None,
+    player_stats=None,
+    selected_team: str | None = None,
+    show_team_list: bool = True,
+    player_data_updated: str = "Unavailable",
+):
     teams_by_name = {t.name: t for t in teams}
     rr = round_reach.set_index("team")
     st_by_team = standings.set_index("team")
     ranked_teams = sorted(teams, key=lambda t: (-t.elo, t.name))
     selected = teams_by_name.get(selected_team) or ranked_teams[0]
     selected_rank = next((idx for idx, team in enumerate(ranked_teams, start=1) if team.name == selected.name), 1)
+    theme_style = _team_theme_style(selected.name)
 
     selected_rr = rr.loc[selected.name]
     selected_st = st_by_team.loc[selected.name]
     selected_flag = _flag_image_html(selected, "wc-ta-hero-flag")
     selected_crest = _flag_image_html(selected, "wc-ta-crest")
-    side_flag = _flag_image_html(selected, "wc-group-flag-img")
     selected_form_values = selected.campaign_results or selected.recent_form
     selected_form = _form_chips(selected_form_values)
     selected_record = (
@@ -2352,37 +3672,63 @@ def team_stats_dashboard(teams: list, standings, round_reach, matches=None, sele
         else f"GF {selected.goals_for_l5} / GA {selected.goals_against_l5}"
     )
 
-    side_teams = ranked_teams[:14]
-    if selected.name not in {team.name for team in side_teams}:
-        side_teams = [selected] + side_teams[:13]
     side_rows = []
-    for team in side_teams:
+    for team in ranked_teams:
         active = " wc-ta-list-row-active" if team.name == selected.name else ""
         active_dot = '<span class="wc-ta-active-dot"></span>' if team.name == selected.name else ""
         flag = _flag_image_html(team, "wc-group-flag-img")
+        team_url = f"?page=Teams&team={quote(team.name)}"
         side_rows.append(
-            f"""<div class="wc-ta-list-row{active}">
+            f"""<a class="wc-ta-list-row{active}" href="{team_url}" target="_self">
                 <div class="wc-ta-list-team">{flag}<span>{escape(team.name)}</span></div>
                 {active_dot}
-            </div>"""
+            </a>"""
         )
 
+    performers, player_count = _available_player_performers(player_stats, selected.name)
     performer_rows = []
-    color_palette = ["#3fa659", "#2f7bd8", "#7d49dc", "#d46a2f", "#d5a52a", "#34a9b2", "#c04578", "#579bd8"]
-    for idx, (label, player, value, unit, token) in enumerate(_mock_performers_for(selected.name)):
-        color = color_palette[idx % len(color_palette)]
+    for label, player, value, unit, _token, position in performers[:12]:
+        position_badge = (
+            f'<span class="wc-ta-position-pill">{escape(position)}</span>'
+            if position and position.lower() != "nan"
+            else ""
+        )
         performer_rows.append(
             f"""<div class="wc-ta-performer">
                 <div class="wc-ta-performer-top">
-                    <div class="wc-ta-performer-icon" style="background:{color};">{escape(token)}</div>
                     <div class="wc-ta-performer-label">{escape(label)}</div>
                 </div>
-                <div class="wc-ta-avatar">{escape(_name_initials(player))}</div>
                 <div class="wc-ta-performer-name">{escape(player)}</div>
-                <div class="wc-ta-performer-value">{value}</div>
-                <div class="wc-ta-performer-unit">{escape(unit)}</div>
+                <div class="wc-ta-performer-stat">
+                    <div class="wc-ta-performer-number">
+                        <div class="wc-ta-performer-value">{value}</div>
+                        <div class="wc-ta-performer-unit">{escape(unit)}</div>
+                    </div>
+                    {position_badge}
+                </div>
             </div>"""
         )
+    if not performer_rows:
+        performer_rows.append(
+            """<div class="wc-ta-performer">
+                <div class="wc-ta-performer-top">
+                    <div class="wc-ta-performer-label">Player Data</div>
+                </div>
+                <div class="wc-ta-performer-name">No player rows available</div>
+                <div class="wc-ta-performer-stat">
+                    <div class="wc-ta-performer-number">
+                        <div class="wc-ta-performer-value">-</div>
+                        <div class="wc-ta-performer-unit">No statistics</div>
+                    </div>
+                </div>
+            </div>"""
+        )
+    player_note = (
+        f"Real StatBunker player data loaded for {player_count} {escape(selected.name)} players. "
+        f"Unavailable advanced fields are hidden. Refreshed: {escape(player_data_updated)}."
+        if player_count
+        else f"No player data available for this team yet. Last refresh: {escape(player_data_updated)}."
+    )
 
     match_rows = []
     if matches is not None:
@@ -2441,14 +3787,15 @@ def team_stats_dashboard(teams: list, standings, round_reach, matches=None, sele
         for label, prob, accent in outlook_rows
     )
 
-    html = f"""<div class="wc-ta-shell">
-        <aside class="wc-ta-panel wc-ta-side">
-            <div class="wc-ta-side-label">Selected Country</div>
-            <div class="wc-ta-selected-box">{side_flag}<span>{escape(selected.name)}</span></div>
+    side_html = f"""<aside class="wc-ta-panel wc-ta-side">
             <div class="wc-ta-side-label">All Teams</div>
             <div class="wc-ta-list">{''.join(side_rows)}</div>
             <div class="wc-ta-selected-box" style="justify-content:center;margin-top:18px;color:#9be36c;">Compare Teams</div>
-        </aside>
+        </aside>""" if show_team_list else ""
+    shell_class = "wc-ta-shell" if show_team_list else "wc-ta-shell wc-ta-shell-no-side"
+
+    html = f"""<div class="{shell_class}" style="{theme_style}">
+        {side_html}
 
         <main class="wc-ta-main">
             <section class="wc-ta-hero">
@@ -2470,7 +3817,7 @@ def team_stats_dashboard(teams: list, standings, round_reach, matches=None, sele
             <section class="wc-ta-panel">
                 <div class="wc-panel-title">Top Performers ({escape(selected.name)})</div>
                 <div class="wc-ta-performer-grid">{''.join(performer_rows)}</div>
-                <div class="wc-ta-overview-sub" style="text-align:center;margin-top:12px;">Mock player statistics until a real squad/player dataset is added.</div>
+                <div class="wc-ta-overview-sub" style="text-align:center;margin-top:12px;">{player_note}</div>
             </section>
 
             <section class="wc-ta-panel">
@@ -2511,8 +3858,10 @@ def match_card(match_row, team1, team2):
     played = bool(match_row.get("played", False))
     score_display = match_row.get("score_display", "TBD")
     status = match_row.get("status", "SCHEDULED")
-    match_date = match_row.get("match_date", match_row.get("date", ""))
-    kickoff_time = match_row.get("kickoff_time_utc", "")
+    match_date, kickoff_time, timezone_label = belgian_kickoff(
+        match_row.get("match_date", match_row.get("date", "")),
+        match_row.get("kickoff_time_utc", ""),
+    )
     if played:
         st.markdown(
             f"""<div class="wc-team-row">
@@ -2541,7 +3890,7 @@ def match_card(match_row, team1, team2):
     probability_bar(home_pct, draw_pct, away_pct, team1.name, team2.name)
     if match_date or kickoff_time:
         st.markdown(
-            f'<div class="wc-match-meta">Kickoff: {match_date} {kickoff_time} UTC</div>',
+            f'<div class="wc-match-meta">Kickoff: {match_date} {kickoff_time} {timezone_label}</div>',
             unsafe_allow_html=True,
         )
     c1, c2 = st.columns(2)
@@ -2552,6 +3901,6 @@ def match_card(match_row, team1, team2):
         )
     with c2:
         if match_row["upset_risk_score"] >= 0.7:
-            st.markdown(f'<span class="wc-upset">\u26a0 Upset potential ({match_row["upset_risk_score"]:.2f})</span>',
+            st.markdown(f'<span class="wc-upset">\u26a0 Prediction uncertainty ({match_row["upset_risk_score"]:.2f})</span>',
                          unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)

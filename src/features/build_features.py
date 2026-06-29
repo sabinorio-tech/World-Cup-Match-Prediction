@@ -39,8 +39,15 @@ FEATURE_COLUMNS = [
     "elo_diff",
     "home_elo",
     "away_elo",
+    "h2h_home_win_rate",
+    "h2h_avg_goal_diff",
     "result",
 ]
+
+H2H_FALLBACK = {
+    "h2h_home_win_rate": 0.5,
+    "h2h_avg_goal_diff": 0.0,
+}
 
 
 def _atomic_to_csv(df: pd.DataFrame, output_path: Path) -> Path:
@@ -153,6 +160,50 @@ def _append_match_to_history(histories: dict[str, list[dict]], row: pd.Series) -
     )
 
 
+def _pair_key(team_a: str, team_b: str) -> tuple[str, str]:
+    return tuple(sorted([team_a, team_b]))
+
+
+def _get_h2h_from_history(
+    h2h_histories: dict[tuple[str, str], list[dict]],
+    home_team: str,
+    away_team: str,
+    n: int = 10,
+    min_matches: int = 3,
+) -> dict:
+    recent = h2h_histories[_pair_key(home_team, away_team)][-n:]
+    if len(recent) < min_matches:
+        return H2H_FALLBACK.copy()
+
+    home_wins = 0
+    goal_diffs = []
+    for match in recent:
+        current_home_was_home = match["home_team"] == home_team
+        if current_home_was_home:
+            home_wins += int(match["result"] == "home_win")
+            goal_diffs.append(match["home_score"] - match["away_score"])
+        else:
+            home_wins += int(match["result"] == "away_win")
+            goal_diffs.append(match["away_score"] - match["home_score"])
+
+    return {
+        "h2h_home_win_rate": home_wins / len(recent),
+        "h2h_avg_goal_diff": sum(goal_diffs) / len(goal_diffs),
+    }
+
+
+def _append_match_to_h2h(h2h_histories: dict[tuple[str, str], list[dict]], row: pd.Series) -> None:
+    h2h_histories[_pair_key(row["home_team"], row["away_team"])].append(
+        {
+            "home_team": row["home_team"],
+            "away_team": row["away_team"],
+            "home_score": row["home_score"],
+            "away_score": row["away_score"],
+            "result": row["result"],
+        }
+    )
+
+
 def _build_elo_lookup(elo_yearly: pd.DataFrame) -> dict[str, tuple[list[int], list[float]]]:
     lookup = {}
     for country, group in elo_yearly.sort_values("year").groupby("country"):
@@ -182,6 +233,7 @@ def build_feature_frame(results: pd.DataFrame, elo: pd.DataFrame) -> pd.DataFram
     elo_yearly = prepare_yearly_elo(elo)
     elo_lookup = _build_elo_lookup(elo_yearly)
     histories: dict[str, list[dict]] = defaultdict(list)
+    h2h_histories: dict[tuple[str, str], list[dict]] = defaultdict(list)
 
     rows = []
     for date, same_day_matches in matches.groupby("date", sort=True):
@@ -193,6 +245,7 @@ def build_feature_frame(results: pd.DataFrame, elo: pd.DataFrame) -> pd.DataFram
             away_form = _summarize_team_history(histories[away], n=10)
             home_elo = _get_elo_from_lookup(home, date, elo_lookup)
             away_elo = _get_elo_from_lookup(away, date, elo_lookup)
+            h2h = _get_h2h_from_history(h2h_histories, home, away)
 
             rows.append(
                 {
@@ -212,12 +265,15 @@ def build_feature_frame(results: pd.DataFrame, elo: pd.DataFrame) -> pd.DataFram
                     "elo_diff": home_elo - away_elo,
                     "home_elo": home_elo,
                     "away_elo": away_elo,
+                    "h2h_home_win_rate": h2h["h2h_home_win_rate"],
+                    "h2h_avg_goal_diff": h2h["h2h_avg_goal_diff"],
                     "result": row["result"],
                 }
             )
 
         for _, row in same_day_matches.iterrows():
             _append_match_to_history(histories, row)
+            _append_match_to_h2h(h2h_histories, row)
 
     features = pd.DataFrame(rows, columns=FEATURE_COLUMNS)
     if features.empty:
