@@ -1,0 +1,33 @@
+match_number,match_id,stage,date,kickoff_time,venue,city,country,home_slot,away_slot,home_team,away_team,home_goals,away_goals,home_score_penalties,away_score_penalties,status,score_display,winner,result_source,is_resolved,resolution_source
+73,537417,Round of 32,2026-06-28,19:00,MetLife Stadium,East Rutherford,USA,2A,2B,South Africa,Canada,0.0,1.0,,,FINISHED,0-1,Canada,actual,True,football_data_api_confirmed
+74,537415,Round of 32,2026-06-29,20:30,AT&T Stadium,Arlington,USA,1E,3D,Germany,Paraguay,1.0,1.0,3.0,4.0,FINISHED,1–1 (3–4 pens),Paraguay,actual,True,football_data_api_confirmed
+75,537418,Round of 32,2026-06-30,01:00,NRG Stadium,Houston,USA,1F,2C,Netherlands,Morocco,1.0,1.0,2.0,3.0,FINISHED,1–1 (2–3 pens),Morocco,actual,True,football_data_api_confirmed
+76,537423,Round of 32,2026-06-29,17:00,Rose Bowl,Pasadena,USA,1C,2F,Brazil,Japan,2.0,1.0,,,FINISHED,2-1,Brazil,actual,True,football_data_api_confirmed
+77,537416,Round of 32,2026-06-30,21:00,SoFi Stadium,Inglewood,USA,1I,3F,France,Sweden,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+78,537424,Round of 32,2026-06-30,17:00,Lumen Field,Seattle,USA,2E,2I,Ivory Coast,Norway,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+79,537425,Round of 32,2026-07-01,01:00,Mercedes-Benz Stadium,Atlanta,USA,1A,3E,Mexico,Ecuador,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+80,537426,Round of 32,2026-07-01,16:00,Hard Rock Stadium,Miami,USA,1L,3K,England,DR Congo,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+81,537421,Round of 32,2026-07-02,00:00,Lincoln Financial Field,Philadelphia,USA,1D,3B,USA,Bosnia and Herzegovina,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+82,537422,Round of 32,2026-07-01,20:00,Arrowhead Stadium,Kansas City,USA,1G,3I,Belgium,Senegal,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+83,537419,Round of 32,2026-07-02,23:00,Gillette Stadium,Foxborough,USA,2K,2L,Portugal,Croatia,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+84,537420,Round of 32,2026-07-02,19:00,BC Place,Vancouver,Canada,1H,2J,Spain,Austria,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+85,537429,Round of 32,2026-07-03,03:00,BMO Field,Toronto,Canada,1B,3J,Switzerland,Algeria,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+86,537427,Round of 32,2026-07-03,22:00,Estadio BBVA,Monterrey,Mexico,1J,2H,Argentina,Cape Verde,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+87,537430,Round of 32,2026-07-04,01:30,Estadio Akron,Guadalajara,Mexico,1K,3L,Colombia,Ghana,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+88,537428,Round of 32,2026-07-03,18:00,Estadio Azteca,Mexico City,Mexico,2D,2G,Australia,Egypt,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+89,537376,Round of 16,2026-07-04,17:00,AT&T Stadium,Arlington,USA,W73,W75,Canada,Morocco,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+90,537375,Round of 16,2026-07-04,21:00,MetLife Stadium,East Rutherford,USA,W74,W77,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+91,537377,Round of 16,2026-07-05,20:00,Rose Bowl,Pasadena,USA,W76,W78,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+92,537378,Round of 16,2026-07-06,00:00,NRG Stadium,Houston,USA,W79,W80,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+93,537379,Round of 16,2026-07-06,19:00,SoFi Stadium,Inglewood,USA,W83,W84,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+94,537380,Round of 16,2026-07-07,00:00,Lumen Field,Seattle,USA,W81,W82,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+95,537381,Round of 16,2026-07-07,16:00,Hard Rock Stadium,Miami,USA,W86,W88,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+96,537382,Round of 16,2026-07-07,20:00,Mercedes-Benz Stadium,Atlanta,USA,W85,W87,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+97,537383,Quarter-final,2026-07-09,20:00,AT&T Stadium,Arlington,USA,W89,W90,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+98,537384,Quarter-final,2026-07-10,19:00,MetLife Stadium,East Rutherford,USA,W93,W94,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+99,537385,Quarter-final,2026-07-11,21:00,Rose Bowl,Pasadena,USA,W91,W92,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+100,537386,Quarter-final,2026-07-12,01:00,NRG Stadium,Houston,USA,W95,W96,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+101,537387,Semi-final,2026-07-14,19:00,AT&T Stadium,Arlington,USA,W97,W98,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+102,537388,Semi-final,2026-07-15,19:00,MetLife Stadium,East Rutherford,USA,W99,W100,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+103,537389,3rd Place Match,2026-07-18,21:00,Hard Rock Stadium,Miami,USA,L101,L102,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+104,537390,Final,2026-07-19,19:00,MetLife Stadium,East Rutherford,USA,W101,W102,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round

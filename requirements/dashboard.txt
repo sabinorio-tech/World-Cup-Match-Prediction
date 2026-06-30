@@ -1,3 +1,4 @@
-# Work in Progress
-
-# Dashboard dependencies will be added when dashboard development begins.
+streamlit>=1.35
+plotly
+altair
+pyarrow
