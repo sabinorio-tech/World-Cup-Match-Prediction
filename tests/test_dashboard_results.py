@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "dashboard"))
 from components import _bracket_path_order, _match_resolution
 from time_utils import belgian_kickoff
 from src.utils.match_results import get_match_source_of_truth
+from src.transform.live_matches import flatten_match
 
 
 def test_live_dataset_has_all_104_fixtures():
@@ -79,6 +80,34 @@ def test_tied_knockout_without_penalties_is_unresolved():
     assert truth["winner"] is None
 
 
+def test_penalty_shootout_preserves_match_score_and_displays_penalties():
+    row = flatten_match({
+        "id": 123,
+        "status": "FINISHED",
+        "homeTeam": {"name": "Germany"},
+        "awayTeam": {"name": "Paraguay"},
+        "score": {
+            "winner": "AWAY_TEAM",
+            "duration": "PENALTY_SHOOTOUT",
+            "regularTime": {"home": 1, "away": 1},
+            "extraTime": {"home": 0, "away": 0},
+            "fullTime": {"home": 4, "away": 5},
+            "halfTime": {"home": 0, "away": 0},
+            "penalties": {"home": 3, "away": 4},
+        },
+    })
+
+    assert row["home_score"] == 1
+    assert row["away_score"] == 1
+    assert row["home_score_full_time"] == 4
+    assert row["away_score_full_time"] == 5
+    assert row["score_display"] == "1\u20131 (3\u20134 pens)"
+
+    truth = get_match_source_of_truth(row, is_knockout=True)
+    assert truth["result_source"] == "actual"
+    assert truth["winner"] == "Paraguay"
+
+
 def test_null_future_match_is_safe():
     truth = get_match_source_of_truth(
         {"status": "TIMED", "home_team": None, "away_team": None},
@@ -103,8 +132,16 @@ def test_dashboard_output_schemas():
 def test_knockout_display_order_follows_winner_paths():
     knockout = pd.read_csv(ROOT / "data" / "processed" / "knockout_matches.csv")
     r32_order, r16_order = _bracket_path_order(knockout)
-    assert r32_order == [73, 75, 74, 77, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87]
-    assert r16_order == [89, 90, 93, 94, 91, 92, 95, 96]
+    expected_r32 = [73, 75, 74, 77, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87]
+    expected_r16 = [89, 90, 93, 94, 91, 92, 95, 96]
+    assert r32_order == expected_r32
+    assert r16_order == expected_r16
+
+    # A live provider may replace W73/W75 with confirmed group slots once
+    # those teams advance. Visual ordering must still follow the official tree.
+    progressed = knockout.copy()
+    progressed.loc[progressed["match_number"].eq(89), ["home_slot", "away_slot"]] = ["2B", "1F"]
+    assert _bracket_path_order(progressed) == (expected_r32, expected_r16)
 
 
 def test_kickoff_is_displayed_in_belgian_summer_time():

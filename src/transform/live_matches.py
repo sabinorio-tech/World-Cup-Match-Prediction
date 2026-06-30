@@ -38,6 +38,10 @@ OUTPUT_COLUMNS = [
     "away_score",
     "home_score_full_time",
     "away_score_full_time",
+    "home_score_regular_time",
+    "away_score_regular_time",
+    "home_score_extra_time",
+    "away_score_extra_time",
     "home_score_half_time",
     "away_score_half_time",
     "home_score_penalties",
@@ -55,10 +59,34 @@ def _as_dict(value: Any) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
 
-def _score_display(home_score: Any, away_score: Any) -> str:
+def _score_display(
+    home_score: Any,
+    away_score: Any,
+    home_penalties: Any = None,
+    away_penalties: Any = None,
+) -> str:
     if pd.isna(home_score) or pd.isna(away_score):
         return "TBD"
+    if not pd.isna(home_penalties) and not pd.isna(away_penalties):
+        return (
+            f"{int(home_score)}\u2013{int(away_score)} "
+            f"({int(home_penalties)}\u2013{int(away_penalties)} pens)"
+        )
     return f"{int(home_score)}-{int(away_score)}"
+
+
+def _score_before_penalties(
+    regular_score: Any,
+    extra_time_score: Any,
+    full_time_score: Any,
+    penalty_score: Any,
+) -> Any:
+    """Return the football score without shootout kicks."""
+    if regular_score is not None:
+        return regular_score + (extra_time_score or 0)
+    if full_time_score is not None and penalty_score is not None:
+        return full_time_score - penalty_score
+    return full_time_score
 
 
 def flatten_match(match: dict[str, Any]) -> dict[str, Any]:
@@ -66,12 +94,28 @@ def flatten_match(match: dict[str, Any]) -> dict[str, Any]:
     away_team = _as_dict(match.get("awayTeam"))
     score = _as_dict(match.get("score"))
     full_time = _as_dict(score.get("fullTime"))
+    regular_time = _as_dict(score.get("regularTime"))
+    extra_time = _as_dict(score.get("extraTime"))
     half_time = _as_dict(score.get("halfTime"))
     penalties = _as_dict(score.get("penalties"))
 
     home_full_time = full_time.get("home")
     away_full_time = full_time.get("away")
-    has_score = home_full_time is not None and away_full_time is not None
+    home_penalties = penalties.get("home")
+    away_penalties = penalties.get("away")
+    has_shootout = home_penalties is not None and away_penalties is not None
+    if has_shootout:
+        home_score = _score_before_penalties(
+            regular_time.get("home"), extra_time.get("home"), home_full_time, home_penalties
+        )
+        away_score = _score_before_penalties(
+            regular_time.get("away"), extra_time.get("away"), away_full_time, away_penalties
+        )
+    else:
+        home_score = home_full_time
+        away_score = away_full_time
+
+    has_score = home_score is not None and away_score is not None
     status = match.get("status")
 
     return {
@@ -102,15 +146,19 @@ def flatten_match(match: dict[str, Any]) -> dict[str, Any]:
 
         "winner": score.get("winner"),
         "duration": score.get("duration"),
-        "home_score": home_full_time,
-        "away_score": away_full_time,
+        "home_score": home_score,
+        "away_score": away_score,
         "home_score_full_time": home_full_time,
         "away_score_full_time": away_full_time,
+        "home_score_regular_time": regular_time.get("home"),
+        "away_score_regular_time": regular_time.get("away"),
+        "home_score_extra_time": extra_time.get("home"),
+        "away_score_extra_time": extra_time.get("away"),
         "home_score_half_time": half_time.get("home"),
         "away_score_half_time": half_time.get("away"),
-        "home_score_penalties": penalties.get("home"),
-        "away_score_penalties": penalties.get("away"),
-        "score_display": _score_display(home_full_time, away_full_time),
+        "home_score_penalties": home_penalties,
+        "away_score_penalties": away_penalties,
+        "score_display": _score_display(home_score, away_score, home_penalties, away_penalties),
     }
 
 
