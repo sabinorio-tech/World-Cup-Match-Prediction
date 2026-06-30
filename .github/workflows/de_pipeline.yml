@@ -1,28 +1,38 @@
-name: Data Engineering Pipeline
+name: Data and ML Pipeline
 
 on:
   workflow_dispatch:
   schedule:
-    # GitHub Actions cron uses UTC. This runs at 15:00 Belgian summer time.
-    - cron: "0 13 * * *"
+    # GitHub Actions cron uses UTC. This runs at 08:00 Belgian summer time.
+    - cron: "0 6 * * *"
   push:
     branches:
       - main
+      - feature/ai-assistant
     paths:
       - "main.py"
       - "src/**"
-      - "data/raw/**"
+      - "dashboard/**"
+      - "tests/**"
+      - "data/raw/IF_1872_2026/**"
+      - "data/raw/FIFA_WK_Elo_Ratings/**"
+      - "data/raw/FIFA_WC_1930_2026/**"
       - "requirements.txt"
       - "requirements/**"
       - ".github/workflows/de_pipeline.yml"
 
+permissions:
+  contents: write
+
 jobs:
-  run-de-pipeline:
+  run-data-ml-pipeline:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -45,10 +55,14 @@ jobs:
           test -f data/raw/FIFA_WC_1930_2026/wc_2026_teams.csv
           test -f data/raw/FIFA_WC_1930_2026/wc_2026_fixtures.csv
 
-      - name: Run Data Engineering pipeline
-        run: python main.py
+      - name: Run Data and ML pipeline
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+        run: |
+          test -n "$FOOTBALL_DATA_API_KEY" || (echo "Missing FOOTBALL_DATA_API_KEY GitHub Secret" && exit 1)
+          python main.py
 
-      - name: Check processed outputs
+      - name: Check generated outputs
         run: |
           test -s data/processed/results_historical.csv
           test -s data/processed/results_future.csv
@@ -58,9 +72,41 @@ jobs:
           test -s data/processed/wc_2026_fixtures_validated.csv
           test -s data/processed/wc_2026_fixtures_enriched.csv
           test -s data/processed/model_training_base.csv
+          test -s data/raw/live/football_data_wc_matches.json
+          test -s data/processed/live_matches.csv
+          test -s data/processed/knockout_matches.csv
+          test -s data/processed/player_profiles.csv
+          test -s data/processed/player_stats.csv
+          test -s data/raw/player_data/statbunker_player_standings.html
+          test -s data/raw/player_data/statbunker_fantasy_players.html
+          test -s data/raw/player_data/statbunker_shots_on_goal.html
+          test -s data/processed/features.csv
+          test -s models/xgb_model.pkl
+          test -s models/poisson_model.pkl
+          test -s data/processed/predictions_2026.csv
+          test -s data/processed/prediction_evaluation.csv
+          python -c "import pandas as pd; f=pd.read_csv('data/processed/features.csv'); assert {'h2h_home_win_rate','h2h_avg_goal_diff'}.issubset(f.columns)"
+          python -c "import pickle; x=pickle.load(open('models/xgb_model.pkl','rb')); p=pickle.load(open('models/poisson_model.pkl','rb')); assert x.get('model_version') == 'v2_h2h'; assert p.get('model_version') == 'v2_h2h'"
 
-      - name: Upload processed datasets
+      - name: Run model and dashboard regression tests
+        run: python -m pytest tests/test_ds_v2.py tests/test_dashboard_results.py -q
+
+      - name: Upload generated datasets and models
         uses: actions/upload-artifact@v4
         with:
-          name: processed-data
-          path: data/processed/
+          name: generated-data-and-models
+          path: |
+            data/processed/
+            data/raw/live/football_data_wc_matches.json
+            data/raw/player_data/
+            models/xgb_model.pkl
+            models/poisson_model.pkl
+
+      - name: Commit updated generated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/raw/live/football_data_wc_matches.json data/processed/*.csv
+          git add -f models/xgb_model.pkl models/poisson_model.pkl
+          git commit -m "Update generated World Cup data" || echo "No changes to commit"
+          git push origin HEAD:${{ github.ref_name }}

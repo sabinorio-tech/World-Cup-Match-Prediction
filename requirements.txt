@@ -1,5 +1,6 @@
--r requirements/base.txt
--r requirements/de.txt
--r requirements/ds.txt
--r requirements/dashboard.txt
--r requirements/dev.txt
+streamlit>=1.35
+pandas>=2.2
+numpy>=1.26
+scipy>=1.15.0
+scikit-learn>=1.9.0
+xgboost>=3.3.0

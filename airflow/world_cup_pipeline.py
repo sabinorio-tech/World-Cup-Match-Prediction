@@ -7,15 +7,13 @@ from pathlib import Path
 
 from airflow import DAG
 
-try:
-    from airflow.providers.standard.operators.python import PythonOperator
-except ImportError:
-    from airflow.operators.python import PythonOperator
+from airflow.providers.standard.operators.python import PythonOperator
+
 
 BASE_DIR = Path(
     os.environ.get(
         "WORLD_CUP_PROJECT_DIR",
-        "/home/seans/becode/projects/World-Cup-Match-Prediction",
+        Path(__file__).resolve().parents[1],
     )
 ).resolve()
 RAW_DIR = BASE_DIR / "data" / "raw"

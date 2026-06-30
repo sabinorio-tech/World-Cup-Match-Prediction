@@ -1,0 +1,73 @@
+match_id,home_team,away_team,predicted_winner,actual_winner,prediction_correct,model_confidence
+537327,Mexico,South Africa,Mexico,Mexico,True,0.61
+537328,South Korea,Czechia,South Korea,South Korea,True,0.489
+537329,Czechia,South Africa,Czechia,Draw,False,0.463
+537330,South Korea,Mexico,Mexico,Mexico,True,0.474
+537331,Czechia,Mexico,Mexico,Mexico,True,0.505
+537332,South Africa,South Korea,South Korea,South Africa,False,0.501
+537333,Canada,Bosnia and Herzegovina,Canada,Draw,False,0.584
+537334,Qatar,Switzerland,Switzerland,Draw,False,0.677
+537335,Switzerland,Bosnia and Herzegovina,Switzerland,Switzerland,True,0.582
+537336,Canada,Qatar,Canada,Canada,True,0.724
+537338,Bosnia and Herzegovina,Qatar,Bosnia and Herzegovina,Bosnia and Herzegovina,True,0.594
+537337,Switzerland,Canada,Switzerland,Switzerland,True,0.452
+537339,Brazil,Morocco,Brazil,Draw,False,0.441
+537340,Haiti,Scotland,Scotland,Scotland,True,0.483
+537343,Brazil,Scotland,Brazil,Brazil,True,0.549
+537344,Morocco,Haiti,Morocco,Morocco,True,0.605
+537341,Brazil,Haiti,Brazil,Brazil,True,0.593
+537342,Morocco,Scotland,Morocco,Morocco,True,0.473
+537345,USA,Paraguay,USA,USA,True,0.466
+537346,Australia,Türkiye,Australia,Australia,True,0.394
+537348,USA,Australia,Australia,USA,False,0.408
+537347,Türkiye,Paraguay,Türkiye,Paraguay,False,0.455
+537350,Paraguay,Australia,Paraguay,Draw,False,0.372
+537349,Türkiye,USA,Türkiye,Türkiye,True,0.496
+537351,Germany,Curaçao,Germany,Germany,True,0.662
+537352,Ivory Coast,Ecuador,Ivory Coast,Ivory Coast,True,0.375
+537354,Ecuador,Curaçao,Ecuador,Draw,False,0.589
+537353,Germany,Ivory Coast,Germany,Germany,True,0.507
+537356,Curaçao,Ivory Coast,Ivory Coast,Ivory Coast,True,0.56
+537355,Ecuador,Germany,Ecuador,Ecuador,True,0.385
+537357,Netherlands,Japan,Netherlands,Draw,False,0.432
+537358,Sweden,Tunisia,Sweden,Sweden,True,0.406
+537359,Netherlands,Sweden,Netherlands,Netherlands,True,0.632
+537360,Tunisia,Japan,Japan,Japan,True,0.494
+537362,Japan,Sweden,Japan,Draw,False,0.613
+537361,Tunisia,Netherlands,Netherlands,Netherlands,True,0.515
+537363,Belgium,Egypt,Belgium,Draw,False,0.539
+537364,Iran,New Zealand,Iran,Draw,False,0.426
+537365,Belgium,Iran,Belgium,Draw,False,0.516
+537366,New Zealand,Egypt,New Zealand,Egypt,False,0.439
+537368,Egypt,Iran,Iran,Draw,False,0.386
+537367,New Zealand,Belgium,Belgium,Belgium,True,0.407
+537370,Saudi Arabia,Uruguay,Uruguay,Draw,False,0.441
+537369,Spain,Cape Verde,Spain,Draw,False,0.646
+537371,Spain,Saudi Arabia,Spain,Spain,True,0.685
+537372,Uruguay,Cape Verde,Uruguay,Draw,False,0.491
+537374,Cape Verde,Saudi Arabia,Cape Verde,Draw,False,0.432
+537373,Uruguay,Spain,Spain,Spain,True,0.503
+537391,France,Senegal,France,France,True,0.526
+537392,Iraq,Norway,Norway,Norway,True,0.666
+537393,France,Iraq,France,France,True,0.666
+537394,Norway,Senegal,Norway,Norway,True,0.516
+537395,Norway,France,France,France,True,0.407
+537396,Senegal,Iraq,Senegal,Senegal,True,0.61
+537397,Argentina,Algeria,Argentina,Argentina,True,0.579
+537398,Austria,Jordan,Austria,Austria,True,0.556
+537399,Argentina,Austria,Argentina,Argentina,True,0.535
+537400,Jordan,Algeria,Algeria,Algeria,True,0.405
+537402,Algeria,Austria,Austria,Draw,False,0.427
+537401,Jordan,Argentina,Argentina,Argentina,True,0.58
+537403,Portugal,DR Congo,Portugal,Draw,False,0.524
+537404,Uzbekistan,Colombia,Colombia,Colombia,True,0.454
+537406,Colombia,DR Congo,Colombia,Colombia,True,0.485
+537405,Portugal,Uzbekistan,Portugal,Portugal,True,0.549
+537407,Colombia,Portugal,Portugal,Draw,False,0.396
+537408,DR Congo,Uzbekistan,DR Congo,DR Congo,True,0.388
+537409,England,Croatia,England,England,True,0.598
+537410,Ghana,Panama,Panama,Ghana,False,0.372
+537412,Croatia,Panama,Croatia,Croatia,True,0.551
+537411,England,Ghana,England,Draw,False,0.649
+537414,Croatia,Ghana,Croatia,Croatia,True,0.56
+537413,Panama,England,England,England,True,0.566
