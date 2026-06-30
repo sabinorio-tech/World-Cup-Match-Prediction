@@ -9,6 +9,7 @@ from urllib.parse import quote
 import pandas as pd
 import streamlit as st
 
+from src.transform.knockout_matches import OFFICIAL_KNOCKOUT_SLOT_MAP, STAGE_LABELS
 from src.utils.match_results import get_match_source_of_truth
 from time_utils import belgian_kickoff
 
@@ -3231,6 +3232,17 @@ def _bracket_path_order(knockout_matches) -> tuple[list[int], list[int]]:
         stage: _winner_sources(knockout_matches[knockout_matches["stage"].eq(stage)])
         for stage in ["Round of 16", "Quarter-final", "Semi-final"]
     }
+    for match_number, stage_api, home_slot, away_slot in OFFICIAL_KNOCKOUT_SLOT_MAP:
+        stage = STAGE_LABELS.get(stage_api)
+        if stage not in stage_sources:
+            continue
+        official_sources = []
+        for slot in [home_slot, away_slot]:
+            if slot.startswith("W") and slot[1:].isdigit():
+                official_sources.append(int(slot[1:]))
+        if official_sources:
+            stage_sources[stage][match_number] = official_sources
+
     r16_order = []
     r32_order = []
     for semifinal_number in sorted(stage_sources["Semi-final"]):

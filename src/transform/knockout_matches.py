@@ -368,8 +368,11 @@ def resolve_knockout_matches(
         )
 
         if has_confirmed_live_teams:
-            home_slot = team_slot_lookup.get(str(live_home_team), home_slot)
-            away_slot = team_slot_lookup.get(str(live_away_team), away_slot)
+            # Concrete group slots add useful detail in the Round of 32. Later
+            # rounds must retain W/L slots so bracket lineage remains stable.
+            if stage_api == "LAST_32":
+                home_slot = team_slot_lookup.get(str(live_home_team), home_slot)
+                away_slot = team_slot_lookup.get(str(live_away_team), away_slot)
             home_team = _project_team_name(live_home_team)
             away_team = _project_team_name(live_away_team)
             is_resolved = True

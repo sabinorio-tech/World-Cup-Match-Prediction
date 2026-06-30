@@ -103,8 +103,16 @@ def test_dashboard_output_schemas():
 def test_knockout_display_order_follows_winner_paths():
     knockout = pd.read_csv(ROOT / "data" / "processed" / "knockout_matches.csv")
     r32_order, r16_order = _bracket_path_order(knockout)
-    assert r32_order == [73, 75, 74, 77, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87]
-    assert r16_order == [89, 90, 93, 94, 91, 92, 95, 96]
+    expected_r32 = [73, 75, 74, 77, 83, 84, 81, 82, 76, 78, 79, 80, 86, 88, 85, 87]
+    expected_r16 = [89, 90, 93, 94, 91, 92, 95, 96]
+    assert r32_order == expected_r32
+    assert r16_order == expected_r16
+
+    # A live provider may replace W73/W75 with confirmed group slots once
+    # those teams advance. Visual ordering must still follow the official tree.
+    progressed = knockout.copy()
+    progressed.loc[progressed["match_number"].eq(89), ["home_slot", "away_slot"]] = ["2B", "1F"]
+    assert _bracket_path_order(progressed) == (expected_r32, expected_r16)
 
 
 def test_kickoff_is_displayed_in_belgian_summer_time():
