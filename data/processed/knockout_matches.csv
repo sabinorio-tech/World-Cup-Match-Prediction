@@ -6,9 +6,9 @@ match_number,match_id,stage,date,kickoff_time,venue,city,country,home_slot,away_
 77,537416,Round of 32,2026-06-30,21:00,SoFi Stadium,Inglewood,USA,1I,3F,France,Sweden,3.0,0.0,,,FINISHED,3-0,France,actual,True,football_data_api_confirmed
 78,537424,Round of 32,2026-06-30,17:00,Lumen Field,Seattle,USA,2E,2I,Ivory Coast,Norway,1.0,2.0,,,FINISHED,1-2,Norway,actual,True,football_data_api_confirmed
 79,537425,Round of 32,2026-07-01,01:00,Mercedes-Benz Stadium,Atlanta,USA,1A,3E,Mexico,Ecuador,2.0,0.0,,,FINISHED,2-0,Mexico,actual,True,football_data_api_confirmed
-80,537426,Round of 32,2026-07-01,16:00,Hard Rock Stadium,Miami,USA,1L,3K,England,DR Congo,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+80,537426,Round of 32,2026-07-01,16:00,Hard Rock Stadium,Miami,USA,1L,3K,England,DR Congo,2.0,1.0,,,FINISHED,2-1,England,actual,True,football_data_api_confirmed
 81,537421,Round of 32,2026-07-02,00:00,Lincoln Financial Field,Philadelphia,USA,1D,3B,USA,Bosnia and Herzegovina,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-82,537422,Round of 32,2026-07-01,20:00,Arrowhead Stadium,Kansas City,USA,1G,3I,Belgium,Senegal,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+82,537422,Round of 32,2026-07-01,20:00,Arrowhead Stadium,Kansas City,USA,1G,3I,Belgium,Senegal,0.0,1.0,,,PAUSED,0-1,,unresolved,True,football_data_api_confirmed
 83,537419,Round of 32,2026-07-02,23:00,Gillette Stadium,Foxborough,USA,2K,2L,Portugal,Croatia,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 84,537420,Round of 32,2026-07-02,19:00,BC Place,Vancouver,Canada,1H,2J,Spain,Austria,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 85,537429,Round of 32,2026-07-03,03:00,BMO Field,Toronto,Canada,1B,3J,Switzerland,Algeria,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
