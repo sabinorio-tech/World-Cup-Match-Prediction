@@ -5,9 +5,9 @@ match_number,match_id,stage,date,kickoff_time,venue,city,country,home_slot,away_
 76,537423,Round of 32,2026-06-29,17:00,Rose Bowl,Pasadena,USA,1C,2F,Brazil,Japan,2.0,1.0,,,FINISHED,2-1,Brazil,actual,True,football_data_api_confirmed
 77,537416,Round of 32,2026-06-30,21:00,SoFi Stadium,Inglewood,USA,1I,3F,France,Sweden,3.0,0.0,,,FINISHED,3-0,France,actual,True,football_data_api_confirmed
 78,537424,Round of 32,2026-06-30,17:00,Lumen Field,Seattle,USA,2E,2I,Ivory Coast,Norway,1.0,2.0,,,FINISHED,1-2,Norway,actual,True,football_data_api_confirmed
-79,537425,Round of 32,2026-07-01,01:00,Mercedes-Benz Stadium,Atlanta,USA,1A,3E,Mexico,Ecuador,2.0,0.0,,,FINISHED,2-0,Mexico,actual,True,football_data_api_confirmed
+79,537425,Round of 32,2026-07-01,02:00,Mercedes-Benz Stadium,Atlanta,USA,1A,3E,Mexico,Ecuador,2.0,0.0,,,FINISHED,2-0,Mexico,actual,True,football_data_api_confirmed
 80,537426,Round of 32,2026-07-01,16:00,Hard Rock Stadium,Miami,USA,1L,3K,England,DR Congo,2.0,1.0,,,FINISHED,2-1,England,actual,True,football_data_api_confirmed
-81,537421,Round of 32,2026-07-02,00:00,Lincoln Financial Field,Philadelphia,USA,1D,3B,USA,Bosnia and Herzegovina,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+81,537421,Round of 32,2026-07-02,00:00,Lincoln Financial Field,Philadelphia,USA,1D,3B,USA,Bosnia and Herzegovina,2.0,0.0,,,FINISHED,2-0,USA,actual,True,football_data_api_confirmed
 82,537422,Round of 32,2026-07-01,20:00,Arrowhead Stadium,Kansas City,USA,1G,3I,Belgium,Senegal,3.0,2.0,,,FINISHED,3-2,Belgium,actual,True,football_data_api_confirmed
 83,537419,Round of 32,2026-07-02,23:00,Gillette Stadium,Foxborough,USA,2K,2L,Portugal,Croatia,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 84,537420,Round of 32,2026-07-02,19:00,BC Place,Vancouver,Canada,1H,2J,Spain,Austria,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
@@ -18,9 +18,9 @@ match_number,match_id,stage,date,kickoff_time,venue,city,country,home_slot,away_
 89,537376,Round of 16,2026-07-04,17:00,AT&T Stadium,Arlington,USA,W73,W75,Canada,Morocco,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 90,537375,Round of 16,2026-07-04,21:00,MetLife Stadium,East Rutherford,USA,W74,W77,Paraguay,France,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 91,537377,Round of 16,2026-07-05,20:00,Rose Bowl,Pasadena,USA,W76,W78,Brazil,Norway,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-92,537378,Round of 16,2026-07-06,00:00,NRG Stadium,Houston,USA,W79,W80,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+92,537378,Round of 16,2026-07-06,00:00,NRG Stadium,Houston,USA,W79,W80,Mexico,England,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 93,537379,Round of 16,2026-07-06,19:00,SoFi Stadium,Inglewood,USA,W83,W84,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
-94,537380,Round of 16,2026-07-07,00:00,Lumen Field,Seattle,USA,W81,W82,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+94,537380,Round of 16,2026-07-07,00:00,Lumen Field,Seattle,USA,W81,W82,USA,Belgium,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 95,537381,Round of 16,2026-07-07,16:00,Hard Rock Stadium,Miami,USA,W86,W88,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
 96,537382,Round of 16,2026-07-07,20:00,Mercedes-Benz Stadium,Atlanta,USA,W85,W87,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
 97,537383,Quarter-final,2026-07-09,20:00,AT&T Stadium,Arlington,USA,W89,W90,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
