@@ -9,9 +9,9 @@ match_number,match_id,stage,date,kickoff_time,venue,city,country,home_slot,away_
 80,537426,Round of 32,2026-07-01,16:00,Hard Rock Stadium,Miami,USA,1L,3K,England,DR Congo,2.0,1.0,,,FINISHED,2-1,England,actual,True,football_data_api_confirmed
 81,537421,Round of 32,2026-07-02,00:00,Lincoln Financial Field,Philadelphia,USA,1D,3B,USA,Bosnia and Herzegovina,2.0,0.0,,,FINISHED,2-0,USA,actual,True,football_data_api_confirmed
 82,537422,Round of 32,2026-07-01,20:00,Arrowhead Stadium,Kansas City,USA,1G,3I,Belgium,Senegal,3.0,2.0,,,FINISHED,3-2,Belgium,actual,True,football_data_api_confirmed
-83,537419,Round of 32,2026-07-02,23:00,Gillette Stadium,Foxborough,USA,2K,2L,Portugal,Croatia,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-84,537420,Round of 32,2026-07-02,19:00,BC Place,Vancouver,Canada,1H,2J,Spain,Austria,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-85,537429,Round of 32,2026-07-03,03:00,BMO Field,Toronto,Canada,1B,3J,Switzerland,Algeria,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+83,537419,Round of 32,2026-07-02,23:00,Gillette Stadium,Foxborough,USA,2K,2L,Portugal,Croatia,2.0,1.0,,,FINISHED,2-1,Portugal,actual,True,football_data_api_confirmed
+84,537420,Round of 32,2026-07-02,19:00,BC Place,Vancouver,Canada,1H,2J,Spain,Austria,3.0,0.0,,,FINISHED,3-0,Spain,actual,True,football_data_api_confirmed
+85,537429,Round of 32,2026-07-03,03:00,BMO Field,Toronto,Canada,1B,3J,Switzerland,Algeria,2.0,0.0,,,FINISHED,2-0,Switzerland,actual,True,football_data_api_confirmed
 86,537427,Round of 32,2026-07-03,22:00,Estadio BBVA,Monterrey,Mexico,1J,2H,Argentina,Cape Verde,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 87,537430,Round of 32,2026-07-04,01:30,Estadio Akron,Guadalajara,Mexico,1K,3L,Colombia,Ghana,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 88,537428,Round of 32,2026-07-03,18:00,Estadio Azteca,Mexico City,Mexico,2D,2G,Australia,Egypt,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
