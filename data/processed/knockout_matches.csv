@@ -16,14 +16,14 @@ match_number,match_id,stage,date,kickoff_time,venue,city,country,home_slot,away_
 87,537430,Round of 32,2026-07-04,01:30,Estadio Akron,Guadalajara,Mexico,1K,3L,Colombia,Ghana,1.0,0.0,,,FINISHED,1-0,Colombia,actual,True,football_data_api_confirmed
 88,537428,Round of 32,2026-07-03,18:00,Estadio Azteca,Mexico City,Mexico,2D,2G,Australia,Egypt,1.0,1.0,2.0,4.0,FINISHED,1–1 (2–4 pens),Egypt,actual,True,football_data_api_confirmed
 89,537376,Round of 16,2026-07-04,17:00,AT&T Stadium,Arlington,USA,W73,W75,Canada,Morocco,0.0,3.0,,,FINISHED,0-3,Morocco,actual,True,football_data_api_confirmed
-90,537375,Round of 16,2026-07-04,21:00,MetLife Stadium,East Rutherford,USA,W74,W77,Paraguay,France,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+90,537375,Round of 16,2026-07-04,21:00,MetLife Stadium,East Rutherford,USA,W74,W77,Paraguay,France,0.0,1.0,,,FINISHED,0-1,France,actual,True,football_data_api_confirmed
 91,537377,Round of 16,2026-07-05,20:00,Rose Bowl,Pasadena,USA,W76,W78,Brazil,Norway,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 92,537378,Round of 16,2026-07-06,00:00,NRG Stadium,Houston,USA,W79,W80,Mexico,England,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 93,537379,Round of 16,2026-07-06,19:00,SoFi Stadium,Inglewood,USA,W83,W84,Portugal,Spain,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 94,537380,Round of 16,2026-07-07,00:00,Lumen Field,Seattle,USA,W81,W82,USA,Belgium,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 95,537381,Round of 16,2026-07-07,16:00,Hard Rock Stadium,Miami,USA,W86,W88,Argentina,Egypt,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 96,537382,Round of 16,2026-07-07,20:00,Mercedes-Benz Stadium,Atlanta,USA,W85,W87,Switzerland,Colombia,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-97,537383,Quarter-final,2026-07-09,20:00,AT&T Stadium,Arlington,USA,W89,W90,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+97,537383,Quarter-final,2026-07-09,20:00,AT&T Stadium,Arlington,USA,W89,W90,France,Morocco,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 98,537384,Quarter-final,2026-07-10,19:00,MetLife Stadium,East Rutherford,USA,W93,W94,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
 99,537385,Quarter-final,2026-07-11,21:00,Rose Bowl,Pasadena,USA,W91,W92,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
 100,537386,Quarter-final,2026-07-12,01:00,NRG Stadium,Houston,USA,W95,W96,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
