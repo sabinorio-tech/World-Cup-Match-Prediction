@@ -21,12 +21,12 @@ match_number,match_id,stage,date,kickoff_time,venue,city,country,home_slot,away_
 92,537378,Round of 16,2026-07-06,01:00,NRG Stadium,Houston,USA,W79,W80,Mexico,England,2.0,3.0,,,FINISHED,2-3,England,actual,True,football_data_api_confirmed
 93,537379,Round of 16,2026-07-06,19:00,SoFi Stadium,Inglewood,USA,W83,W84,Portugal,Spain,0.0,1.0,,,FINISHED,0-1,Spain,actual,True,football_data_api_confirmed
 94,537380,Round of 16,2026-07-07,00:00,Lumen Field,Seattle,USA,W81,W82,USA,Belgium,1.0,4.0,,,FINISHED,1-4,Belgium,actual,True,football_data_api_confirmed
-95,537381,Round of 16,2026-07-07,16:00,Hard Rock Stadium,Miami,USA,W86,W88,Argentina,Egypt,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-96,537382,Round of 16,2026-07-07,20:00,Mercedes-Benz Stadium,Atlanta,USA,W85,W87,Switzerland,Colombia,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+95,537381,Round of 16,2026-07-07,16:00,Hard Rock Stadium,Miami,USA,W86,W88,Argentina,Egypt,3.0,2.0,,,FINISHED,3-2,Argentina,actual,True,football_data_api_confirmed
+96,537382,Round of 16,2026-07-07,20:00,Mercedes-Benz Stadium,Atlanta,USA,W85,W87,Switzerland,Colombia,0.0,0.0,4.0,3.0,FINISHED,0–0 (4–3 pens),Switzerland,actual,True,football_data_api_confirmed
 97,537383,Quarter-final,2026-07-09,20:00,AT&T Stadium,Arlington,USA,W89,W90,France,Morocco,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 98,537384,Quarter-final,2026-07-10,19:00,MetLife Stadium,East Rutherford,USA,W93,W94,Spain,Belgium,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 99,537385,Quarter-final,2026-07-11,21:00,Rose Bowl,Pasadena,USA,W91,W92,Norway,England,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-100,537386,Quarter-final,2026-07-12,01:00,NRG Stadium,Houston,USA,W95,W96,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+100,537386,Quarter-final,2026-07-12,01:00,NRG Stadium,Houston,USA,W95,W96,Argentina,Switzerland,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 101,537387,Semi-final,2026-07-14,19:00,AT&T Stadium,Arlington,USA,W97,W98,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
 102,537388,Semi-final,2026-07-15,19:00,MetLife Stadium,East Rutherford,USA,W99,W100,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
 103,537389,3rd Place Match,2026-07-18,21:00,Hard Rock Stadium,Miami,USA,L101,L102,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
