@@ -25,9 +25,9 @@ match_number,match_id,stage,date,kickoff_time,venue,city,country,home_slot,away_
 96,537382,Round of 16,2026-07-07,20:00,Mercedes-Benz Stadium,Atlanta,USA,W85,W87,Switzerland,Colombia,0.0,0.0,4.0,3.0,FINISHED,0–0 (4–3 pens),Switzerland,actual,True,football_data_api_confirmed
 97,537383,Quarter-final,2026-07-09,20:00,AT&T Stadium,Arlington,USA,W89,W90,France,Morocco,2.0,0.0,,,FINISHED,2-0,France,actual,True,football_data_api_confirmed
 98,537384,Quarter-final,2026-07-10,19:00,MetLife Stadium,East Rutherford,USA,W93,W94,Spain,Belgium,2.0,1.0,,,FINISHED,2-1,Spain,actual,True,football_data_api_confirmed
-99,537385,Quarter-final,2026-07-11,21:00,Rose Bowl,Pasadena,USA,W91,W92,Norway,England,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-100,537386,Quarter-final,2026-07-12,01:00,NRG Stadium,Houston,USA,W95,W96,Argentina,Switzerland,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
+99,537385,Quarter-final,2026-07-11,21:00,Rose Bowl,Pasadena,USA,W91,W92,Norway,England,1.0,2.0,,,FINISHED,1-2,England,actual,True,football_data_api_confirmed
+100,537386,Quarter-final,2026-07-12,01:00,NRG Stadium,Houston,USA,W95,W96,Argentina,Switzerland,3.0,1.0,,,FINISHED,3-1,Argentina,actual,True,football_data_api_confirmed
 101,537387,Semi-final,2026-07-14,19:00,AT&T Stadium,Arlington,USA,W97,W98,France,Spain,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
-102,537388,Semi-final,2026-07-15,19:00,MetLife Stadium,East Rutherford,USA,W99,W100,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
+102,537388,Semi-final,2026-07-15,19:00,MetLife Stadium,East Rutherford,USA,W99,W100,England,Argentina,,,,,TIMED,TBD,,unresolved,True,football_data_api_confirmed
 103,537389,3rd Place Match,2026-07-18,21:00,Hard Rock Stadium,Miami,USA,L101,L102,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
 104,537390,Final,2026-07-19,19:00,MetLife Stadium,East Rutherford,USA,W101,W102,,,,,,,TIMED,TBD,,unresolved,False,unresolved_future_round
